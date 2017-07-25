@@ -15955,8 +15955,11 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.$ajax = __WEBPACK_IMPORTED
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
 	routes: [{
-		path: '/index',
+		path: '/home',
 		component: __WEBPACK_IMPORTED_MODULE_9__components_routers_home_vue___default.a
+	}, {
+		path: '/',
+		redirect: '/home'
 	}]
 });
 

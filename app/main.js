@@ -26,8 +26,11 @@ import home from "./components/routers/home.vue";
 
 var router = new VueRouter({
 	routes: [{
-		path: '/index',
+		path: '/home',
 		component:home
+	},{
+		path: '/',
+		redirect: '/home'
 	}]
 });
 
