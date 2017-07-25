@@ -23,11 +23,19 @@ Vue.prototype.$ajax = axios;
 import "weui"
 //引入组件
 import home from "./components/routers/home.vue";
+import concert from "./components/routers/concert.vue";
+import drama from "./components/routers/drama.vue";
 
 var router = new VueRouter({
 	routes: [{
 		path: '/home',
 		component:home
+	},{
+		path: '/concert',
+		component:concert
+	},{
+		path: '/drama',
+		component:drama
 	},{
 		path: '/',
 		redirect: '/home'
