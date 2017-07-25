@@ -56,15 +56,42 @@ var store = new Vuex.Store({
 	//定义一个状态
 	//所有组件的状态，也就是数据源
 	state: {
-		bottomLight:true
+		bottomLight:true,
+		count: 1,
+		news:[],
 	},
 	getters: {
 	},
 	//分发状态
 	mutations: {
+		setCount(state, data) {
+			console.log(data)
+			state.count = data
+		},
+//		settitle(state, data) {
+//			state.title = data
+//		},
+//		'https://cnodejs.org/api/v1//topics'
+		setNews(state) {
+			axios.get('http://localhost:6789/index', {
+					params: {
+//						page: state.page++,
+					}
+				})
+				.then((response) => {
+					console.log(response.data)
+					state.news = state.news.concat(response.data.data);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
 	},
 	//action就是触发mutations
 	actions: {
+		setChange(context, data) {
+			context.commit('setNews', data)
+		},
 	}
 })
 

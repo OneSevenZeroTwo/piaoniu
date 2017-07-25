@@ -1,5 +1,8 @@
 <template>
-	<xheader></xheader>
+<div>
+<xheader></xheader>
+</div>
+	
 </template>
 <script>
 	import xheader from "../xheader.vue";
