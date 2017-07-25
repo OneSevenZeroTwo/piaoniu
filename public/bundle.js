@@ -28172,7 +28172,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\nheader[data-v-575a06f8] {\n\tbackground-color: red;\n\tcolor: white;\n\theight: 50px;\n\tline-height: 50px;\n\ttext-align: center;\n\tposition: fixed;\n\twidth: 100%;\n\ttop: 0;\n\tleft: 0;\n\tz-index: 10;\n}\n", ""]);
+exports.push([module.i, "\n#header .bar[data-v-575a06f8]{\r\n\tdisplay: -webkit-flex;\r\n    display: flex;\r\n    width: 100%;\r\n    height: 40px;\r\n    background-color: #f8f8f8;\r\n    text-align: center;\r\n    line-height: 40px;\n}\n#header .right[data-v-575a06f8]{\r\n\tpadding-top: 9px\n}\n#header .right input[data-v-575a06f8]{\r\n\twidth: 80px;\r\n\theight: 22px;\r\n\tfloat: left;\r\n    border-radius: 8px;\n}\n#header .btn-search-icon[data-v-575a06f8]{\r\n\tfloat: right;\n}\n#header .bar div[data-v-575a06f8]{\r\n    width: 33%;\r\n    height: 36px;\n}\n#header .sub-nav[data-v-575a06f8]{\r\n\tfloat: left\n}\n#header .sub-nav li[data-v-575a06f8]{\r\n\twidth: 25%;\n}\r\n", ""]);
 
 // exports
 
@@ -28220,6 +28220,24 @@ module.exports = function listToStyles(parentId, list) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 /* 61 */
@@ -28228,7 +28246,54 @@ module.exports = function listToStyles(parentId, list) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _vm._m(0)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('header', [_vm._v("\n\t\t百度音乐\n\t")])])
+  return _c('div', [_c('header', {
+    staticClass: "animated slideDown headroom--top",
+    attrs: {
+      "id": "header"
+    }
+  }, [_c('div', {
+    staticClass: "bar bar-form"
+  }, [_c('div', {
+    staticClass: "left"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "title"
+  }, [_vm._v("百度音乐")]), _vm._v(" "), _c('div', {
+    staticClass: "right"
+  }, [_c('input', {
+    attrs: {
+      "type": "search",
+      "autocomplete": "off",
+      "name": "query",
+      "value": "",
+      "placeholder": "搜歌曲"
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "btn-search-icon"
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "nav-wrap"
+  }, [_c('ul', {
+    staticClass: "sub-nav"
+  }, [_c('a', {
+    attrs: {
+      "href": ""
+    }
+  }, [_c('li', [_vm._v("推荐")])]), _vm._v(" "), _c('a', {
+    attrs: {
+      "href": ""
+    }
+  }, [_c('li', [_vm._v("分类")])]), _vm._v(" "), _c('a', {
+    attrs: {
+      "href": ""
+    }
+  }, [_c('li', [_vm._v("榜单")])]), _vm._v(" "), _c('a', {
+    attrs: {
+      "href": ""
+    }
+  }, [_c('li', [_vm._v("歌手")])]), _vm._v(" "), _c('a', {
+    attrs: {
+      "href": ""
+    }
+  }, [_c('li', [_vm._v("mv")])])])])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

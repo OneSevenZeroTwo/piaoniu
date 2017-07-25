@@ -56,6 +56,7 @@ var store = new Vuex.Store({
 	//定义一个状态
 	//所有组件的状态，也就是数据源
 	state: {
+		bottomLight:true
 	},
 	getters: {
 	},
