@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<header>
-			票牛
+			百度音乐
 		</header>
 	</div>
 </template>

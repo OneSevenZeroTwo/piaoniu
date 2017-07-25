@@ -1,3 +1,3 @@
 <template>
-	<p>演唱会</p>
+	<p>MV</p>
 </template>

@@ -22,23 +22,32 @@ Vue.prototype.$ajax = axios;
 //拥入weui样式库
 import "weui"
 //引入组件
-import home from "./components/routers/home.vue";
-import concert from "./components/routers/concert.vue";
-import drama from "./components/routers/drama.vue";
+import recommend from "./components/routers/recommend.vue";
+import cate from "./components/routers/cate.vue";
+import bill from "./components/routers/bill.vue";
+import artists from "./components/routers/artists.vue";
+import mv from "./components/routers/mv.vue";
+
 
 var router = new VueRouter({
 	routes: [{
-		path: '/home',
-		component:home
+		path: '/recommend',
+		component:recommend
 	},{
-		path: '/concert',
-		component:concert
+		path: '/cate',
+		component:cate
 	},{
-		path: '/drama',
-		component:drama
+		path: '/bill',
+		component:bill
 	},{
+		path: '/artists',
+		component:artists
+	},{
+		path: '/mv',
+		component:mv
+	}, {
 		path: '/',
-		redirect: '/home'
+		redirect: '/recommend'
 	}]
 });
 

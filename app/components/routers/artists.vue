@@ -1,3 +1,3 @@
 <template>
-	<p>话剧</p>
+	<p>歌手</p>
 </template>
