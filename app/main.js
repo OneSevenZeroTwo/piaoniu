@@ -52,16 +52,12 @@ var router = new VueRouter({
 		component: artists
 	}, {
 		path: '/mv',
-<<<<<<< HEAD
 		component: mv
-	}, {
-=======
-		component:mv
-	},{
+	},
+	{
 		path: '/search',
 		component:search
 	},{
->>>>>>> 0278d070beb410c73cfcfe06b3210a2f1d6fd006
 		path: '/',
 		redirect: '/recommend'
 	}]
