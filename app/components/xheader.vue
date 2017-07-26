@@ -39,19 +39,19 @@ export default{
 	display: -webkit-flex;
     display: flex;
     width: 100%;
-    height: 40px;
+    height: 50px;
     background-color: #f8f8f8;
     text-align: center;
-    line-height: 40px;
+    line-height: 50px;
 }
 #header .right{
-	padding-top: 9px
+	padding-top: 12px
 }
 #header .right input{
-	width: 80px;
+	width: 60px;
 	height: 22px;
 	float: left;
-    border-radius: 8px;
+    border-radius: 13px;
 }
 #header .btn-search-icon{
 	float: right;
@@ -67,6 +67,10 @@ export default{
 	list-style: none;
 }
 #header .sub-nav li a{
-	color: black
+	color: #4a576c;
+    display: block;
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
 }
 </style>
