@@ -198,7 +198,7 @@
 							</div>
 						</li>
 
-						<li class="artist left url log" data-url="#/artist/132632388/">
+						<li class="artist left url log" data-url="#/artist/132632388/" v-for="(c,index) in art">
 							<div class="pic">
 								<img alt="刘珂矣" src="http://musicdata.baidu.com/data2/pic/121900710/121900710.jpg@s_0,w_120" org_src="http://musicdata.baidu.com/data2/pic/121900710/121900710.jpg@s_0,w_120">
 							</div>
@@ -206,9 +206,8 @@
 								<div>刘珂矣</div>
 							</div>
 						</li>
-
-						<li class="load-more need-active">查看更多...</li>
-
+						
+						<li class="load-more need-active" @click="loadMore()">查看更多...</li>
 					</ul>
 				</div>
 
@@ -270,21 +269,17 @@
 			}
 		},
 		computed: {
-			Bill() {
-				return this.$store.state.bill
+			art() {
+				return this.$store.state.art
 			},
-			img() {
-				return this.$store.state.img
-			}
 		},
 		methods: {
-			bill() {
-				this.$store.dispatch("setbill")
+			loadMore() {
+				this.$store.dispatch("Xart")
 			}
-
 		},
 		mounted() {
-			this.bill()
+//			this.loadMore()
 		},
 	}
 </script>

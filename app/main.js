@@ -69,11 +69,12 @@ var store = new Vuex.Store({
 	//所有组件的状态，也就是数据源
 	state: {
 		bottomLight: true,
-		bill: [],
-		img:"./images/1.jpg",
+		bill:"",
 		count: 1,
 		news:[],
 		isshow:"true",
+		art:[],
+		mtv:[],
 	},
 	getters: {},
 	//分发状态
@@ -85,9 +86,26 @@ var store = new Vuex.Store({
 		setChange(context, data) {
 			context.commit('setNews', data)
 		},
+		Xart(context, data) {
+			context.commit('xart', data)
+		},
+		Mtv(context, data) {
+			context.commit('mtv', data)
+		},
 	},
 	//分发状态
 	mutations: {
+		xart(state) {
+			axios.get("http://localhost:6789/xart", {
+
+				}).then((response) => {
+					console.log(response.data.song_list)
+					state.art = state.art.concat(response.data.song_list)
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
 		setCount(state, data) {
 			console.log(data)
 			state.count = data
@@ -103,7 +121,6 @@ var store = new Vuex.Store({
 					}
 				})
 				.then((response) => {
-					console.log(response.data)
 					state.news = state.news.concat(response.data.data);
 				})
 				.catch((error) => {
@@ -113,14 +130,25 @@ var store = new Vuex.Store({
 		bill(state) {
 			axios.get("http://localhost:6789/bill", {
 
-				}).then((response) => {
-					console.log(response.data.song_list)
-					state.bill = state.bill.concat(response.data.song_list)
+			}).then((response) => {
+				console.log(response)
+					state.bill =response.data.song_list
 				})
 				.catch((error) => {
 					console.log(error);
 				});
-		}
+		},
+		mtv(state) {
+			axios.get("http://localhost:6789/mtv", {
+
+			}).then((response) => {
+					state.mtv = state.mtv.concat(response.data.song_list)
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+		
 	},
 })
 
