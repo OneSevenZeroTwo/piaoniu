@@ -68,16 +68,12 @@ var store = new Vuex.Store({
 	//定义一个状态
 	//所有组件的状态，也就是数据源
 	state: {
-<<<<<<< HEAD
 		bottomLight: true,
 		bill: [],
 		img:"./images/1.jpg",
-=======
-		bottomLight:true,
 		count: 1,
 		news:[],
 		isshow:"true",
->>>>>>> 0278d070beb410c73cfcfe06b3210a2f1d6fd006
 	},
 	getters: {},
 	//分发状态
