@@ -36,23 +36,22 @@ import bill from "./components/routers/bill.vue";
 import artists from "./components/routers/artists.vue";
 import mv from "./components/routers/mv.vue";
 
-
 var router = new VueRouter({
 	routes: [{
 		path: '/recommend',
-		component:recommend
-	},{
+		component: recommend
+	}, {
 		path: '/cate',
-		component:cate
-	},{
+		component: cate
+	}, {
 		path: '/bill',
-		component:bill
-	},{
+		component: bill
+	}, {
 		path: '/artists',
-		component:artists
-	},{
+		component: artists
+	}, {
 		path: '/mv',
-		component:mv
+		component: mv
 	}, {
 		path: '/',
 		redirect: '/recommend'
@@ -65,14 +64,14 @@ var store = new Vuex.Store({
 	//所有组件的状态，也就是数据源
 	state: {
 		bottomLight: true,
-		bill:[],
-		img:[""],
+		bill: [],
+		img:"./images/1.jpg",
 	},
 	getters: {},
 	//分发状态
 	//action就是触发mutations
 	actions: {
-		setbill(context,data) {
+		setbill(context, data) {
 			context.commit("bill")
 		},
 		setChange(context, data) {
@@ -85,14 +84,14 @@ var store = new Vuex.Store({
 			console.log(data)
 			state.count = data
 		},
-//		settitle(state, data) {
-//			state.title = data
-//		},
-//		'https://cnodejs.org/api/v1//topics'
+		//		settitle(state, data) {
+		//			state.title = data
+		//		},
+		//		'https://cnodejs.org/api/v1//topics'
 		setNews(state) {
 			axios.get('http://localhost:6789/index', {
 					params: {
-//						page: state.page++,
+						//						page: state.page++,
 					}
 				})
 				.then((response) => {
@@ -104,18 +103,17 @@ var store = new Vuex.Store({
 				});
 		},
 		bill(state) {
-			axios.get("http://localhost:6789/index", {
-				
-			}).then((response) => {
-				console.log(response.data.song_list)
-               state.bill = state.bill.concat(response.data.song_list)
-				
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+			axios.get("http://localhost:6789/bill", {
+
+				}).then((response) => {
+					console.log(response.data.song_list)
+					state.bill = state.bill.concat(response.data.song_list)
+				})
+				.catch((error) => {
+					console.log(error);
+				});
 		}
-},
+	},
 })
 
 new Vue({
