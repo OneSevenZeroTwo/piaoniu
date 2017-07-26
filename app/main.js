@@ -7,17 +7,25 @@ import Vuex from 'vuex';
 import VueResource from 'vue-resource';
 //axios的ajax封装库
 import axios from "axios";
+//引入公共样式 全局
+//添加样式
+require("./css/common.css")
 //轮播图
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
-Vue.use(MuseUI)
+
+Vue.use(MuseUI);
 Vue.use(Vuex);
+//vue-mui
+//import Mui from "vue-awesome-mui";
+//import "vue-awesome-mui/mui/dist/css/mui.css"
+//Vue.use(Mui);
 //通过 Vue.use()明确地安装路由功能
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(VueAwesomeSwiper)
-	//挂载axios在Vue构造器下
+//挂载axios在Vue构造器下
 Vue.prototype.$ajax = axios;
 //拥入weui样式库
 import "weui"
@@ -56,11 +64,20 @@ var store = new Vuex.Store({
 	//定义一个状态
 	//所有组件的状态，也就是数据源
 	state: {
-		bottomLight:true,
-		count: 1,
-		news:[],
+		bottomLight: true,
+		bill:[],
+		img:[""],
 	},
-	getters: {
+	getters: {},
+	//分发状态
+	//action就是触发mutations
+	actions: {
+		setbill(context,data) {
+			context.commit("bill")
+		},
+		setChange(context, data) {
+			context.commit('setNews', data)
+		},
 	},
 	//分发状态
 	mutations: {
@@ -86,13 +103,19 @@ var store = new Vuex.Store({
 					console.log(error);
 				});
 		},
-	},
-	//action就是触发mutations
-	actions: {
-		setChange(context, data) {
-			context.commit('setNews', data)
-		},
-	}
+		bill(state) {
+			axios.get("http://localhost:6789/index", {
+				
+			}).then((response) => {
+				console.log(response.data.song_list)
+               state.bill = state.bill.concat(response.data.song_list)
+				
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+		}
+},
 })
 
 new Vue({

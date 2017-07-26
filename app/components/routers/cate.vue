@@ -1,9 +1,8 @@
-<template>
+    <template>
 	<div>
 		<xheader></xheader>
 		<xcatemain></xcatemain>
 	</div>
-
 </template>
 <script>
 	import xheader from "../xheader.vue";
