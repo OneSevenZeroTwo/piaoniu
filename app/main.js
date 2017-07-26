@@ -67,6 +67,9 @@ var store = new Vuex.Store({
 		bottomLight: true,
 		bill:[],
 		img:[""],
+		hot:[],
+		news:[],
+		page:0
 	},
 	getters: {},
 	//分发状态
@@ -77,6 +80,9 @@ var store = new Vuex.Store({
 		},
 		setChange(context, data) {
 			context.commit('setNews', data)
+		},
+		sethot(context, data) {
+			context.commit('hot', data)
 		},
 	},
 	//分发状态
@@ -91,13 +97,11 @@ var store = new Vuex.Store({
 //		'https://cnodejs.org/api/v1//topics'
 		setNews(state) {
 			axios.get('http://localhost:6789/index', {
-					params: {
-//						page: state.page++,
-					}
+					
 				})
 				.then((response) => {
-					console.log(response.data)
-					state.news = state.news.concat(response.data.data);
+					console.log(response.data.song_list)
+					state.news = state.news.concat(response.data.song_list);
 				})
 				.catch((error) => {
 					console.log(error);
@@ -107,8 +111,21 @@ var store = new Vuex.Store({
 			axios.get("http://localhost:6789/index", {
 				
 			}).then((response) => {
-				console.log(response.data.song_list)
                state.bill = state.bill.concat(response.data.song_list)
+				
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+		},
+		hot(state) {
+			axios.get("http://localhost:6789/hot", {
+				params: {
+						page: state.page,
+					}
+			}).then((response) => {
+				console.log(response.data.song_list)
+               state.hot = state.hot.concat(response.data.song_list)
 				
 			})
 			.catch((error) => {

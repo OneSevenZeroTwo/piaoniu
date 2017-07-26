@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="cate">
-			<h3>热门分类</h3>
+			<h4>热门分类</h4>
 			<div class="subcate">
 				<div class="nav">流行</div>
 				<div class="nav subnav">
@@ -14,7 +14,7 @@
 				</div>
 			</div>
 			<div class="spend" v-show="isSpend">
-				<h3>全部分类</h3>
+				<h4>全部分类</h4>
 				<div class="spendAll" >
 					<div class="bigCate">
 						<div class="subCate">
@@ -176,7 +176,14 @@
 			<span class="choose" @click="showSpend()">{{spendWord}}</span>
 		</div>
 		<div class="hot">
-			
+			<h4>热门歌单</h4>
+			<div v-for="n in hot">
+				<img :src="n.pic_big" alt="">
+				<p>{{n.author}}</p>
+				<i @click="play()"></i>
+				<span>{{n.title}}</span>
+			</div>
+			<p class="loadMore" @click="sethot()">加载更多</p>
 		</div>
 	</div>
 </template>
@@ -192,23 +199,38 @@
 			showSpend:function(){
 				this.isSpend=!this.isSpend,
 				this.spendWord="收起全部分类"
+			},
+			sethot:function(){
+				this.$store.dispatch("sethot")
+				this.$store.state.page++
+				console.log(this.$store.state.page)
+			},
+			play:function(){
+				console.log("play")
+			}
+		},
+		computed:{
+			hot(){
+				return this.$store.state.hot
 			}
 		},
 		mounted:function(){
-			
+			this.sethot()
 		}
 	}
 </script>
 <style scoped>
-h3{
+h4{
 	margin-left: 5%;
 	float: left;
 	height: 50px;
 	line-height: 50px;	
 	font-weight: bold;
 }
+.cate{
+	margin-top: 80px;
+}
 .subcate{
-	margin-top: 60px;
 	width: 90%;
 	margin-left: 5%;
 	background: #e0effa;
@@ -241,7 +263,7 @@ h3{
 	border: 1px solid #fff;
 	margin-bottom: 20px;
 }
-.bigCate h3{
+.bigCate h4{
 	background-color: #f7f7f7;
 	font-size: 12px;
 	height: 35px;
@@ -270,5 +292,40 @@ h3{
 	line-height: 40px;
 	text-align: center;
 	color: black;
+}
+.hot{
+	margin-left: 0;
+}
+.hot p{
+	color:#999;
+	margin-left: 3%
+}
+.hot div{
+	width: 40%;
+	margin: 5%;
+	float: left;
+	font-size: 12px;
+	position: relative;
+}
+.hot div i{
+	display: block;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-color: red;
+	position:absolute;
+	right: 8px;
+	top: 5rem;
+	background: url(//static0.qianqian.com/web/st/img/sprite/ui-list-0e4.png)-137px -114px;
+}
+.hot h4{
+	margin-left: 5%;
+	width: 100%;
+}
+.loadMore{
+	float: left;
+	width: 90%;
+	margin-left: 0;
+	text-align: center;
 }
 </style>
