@@ -33,6 +33,7 @@ import cate from "./components/routers/cate.vue";
 import bill from "./components/routers/bill.vue";
 import artists from "./components/routers/artists.vue";
 import mv from "./components/routers/mv.vue";
+import search from "./components/routers/search.vue";
 
 
 var router = new VueRouter({
@@ -51,7 +52,10 @@ var router = new VueRouter({
 	},{
 		path: '/mv',
 		component:mv
-	}, {
+	},{
+		path: '/search',
+		component:search
+	},{
 		path: '/',
 		redirect: '/recommend'
 	}]
@@ -65,6 +69,7 @@ var store = new Vuex.Store({
 		bottomLight:true,
 		count: 1,
 		news:[],
+		isshow:"true",
 	},
 	getters: {
 	},
