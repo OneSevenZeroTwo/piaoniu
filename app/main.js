@@ -7,17 +7,23 @@ import Vuex from 'vuex';
 import VueResource from 'vue-resource';
 //axios的ajax封装库
 import axios from "axios";
+//添加样式
+require("./css/common.css")
 //轮播图
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
-Vue.use(MuseUI)
+Vue.use(MuseUI);
 Vue.use(Vuex);
+//vue-mui
+//import Mui from "vue-awesome-mui";
+//import "vue-awesome-mui/mui/dist/css/mui.css"
+//Vue.use(Mui);
 //通过 Vue.use()明确地安装路由功能
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(VueAwesomeSwiper)
-	//挂载axios在Vue构造器下
+//挂载axios在Vue构造器下
 Vue.prototype.$ajax = axios;
 //拥入weui样式库
 import "weui"
