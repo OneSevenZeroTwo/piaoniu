@@ -45,11 +45,8 @@ export default{
 	}
 }
 </script>
-<<<<<<< HEAD
-<style>
-	
-=======
+
 <style scoped>
 
->>>>>>> 372aeddf7a059ab157ab6f6d3878aa315327dc4b
+
 </style>
