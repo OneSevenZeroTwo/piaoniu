@@ -208,6 +208,7 @@ h3{
 	font-weight: bold;
 }
 .subcate{
+	margin-top: 60px;
 	width: 90%;
 	margin-left: 5%;
 	background: #e0effa;
