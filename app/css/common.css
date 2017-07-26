@@ -3855,7 +3855,7 @@ html.debug .warning {
 }
 
 .list-category {
-	padding: 0 10px 20px
+	padding: 0 10px 20px;
 }
 
 .list-category .cate-item {

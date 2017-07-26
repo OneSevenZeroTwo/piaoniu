@@ -1,11 +1,17 @@
+
 <template>
-	<xheader></xheader>
+	<div>
+		<xheader></xheader>
+		<xrecommend></xrecommend>
+	</div>
 </template>
 <script>
 	import xheader from "../xheader.vue";
-	export default{
-		components:{
-			xheader
-		}
+	import xrecommend from "../xrecommend.vue";
+	export default {
+		components: {
+			xheader,
+			xrecommend,
+		},
 	}
 </script>
