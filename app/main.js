@@ -35,6 +35,7 @@ import cate from "./components/routers/cate.vue";
 import bill from "./components/routers/bill.vue";
 import artists from "./components/routers/artists.vue";
 import mv from "./components/routers/mv.vue";
+import search from "./components/routers/search.vue";
 
 var router = new VueRouter({
 	routes: [{
@@ -51,8 +52,16 @@ var router = new VueRouter({
 		component: artists
 	}, {
 		path: '/mv',
+<<<<<<< HEAD
 		component: mv
 	}, {
+=======
+		component:mv
+	},{
+		path: '/search',
+		component:search
+	},{
+>>>>>>> 0278d070beb410c73cfcfe06b3210a2f1d6fd006
 		path: '/',
 		redirect: '/recommend'
 	}]
@@ -63,9 +72,16 @@ var store = new Vuex.Store({
 	//定义一个状态
 	//所有组件的状态，也就是数据源
 	state: {
+<<<<<<< HEAD
 		bottomLight: true,
 		bill: [],
 		img:"./images/1.jpg",
+=======
+		bottomLight:true,
+		count: 1,
+		news:[],
+		isshow:"true",
+>>>>>>> 0278d070beb410c73cfcfe06b3210a2f1d6fd006
 	},
 	getters: {},
 	//分发状态
