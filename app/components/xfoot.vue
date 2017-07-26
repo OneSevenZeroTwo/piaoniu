@@ -1,4 +1,17 @@
-html {
+<template>
+	<div>
+	   <footer id="footer" class="c_bb_1">
+		   <a class="log" data-log="{&quot;page&quot;:&quot;bottom&quot;,&quot;pos&quot;:&quot;home&quot;}" href="/">首页</a>
+	       <a class="log url" data-log="{&quot;page&quot;:&quot;bottom&quot;,&quot;pos&quot;:&quot;feedback&quot;}" href="#/feedback">意见反馈</a>
+      </footer>
+	</div>
+</template>
+
+<script>
+</script>
+
+<style scoped>
+	html {
 	font-family: sans-serif;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%
@@ -3856,6 +3869,7 @@ html.debug .warning {
 
 .list-category {
 	padding: 0 10px 20px;
+	margin-top: 60px;
 }
 
 .list-category .cate-item {
@@ -12064,3 +12078,4 @@ html.route-ucenter body {
 	border-top: 1px solid #F2F2F2;
 	z-index: 10
 }
+</style>

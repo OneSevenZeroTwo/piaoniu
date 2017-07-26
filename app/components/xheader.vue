@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<header id="header" class="animated headroom--top">
+      <header id="header" class="animated headroom--top">
 			<div class="bar  bar-form ">
 				<div class="left"></div>
 				<div class="title">百度音乐</div>
@@ -17,7 +17,9 @@
 			<div class="nav-wrap">
 				<ul class="sub-nav">
 
+
 					<li class="log url on" data-name="home" data-log="{&quot;pos&quot;:&quot;nav_home&quot;}" data-url="#/recommend"><a href="#/recommend">推荐</a></li>
+
 
 					<li class="log url" data-name="songlists" data-log="{&quot;pos&quot;:&quot;nav_songlists&quot;}" data-url="#/cate"><a href="#/cate">分类</a></li>
 
@@ -33,15 +35,21 @@
 	</div>
 </template>
 <script>
-	export default {
-		computed: {},
-		methods: {
-			bottomLight() {
-				console.log(this.$store.state.bottomLight)
-			}
-		}
+export default{
+	computed:{
+	},
+	methods:{
+		bottomLight(){
+			console.log(this.$store.state.bottomLight)
+		}	
 	}
+}
 </script>
+<<<<<<< HEAD
 <style>
 	
+=======
+<style scoped>
+
+>>>>>>> 372aeddf7a059ab157ab6f6d3878aa315327dc4b
 </style>

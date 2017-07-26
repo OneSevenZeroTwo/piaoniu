@@ -7,12 +7,14 @@ import Vuex from 'vuex';
 import VueResource from 'vue-resource';
 //axios的ajax封装库
 import axios from "axios";
+//引入公共样式 全局
 //添加样式
 require("./css/common.css")
 //轮播图
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
+
 Vue.use(MuseUI);
 Vue.use(Vuex);
 //vue-mui
@@ -71,7 +73,16 @@ var store = new Vuex.Store({
 		news:[],
 		isshow:"true",
 	},
-	getters: {
+	getters: {},
+	//分发状态
+	//action就是触发mutations
+	actions: {
+		setbill(context,data) {
+			context.commit("bill")
+		},
+		setChange(context, data) {
+			context.commit('setNews', data)
+		},
 	},
 	//分发状态
 	mutations: {
@@ -97,13 +108,19 @@ var store = new Vuex.Store({
 					console.log(error);
 				});
 		},
-	},
-	//action就是触发mutations
-	actions: {
-		setChange(context, data) {
-			context.commit('setNews', data)
-		},
-	}
+		bill(state) {
+			axios.get("http://localhost:6789/index", {
+				
+			}).then((response) => {
+				console.log(response.data.song_list)
+               state.bill = state.bill.concat(response.data.song_list)
+				
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+		}
+},
 })
 
 new Vue({
