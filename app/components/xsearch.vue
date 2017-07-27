@@ -1,13 +1,13 @@
 <template>
 	<div>
-		<div id="search" class="page search" v-show="isshow" >
+		<div id="search" class="page search"  >
 			<form id="se_form" action="/" method="GET">
 				<div class="search-input">
 					<div class="input-wrap">
 						<div class="search-query-button"><span></span></div>
 						<input type="search" autocomplete="off" name="query" value="" placeholder="歌名、歌词、歌手、专辑">
 						<div class="search-cancel-button" style="display: none"><span></span></div>
-						<div class="search-button">取消</div>
+						<div class="search-button"><a href="#/recommend">取消</a></div>
 					</div>
 				</div>
 			</form>
@@ -28,18 +28,15 @@
 //			search() {
 //				return this.$store.state.count
 //			},
-			isshow() {
-				return this.$store.state.isshow;
-				console.log(this.$store.state.isshow)
-			}
 		},
-		methods: {
+//		methods: {
 //			loadMore() {
+//				this.$store.state.isshow = "none";
 //				this.$store.dispatch("setChange")
 //			},
-		},
+//		},
 //		mounted() {
-//			this.isshow();
+//			this.setShow();
 //		},
 	}
 </script>
@@ -47,7 +44,7 @@
 <style>
 	#search{
 		display: block;
-		position: fixed;
-		z-index: 1000;
+		/*position: fixed;*/
+		/*z-index: 1000;*/
 	}
 </style>

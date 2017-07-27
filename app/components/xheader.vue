@@ -37,6 +37,7 @@
 <script>
 export default{
 	computed:{
+		
 	},
 	methods:{
 		bottomLight(){

@@ -53,11 +53,10 @@ var router = new VueRouter({
 	}, {
 		path: '/mv',
 		component: mv
-	},
-	{
+	}, {
 		path: '/search',
-		component:search
-	},{
+		component: search
+	}, {
 		path: '/',
 		redirect: '/recommend'
 	}]
@@ -77,6 +76,9 @@ var store = new Vuex.Store({
 		isshow:"true",
 		art:[],
 		mtv:[],
+		news: [],
+		arrs:[],
+		re:[],
 	},
 	getters: {},
 	//分发状态
@@ -86,7 +88,9 @@ var store = new Vuex.Store({
 			context.commit("bill")
 		},
 		setChange(context, data) {
-			context.commit('setNews', data)
+			context.commit('setNews', data),
+			context.commit('setArrs', data),
+			context.commit('setRe', data)
 		},
 		sethot(context, data) {
 			context.commit('hot', data)
@@ -98,6 +102,7 @@ var store = new Vuex.Store({
 			context.commit('mtv', data)
 		},
 	},
+	
 	//分发状态
 	mutations: {
 		xart(state) {
@@ -115,10 +120,6 @@ var store = new Vuex.Store({
 			console.log(data)
 			state.count = data
 		},
-		//		settitle(state, data) {
-		//			state.title = data
-		//		},
-		//		'https://cnodejs.org/api/v1//topics'
 		setNews(state) {
 			axios.get('http://localhost:6789/index', {	
 				})
@@ -126,8 +127,43 @@ var store = new Vuex.Store({
 					console.log(response.data.song_list)
 					state.news = state.news.concat(response.data.song_list);
 					params: {
-						//						page: state.page++,
+						//page: state.page++,
 					}
+				})
+				.then((response) => {
+					console.log(response.data.song_list)
+					state.news = response.data.song_list;
+//					state.news = state.news.concat(response.data.song_list);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+//		新歌速递
+		setArrs(state) {
+			axios.get('http://localhost:6789/xin', {
+					params: {
+						
+					}
+			}).then((response) => {
+					console.log(response.data.song_list)
+					state.arrs = response.data.song_list;
+//					state.news = state.news.concat(response.data.song_list);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+//		热门歌单
+		setRe(state) {
+			axios.get('http://localhost:6789/re', {
+					params: {
+					}
+				})
+				.then((response) => {
+					console.log(response.data.song_list)
+					state.re = response.data.song_list;
+//					state.news = state.news.concat(response.data.song_list);
 				})
 				.catch((error) => {
 					console.log(error);
@@ -135,7 +171,6 @@ var store = new Vuex.Store({
 		},
 		bill(state) {
 			axios.get("http://localhost:6789/bill", {
-
 			}).then((response) => {
                state.bill = state.bill.concat(response.data.song_list)
 			})
@@ -162,6 +197,9 @@ var store = new Vuex.Store({
 
 			}).then((response) => {
 					state.mtv = state.mtv.concat(response.data.song_list)
+				}).then((response) => {
+					console.log(response.data.song_list)
+					state.bill = state.bill.concat(response.data.song_list)
 				})
 				.catch((error) => {
 					console.log(error);

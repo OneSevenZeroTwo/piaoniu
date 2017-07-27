@@ -6,7 +6,33 @@ var cheerio = require("cheerio");
 
 app.get("/index",function(request,response){
 	response.setHeader("Access-Control-Allow-Origin","*");
-	http.get("http://tingapi.ting.baidu.com/v1/restserver/ting?format=json&calback=&from=webapp_music&method=baidu.ting.billboard.billList&type=1&size=50&offset=0  ", function(res) {
+	http.get("http://tingapi.ting.baidu.com/v1/restserver/ting?format=json&calback=&from=webapp_music&method=baidu.ting.billboard.billList&type=1&size=6&offset=0  ", function(res) {
+		var data = "";
+		res.on('data', function(chunk) {
+			data += chunk
+		})
+		res.on('end', function() {
+			response.end(data)
+		})
+	})
+})
+//新歌速递请求
+app.get("/xin",function(request,response){
+	response.setHeader("Access-Control-Allow-Origin","*");
+	http.get("http://tingapi.ting.baidu.com/v1/restserver/ting?format=json&calback=&from=webapp_music&method=baidu.ting.billboard.billList&type=16&size=3&offset=0  ", function(res) {
+		var data = "";
+		res.on('data', function(chunk) {
+			data += chunk
+		})
+		res.on('end', function() {
+			response.end(data)
+		})
+	})
+})
+//热门歌单
+app.get("/re",function(request,response){
+	response.setHeader("Access-Control-Allow-Origin","*");
+	http.get("http://tingapi.ting.baidu.com/v1/restserver/ting?format=json&calback=&from=webapp_music&method=baidu.ting.billboard.billList&type=2&size=6&offset=0  ", function(res) {
 		var data = "";
 		res.on('data', function(chunk) {
 			data += chunk
@@ -46,6 +72,7 @@ app.get("/bill",function(request,response){
 		})
 	})
 })
+
 
 app.get("/xart",function(request,response){
 	response.setHeader("Access-Control-Allow-Origin","*");
