@@ -35,25 +35,29 @@ import cate from "./components/routers/cate.vue";
 import bill from "./components/routers/bill.vue";
 import artists from "./components/routers/artists.vue";
 import mv from "./components/routers/mv.vue";
-
+import search from "./components/routers/search.vue";
 
 var router = new VueRouter({
 	routes: [{
 		path: '/recommend',
-		component:recommend
-	},{
-		path: '/cate',
-		component:cate
-	},{
-		path: '/bill',
-		component:bill
-	},{
-		path: '/artists',
-		component:artists
-	},{
-		path: '/mv',
-		component:mv
+		component: recommend
 	}, {
+		path: '/cate',
+		component: cate
+	}, {
+		path: '/bill',
+		component: bill
+	}, {
+		path: '/artists',
+		component: artists
+	}, {
+		path: '/mv',
+		component: mv
+	},
+	{
+		path: '/search',
+		component:search
+	},{
 		path: '/',
 		redirect: '/recommend'
 	}]
@@ -66,16 +70,19 @@ var store = new Vuex.Store({
 	state: {
 		bottomLight: true,
 		bill:[],
-		img:[""],
 		hot:[],
 		news:[],
-		page:0
+		page:0,
+		count: 1,
+		isshow:"true",
+		art:[],
+		mtv:[],
 	},
 	getters: {},
 	//分发状态
 	//action就是触发mutations
 	actions: {
-		setbill(context,data) {
+		setbill(context, data) {
 			context.commit("bill")
 		},
 		setChange(context, data) {
@@ -84,35 +91,53 @@ var store = new Vuex.Store({
 		sethot(context, data) {
 			context.commit('hot', data)
 		},
+		Xart(context, data) {
+			context.commit('xart', data)
+		},
+		Mtv(context, data) {
+			context.commit('mtv', data)
+		},
 	},
 	//分发状态
 	mutations: {
+		xart(state) {
+			axios.get("http://localhost:6789/xart", {
+
+				}).then((response) => {
+					console.log(response.data.song_list)
+					state.art = state.art.concat(response.data.song_list)
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
 		setCount(state, data) {
 			console.log(data)
 			state.count = data
 		},
-//		settitle(state, data) {
-//			state.title = data
-//		},
-//		'https://cnodejs.org/api/v1//topics'
+		//		settitle(state, data) {
+		//			state.title = data
+		//		},
+		//		'https://cnodejs.org/api/v1//topics'
 		setNews(state) {
-			axios.get('http://localhost:6789/index', {
-					
+			axios.get('http://localhost:6789/index', {	
 				})
 				.then((response) => {
 					console.log(response.data.song_list)
 					state.news = state.news.concat(response.data.song_list);
+					params: {
+						//						page: state.page++,
+					}
 				})
 				.catch((error) => {
 					console.log(error);
 				});
 		},
 		bill(state) {
-			axios.get("http://localhost:6789/index", {
-				
+			axios.get("http://localhost:6789/bill", {
+
 			}).then((response) => {
                state.bill = state.bill.concat(response.data.song_list)
-				
 			})
 			.catch((error) => {
 				console.log(error);
@@ -131,8 +156,20 @@ var store = new Vuex.Store({
 			.catch((error) => {
 				console.log(error);
 			});
+		},
+		mtv(state) {
+			axios.get("http://localhost:6789/mtv", {
+
+			}).then((response) => {
+					state.mtv = state.mtv.concat(response.data.song_list)
+				})
+				.catch((error) => {
+					console.log(error);
+				});
 		}
+		
 },
+
 })
 
 new Vue({

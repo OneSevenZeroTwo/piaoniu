@@ -6,7 +6,7 @@
 
 				<div class="item-content need-active">
 					<div class="cate-post">
-						<img :org_src="n.pic_big" alt="新歌榜">
+						<img :src="n.pic_big" alt="新歌榜">
 						<span class="btn-play ui-icon-play-big" data-list="544901993,541680641,544606704,544607265" data-type="1" data-log="{&quot;page&quot;:&quot;listcate&quot;,&quot;pos&quot;:&quot;allplay&quot;} "></span>
 					</div>
 					<ul class="cate-hot">

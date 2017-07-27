@@ -9,7 +9,7 @@
 					<span class="btn log btn-search" data-log="{&quot;pos&quot;:&quot;searchup&quot;,&quot;page&quot;:&quot;home&quot;}"></span>
 					<div class="form-search">
 						<div class="btn-search-icon"></div>
-						<input type="search" autocomplete="off" name="query" value="" placeholder="搜歌曲">
+						<a href="#/search"><input type="search" autocomplete="off" name="query" value="" placeholder="搜歌曲"></a>
 					</div>
 				</div>
 			</div>
@@ -17,7 +17,9 @@
 			<div class="nav-wrap">
 				<ul class="sub-nav">
 
-					<li class="log url on" data-name="home" data-log="{&quot;pos&quot;:&quot;nav_home&quot;}" data-url="/recommend"><a href="#/recommend">推荐</a></li>
+
+					<li class="log url on" data-name="home" data-log="{&quot;pos&quot;:&quot;nav_home&quot;}" data-url="#/recommend"><a href="#/recommend">推荐</a></li>
+
 
 					<li class="log url" data-name="songlists" data-log="{&quot;pos&quot;:&quot;nav_songlists&quot;}" data-url="#/cate"><a href="#/cate">分类</a></li>
 
@@ -43,6 +45,8 @@ export default{
 	}
 }
 </script>
+
 <style scoped>
+
 
 </style>
