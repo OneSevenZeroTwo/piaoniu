@@ -42,11 +42,27 @@ import wangluo from "./components/routers/wangluo.vue";
 import minyao from "./components/routers/minyao.vue";
 import oumei from "./components/routers/oumei.vue";
 import qingge from "./components/routers/qingge.vue";
-
+import regebang from "./components/routers/regebang_2.vue";
+import xingebang from "./components/routers/xingebang_2.vue";
+import kingbang from "./components/routers/kingbang_2.vue";
+import gengduoxg from "./components/routers/gengduoxg.vue";
 var router = new VueRouter({
 	routes: [{
 		path: '/recommend',
-		component: recommend
+		component: recommend,
+		children:[{
+			path:'/recommend/regebang',
+			component:regebang,
+		},{
+			path:'/recommend/xingebang',
+			component:xingebang,
+		},{
+			path:'/recommend/kingbang',
+			component:kingbang,
+		}]
+	}, {
+		path: '/gengduoxg',
+		component: gengduoxg,
 	}, {
 		path: '/cate',
 		component: cate
@@ -83,7 +99,7 @@ var router = new VueRouter({
 		}]
 	},{
 		path: '/',
-		redirect: '/recommend'
+		redirect: '/recommend/regebang'
 	}]
 });
 
@@ -105,7 +121,13 @@ var store = new Vuex.Store({
 		arrs:[],
 		re:[],
 		liuxing:[],
-		kind:null
+		kind:null,
+		tui:[],
+		rege:[],
+		xinge:[],
+		king:[],
+		xg01:[],
+		xg02:[],
 	},
 	getters: {},
 	//分发状态
@@ -117,7 +139,13 @@ var store = new Vuex.Store({
 		setChange(context, data) {
 			context.commit('setNews', data),
 			context.commit('setArrs', data),
-			context.commit('setRe', data)
+			context.commit('setRe', data),
+			context.commit('setTui', data),
+			context.commit('setRege', data),
+			context.commit('setXinge', data),
+			context.commit('setKing', data),
+			context.commit('setXg', data),
+			context.commit('setXg02', data)
 		},
 		sethot(context, data) {
 			context.commit('hot', data)
@@ -176,7 +204,7 @@ var store = new Vuex.Store({
 						
 					}
 			}).then((response) => {
-					console.log(response.data.song_list)
+//					console.log(response.data.song_list)
 					state.arrs = response.data.song_list;
 //					state.news = state.news.concat(response.data.song_list);
 				})
@@ -191,8 +219,97 @@ var store = new Vuex.Store({
 					}
 				})
 				.then((response) => {
-					console.log(response.data.song_list)
+//					console.log(response.data.song_list)
 					state.re = response.data.song_list;
+//					state.news = state.news.concat(response.data.song_list);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+//		推荐
+		setTui(state) {
+			axios.get('http://localhost:6789/tui', {
+					params: {
+						
+					}
+			}).then((response) => {
+//					console.log(response.data.song_list)
+					state.tui = response.data.song_list;
+//					state.news = state.news.concat(response.data.song_list);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+//		热歌榜
+		setRege(state) {
+			axios.get('http://localhost:6789/rege', {
+					params: {
+						
+					}
+			}).then((response) => {
+//					console.log(response.data.song_list)
+					state.rege = response.data.song_list;
+//					state.news = state.news.concat(response.data.song_list);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+//		新歌榜
+		setXinge(state) {
+			axios.get('http://localhost:6789/xinge', {
+					params: {
+						
+					}
+			}).then((response) => {
+//					console.log(response.data.song_list)
+					state.xinge = response.data.song_list;
+//					state.news = state.news.concat(response.data.song_list);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+//		king榜
+		setKing(state) {
+			axios.get('http://localhost:6789/king', {
+					params: {
+						
+					}
+			}).then((response) => {
+//					console.log(response.data.song_list)
+					state.king = response.data.song_list;
+//					state.news = state.news.concat(response.data.song_list);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+//		新歌更多
+		setXg(state) {
+			axios.get('http://localhost:6789/xg', {
+					params: {
+						
+					}
+			}).then((response) => {
+//					console.log(response.data.song_list)
+					state.xg01 = response.data.song_list;
+//					state.news = state.news.concat(response.data.song_list);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+		setXg02(state) {
+			axios.get('http://localhost:6789/xg02', {
+					params: {
+						
+					}
+			}).then((response) => {
+//					console.log(response.data.song_list)
+					state.xg02 = response.data.song_list;
 //					state.news = state.news.concat(response.data.song_list);
 				})
 				.catch((error) => {
