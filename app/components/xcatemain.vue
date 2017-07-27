@@ -3,14 +3,14 @@
 		<div class="cate">
 			<h4>热门分类</h4>
 			<div class="subcate">
-				<div class="nav">流行</div>
+				<div class="nav"><a href="#/subcate/liuxing">流行</a></div>
 				<div class="nav subnav">
-					<div class="treenav">民谣</div>
-					<div class="treenav">儿歌</div>
+					<div class="treenav"><a href="#/subcate/minyao">民谣</a></div>
+					<div class="treenav"><a href="#/subcate/oumei">欧美金曲榜</a></div>
 				</div>
 				<div class="nav subnav">
-					<div class="treenav">网络歌曲</div>
-					<div class="treenav">乐器</div>
+					<div class="treenav"><a href="#/subcate/wangluo">网络歌曲</a></div>
+					<div class="treenav"><a href="#/subcate/qingge">情歌对唱</a></div>
 				</div>
 			</div>
 			<div class="spend" v-show="isSpend">

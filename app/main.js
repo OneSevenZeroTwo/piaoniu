@@ -36,6 +36,12 @@ import bill from "./components/routers/bill.vue";
 import artists from "./components/routers/artists.vue";
 import mv from "./components/routers/mv.vue";
 import search from "./components/routers/search.vue";
+import subcate from "./components/routers/subcate.vue";
+import liuxing from "./components/routers/liuxing.vue";
+import wangluo from "./components/routers/wangluo.vue";
+import minyao from "./components/routers/minyao.vue";
+import oumei from "./components/routers/oumei.vue";
+import qingge from "./components/routers/qingge.vue";
 
 var router = new VueRouter({
 	routes: [{
@@ -57,6 +63,25 @@ var router = new VueRouter({
 		path: '/search',
 		component: search
 	}, {
+		path:'/subcate',
+		component:subcate,
+		children:[{
+			path:'liuxing',
+			component:liuxing
+		},{
+			path:'wangluo',
+			component:wangluo
+		},{
+			path:'minyao',
+			component:minyao
+		},{
+			path:'oumei',
+			component:oumei
+		},{
+			path:'qingge',
+			component:qingge
+		}]
+	},{
 		path: '/',
 		redirect: '/recommend'
 	}]
@@ -79,6 +104,8 @@ var store = new Vuex.Store({
 		news: [],
 		arrs:[],
 		re:[],
+		liuxing:[],
+		kind:null
 	},
 	getters: {},
 	//分发状态
@@ -100,6 +127,9 @@ var store = new Vuex.Store({
 		},
 		Mtv(context, data) {
 			context.commit('mtv', data)
+		},
+		setliuxing(context, data) {
+			context.commit('liuxing', data)
 		},
 	},
 	
@@ -125,7 +155,7 @@ var store = new Vuex.Store({
 				})
 				.then((response) => {
 					console.log(response.data.song_list)
-					state.news = state.news.concat(response.data.song_list);
+					state.news = response.data.song_list;
 					params: {
 						//page: state.page++,
 					}
@@ -184,7 +214,6 @@ var store = new Vuex.Store({
 						page: state.page,
 					}
 			}).then((response) => {
-				console.log(response.data.song_list)
                state.hot = state.hot.concat(response.data.song_list)
 				
 			})
@@ -204,7 +233,21 @@ var store = new Vuex.Store({
 				.catch((error) => {
 					console.log(error);
 				});
-		}
+		},
+
+		//分类流行音乐
+		liuxing(state) {
+			axios.get("http://localhost:6789/liuxing", {
+				params: {
+						type:state.kind
+					}
+			}).then((response) => {	
+				console.log(response.data.song_list,"000")
+				state.liuxing = response.data.song_list
+				}).catch((error) => {
+					console.log(error);
+				});
+		},
 		
 },
 
