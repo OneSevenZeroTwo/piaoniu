@@ -210,6 +210,22 @@ app.get("/search",function(request,response){
 	})
 })
 
+//请求歌手信息
+//app.get("/singer",function(request,response){
+////	var name = encodeURI(request.query.type);
+//	response.setHeader("Access-Control-Allow-Origin","*");
+//	http.get("http://tingapi.ting.baidu.com/v1/restserver/ting?format=json&calback=&from=webapp_music&method=baidu.ting.artist.getInfo&tinguid=ting id, function(res) {
+//		var data = "";
+//		res.on('data', function(chunk) {
+//			data += chunk
+//			console.log(data)
+//		})
+//		res.on('end', function() {
+//			response.end(data)
+//		})
+//	})
+//})
+
 
 var server = app.listen("6789",function(host,post){
 

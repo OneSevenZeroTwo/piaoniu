@@ -56,7 +56,8 @@
 				this.page = index;
 			},
 			directionTo() {
-				return this.$store.state.direction="left"
+				this.$store.state.direction="left",
+				this.$store.dispatch("setChange",this.$store.state.direction)
 			},
 		},
 		mounted() {
@@ -68,7 +69,7 @@
 <style scoped>
 	#che {
 		color: #F1F2F3;
-		width: 320px;
+		width: 100%;
 		height: 100%;
 		position: fixed;
 		top: 0;
