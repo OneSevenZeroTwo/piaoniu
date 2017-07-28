@@ -15,10 +15,10 @@
 				</div>
 			</form>
 		</div>
-		<div v-for="n in backlist" class="song">
-			<div>
+		<div v-for="(n,$index) in backlist"  class="song">
+			<div @click="playsong($index)">
 				<span class="t">{{n.songname}}<i class="sq"></i></span>
-				<p class="b">{{n.artistname}}<i class="load"></i></p>
+				<p class="b"><img src="../../images/1.gif" alt="" v-if="$index==page">{{n.artistname}}<i class="load"></i></p>
 			</div>
 		</div>
 	</div>
@@ -29,7 +29,8 @@
 		data(){
 			return{
 				song : "",
-				issearch : true
+				issearch : true,
+				page:null
 			}
 		},
 		computed:{
@@ -48,6 +49,9 @@
 			search(){
 				this.$store.state.mysearch = this.song;
 				this.$store.dispatch("getmsg");
+			},
+			playsong(index){
+				this.page = index
 			}
 		},
 		mounted(){
@@ -70,6 +74,10 @@
 }
 .t{
 	position: relative;
+}
+.song .b img{
+	height: 16px;
+	margin-right: 16px;
 }
 .sq{
 	display: block;

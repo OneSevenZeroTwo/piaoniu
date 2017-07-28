@@ -49,6 +49,7 @@ import xingebang from "./components/routers/xingebang_2.vue";
 import kingbang from "./components/routers/kingbang_2.vue";
 import gengduoxg from "./components/routers/gengduoxg.vue";
 import subsearch from "./components/routers/subsearch.vue";
+import detail from "./components/routers/detail.vue";
 var router = new VueRouter({
 	routes: [{
 		path: '/recommend',
@@ -104,6 +105,9 @@ var router = new VueRouter({
 			path:'/subsearch',
 			component:subsearch
 	},{
+			path:'/detail',
+			component:detail
+	},{
 		path: '/',
 		redirect: '/recommend/regebang'
 	}]
@@ -136,7 +140,10 @@ var store = new Vuex.Store({
 		xg02:[],
 		direction:"",
 		mysearch:null,
-		backsong:[]
+		backsong:[],
+		detailname:null,
+		detailpic:null,
+		playsong:null
 	},
 	getters: {},
 	//分发状态

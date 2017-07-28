@@ -177,10 +177,10 @@
 		</div>
 		<div class="hot">
 			<h4>热门歌单</h4>
-			<div v-for="n in hot">
-				<img :src="n.pic_big" alt="">
+			<div v-for="n in hot" >
+				<a href="#/detail" @click="detail(n.artist_name,n.pic_big,n.title)"><img :src="n.pic_big" alt=""></a>
 				<p>{{n.author}}</p>
-				<i @click="play()"></i>
+				<i></i>
 				<span>{{n.title}}</span>
 			</div>
 			<p class="loadMore" @click="sethot()">加载更多</p>
@@ -205,12 +205,15 @@
 				this.$store.state.page++
 				console.log(this.$store.state.page)
 			},
-			play:function(){
-				console.log("play")
+			detail:function(name,img,song){
+				this.$store.state.detailname = name;
+				this.$store.state.detailpic = img;
+				this.$store.state.playsong = song;
 			}
 		},
 		computed:{
 			hot(){
+				console.log(this.$store.state.hot)
 				return this.$store.state.hot
 			}
 		},
