@@ -46,6 +46,7 @@ import regebang from "./components/routers/regebang_2.vue";
 import xingebang from "./components/routers/xingebang_2.vue";
 import kingbang from "./components/routers/kingbang_2.vue";
 import gengduoxg from "./components/routers/gengduoxg.vue";
+import subsearch from "./components/routers/subsearch.vue";
 var router = new VueRouter({
 	routes: [{
 		path: '/recommend',
@@ -98,6 +99,9 @@ var router = new VueRouter({
 			component:qingge
 		}]
 	},{
+			path:'/subsearch',
+			component:subsearch
+	},{
 		path: '/',
 		redirect: '/recommend/regebang'
 	}]
@@ -108,7 +112,7 @@ var store = new Vuex.Store({
 	//定义一个状态
 	//所有组件的状态，也就是数据源
 	state: {
-		bottomLight: true,
+		bottomLight:'recommend',
 		bill:[],
 		hot:[],
 		news:[],
@@ -129,6 +133,8 @@ var store = new Vuex.Store({
 		xg01:[],
 		xg02:[],
 		direction:"",
+		mysearch:null,
+		backsong:[]
 	},
 	getters: {},
 	//分发状态
@@ -159,6 +165,9 @@ var store = new Vuex.Store({
 		},
 		setliuxing(context, data) {
 			context.commit('liuxing', data)
+		},
+		getmsg(context, data) {
+			context.commit('getsearch', data)
 		},
 	},
 	
@@ -363,8 +372,23 @@ var store = new Vuex.Store({
 						type:state.kind
 					}
 			}).then((response) => {	
-				console.log(response.data.song_list,"000")
 				state.liuxing = response.data.song_list
+				}).catch((error) => {
+					console.log(error);
+				});
+		},
+
+
+
+		//获取搜索
+		getsearch(state) {
+			axios.get("http://localhost:6789/search", {
+				params: {
+						type:state.mysearch
+					}
+			}).then((response) => {	
+				console.log(response.data.song,"000")
+				state.backsong = response.data.song
 				}).catch((error) => {
 					console.log(error);
 				});

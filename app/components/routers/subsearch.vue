@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div id="search" class="page search"  >
+		<div>
 			<form id="se_form" action="/" method="GET">
 				<div class="search-input">
 					<div class="input-wrap">
@@ -14,19 +14,18 @@
 					</div>
 				</div>
 			</form>
-			<div class="ui-suggestion" style="height: 640px;">
-				<div class="hot-sug clearfix" style="margin-bottom: 10px;"><span class="item">薛之谦</span><span class="item">孙盛希《Between》</span><span class="item">林忆莲《我不能忘记你》</span><span class="item">五月天</span><span class="item">梁静茹</span><span class="item">莫文蔚</span><span class="item">李宗盛</span><span class="item">陈梓童</span><span class="item">刚好遇见你</span><span class="item">张杰</span></div>
-				<div class="ui-suggestion-content"> </div>
-				<div class="ui-suggestion-button">
-					<div class="ui-suggestion-clear">清除历史记录</div>
-				</div>
+		</div>
+		<div v-for="n in backlist" class="song">
+			<div>
+				<span class="t">{{n.songname}}<i class="sq"></i></span>
+				<p class="b">{{n.artistname}}<i class="load"></i></p>
 			</div>
 		</div>
 	</div>
-</template>
 
+</template>
 <script>
-	export default {
+	export default{
 		data(){
 			return{
 				song : "",
@@ -59,11 +58,36 @@
 		}
 	}
 </script>
-
-<style>
-	#search{
-		display: block;
-		/*position: fixed;*/
-		/*z-index: 1000;*/
-	}
+<style scoped>
+.song{
+	border-top: 1px solid pink;
+	padding:14px;
+}
+.song .b{
+	font-size: 12px;
+	color:#999;
+	position: relative;
+}
+.t{
+	position: relative;
+}
+.sq{
+	display: block;
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	right: -50px;
+	top: -15px;
+	background: url(../../images/4.png)-370px -135px
+}
+.load{
+	display: block;
+	width: 50px;
+	height: 50px;
+	background-color: red;
+	position: absolute;
+	right:0px;
+	top: -25px;
+	background: url(../../images/4.png)-215px -263px
+}
 </style>

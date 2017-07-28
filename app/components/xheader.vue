@@ -18,16 +18,16 @@
 				<ul class="sub-nav">
 
 
-					<li class="log url on" data-name="home" data-log="{&quot;pos&quot;:&quot;nav_home&quot;}" data-url="#/recommend"><a href="#/recommend/regebang">推荐</a></li>
+					<li class="log url" :class="{'on':'recommend'==light}" @click="changeLight('recommend')" data-name="home" data-log="{&quot;pos&quot;:&quot;nav_home&quot;}" data-url="#/recommend"><a href="#/recommend/regebang">推荐</a></li>
 
 
-					<li class="log url" data-name="songlists" data-log="{&quot;pos&quot;:&quot;nav_songlists&quot;}" data-url="#/cate"><a href="#/cate">分类</a></li>
+					<li class="log url" :class="{'on':'cate'==light}" @click="changeLight('cate')" data-name="songlists" data-log="{&quot;pos&quot;:&quot;nav_songlists&quot;}" data-url="#/cate"><a href="#/cate">分类</a></li>
 
-					<li class="log url" data-name="listcate" data-log="{&quot;pos&quot;:&quot;nav_listcate&quot;}" data-url="#/bill"><a href="#/bill">榜单</a></li>
+					<li class="log url" :class="{'on':'bill'==light}" @click="changeLight('bill')" data-name="listcate" data-log="{&quot;pos&quot;:&quot;nav_listcate&quot;}" data-url="#/bill"><a href="#/bill">榜单</a></li>
 
-					<li class="log url" data-name="artists" data-log="{&quot;pos&quot;:&quot;nav_artists&quot;}" data-url="#/artists"><a href="#/artists">歌手</a></li>
+					<li class="log url" :class="{'on':'artists'==light}" @click="changeLight('artists')" data-name="artists" data-log="{&quot;pos&quot;:&quot;nav_artists&quot;}" data-url="#/artists"><a href="#/artists">歌手</a></li>
 
-					<li class="log url" data-name="mvs" data-log="{&quot;pos&quot;:&quot;nav_mv&quot;}" data-url="#/mv"><a href="#/mv">MV</a></li>
+					<li class="log url" :class="{'on':'mv'==light}" @click="changeLight('mv')" data-name="mvs" data-log="{&quot;pos&quot;:&quot;nav_mv&quot;}" data-url="#/mv"><a href="#/mv">MV</a></li>
 
 				</ul>
 			</div>
@@ -38,11 +38,13 @@
 <script>
 export default{
 	computed:{
-		
+		light(){
+			return this.$store.state.bottomLight
+		}
 	},
 	methods:{
-		bottomLight(){
-			console.log(this.$store.state.bottomLight)
+		changeLight(change){
+			this.$store.state.bottomLight = change
 		},
 		direction(){
 			return this.$store.state.direction = "right"
