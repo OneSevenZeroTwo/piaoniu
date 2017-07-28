@@ -2,7 +2,7 @@
 	<div>
       <header id="header" class="animated headroom--top">
 			<div class="bar  bar-form ">
-				<div class="left"></div>
+				<div class="left iconfont"><span @click="direction">&#xe63d;</span></div>
 				<div class="title">百度音乐</div>
 				<div class="right">
 					<span class="btn btn-ucenter url" data-name="ucenter" data-url="/ucenter" data-transition="none"></span>
@@ -32,6 +32,7 @@
 				</ul>
 			</div>
 		</header>
+		<div id="top"><span class="iconfont">&#xe601;</span></div>
 	</div>
 </template>
 <script>
@@ -42,12 +43,36 @@ export default{
 	methods:{
 		bottomLight(){
 			console.log(this.$store.state.bottomLight)
-		}	
+		},
+		direction(){
+			return this.$store.state.direction = "right"
+		}
 	}
 }
 </script>
 
 <style scoped>
-
-
+	.left{
+		text-align: left;
+		line-height: 48px;
+	}
+	.left span{
+		font-size: 23px;	
+	}
+	#top{
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		position: fixed;
+		z-index: 8889;
+		top: 500px;
+		right: 20px;
+		background: rgba(0, 0, 0, .8);
+		text-align: center;
+		line-height: 50px;
+	}
+	#top>span{
+		font-size: 30px;
+		color: #fff;
+	}
 </style>

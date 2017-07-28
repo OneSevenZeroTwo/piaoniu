@@ -12,10 +12,10 @@ import axios from "axios";
 require("./css/common.css")
 //轮播图
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+// 引入muzeUi
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
-
-Vue.use(MuseUI);
+Vue.use(MuseUI)
 Vue.use(Vuex);
 //vue-mui
 //import Mui from "vue-awesome-mui";
@@ -128,6 +128,7 @@ var store = new Vuex.Store({
 		king:[],
 		xg01:[],
 		xg02:[],
+		direction:"",
 	},
 	getters: {},
 	//分发状态
@@ -163,6 +164,9 @@ var store = new Vuex.Store({
 	
 	//分发状态
 	mutations: {
+//		setCount(state, data) {
+//			state.direction = data
+//		},
 		xart(state) {
 			axios.get("http://localhost:6789/xart", {
 
