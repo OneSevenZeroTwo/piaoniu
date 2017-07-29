@@ -49,7 +49,6 @@
 			bill() {
 				this.$store.dispatch("setbill")
 			}
-
 		},
 		mounted() {
 			this.bill()

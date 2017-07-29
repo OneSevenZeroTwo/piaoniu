@@ -194,6 +194,7 @@ app.get("/liuxing",function(request,response){
 
 
 
+
 //搜索
 app.get("/search",function(request,response){
 	var name = encodeURI(request.query.type);
@@ -225,6 +226,7 @@ app.get("/search",function(request,response){
 //		})
 //	})
 //})
+
 
 //搜索
 app.get("/gethashsong",function(request,response){
