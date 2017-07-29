@@ -13,6 +13,8 @@ require("./css/common.css")
 require("./css/login.css")
 //轮播图
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/dist/js/swiper.js'
+import 'swiper/dist/css/swiper.css'
 // 引入muzeUi
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
@@ -50,6 +52,8 @@ import gengduoxg from "./components/routers/gengduoxg.vue";
 import entry from "./components/routers/entry.vue";
 import register from "./components/routers/register.vue";
 import login from "./components/routers/login.vue";
+import subsearch from "./components/routers/subsearch.vue";
+import detail from "./components/routers/detail.vue";
 var router = new VueRouter({
 	routes: [{
 		path: '/recommend',
@@ -111,6 +115,12 @@ var router = new VueRouter({
 			component:qingge
 		}]
 	},{
+			path:'/subsearch',
+			component:subsearch
+	},{
+			path:'/detail',
+			component:detail
+	},{
 		path: '/',
 		redirect: '/recommend/regebang'
 	}]
@@ -123,6 +133,8 @@ var store = new Vuex.Store({
 	state: {
 		bottomLight: true,
 		bill:"",
+		bottomLight:'recommend',
+		bill:[],
 		hot:[],
 		news:[],
 		page:0,
@@ -144,6 +156,11 @@ var store = new Vuex.Store({
 		direction:"",
 		username:"",
 		password:"",
+		mysearch:null,
+		backsong:[],
+		detailname:null,
+		detailpic:null,
+		playsong:null
 	},
 	getters: {},
 	//分发状态
@@ -161,7 +178,8 @@ var store = new Vuex.Store({
 			context.commit('setXinge', data),
 			context.commit('setKing', data),
 			context.commit('setXg', data),
-			context.commit('setXg02', data)
+			context.commit('setXg02', data),
+			context.commit('setFang', data)
 		},
 		sethot(context, data) {
 			context.commit('hot', data)
@@ -179,13 +197,16 @@ var store = new Vuex.Store({
 		setliuxing(context, data) {
 			context.commit('liuxing', data)
 		},
+		getmsg(context, data) {
+			context.commit('getsearch', data)
+		},
 	},
 	
 	//分发状态
 	mutations: {
-//		setCount(state, data) {
-//			state.direction = data
-//		},
+		setFang(state, data) {
+			state.direction = data
+		},
 		xart(state) {
 			axios.get("http://localhost:6789/xart", {
 
@@ -382,7 +403,6 @@ var store = new Vuex.Store({
 						type:state.kind
 					}
 			}).then((response) => {	
-				console.log(response.data.song_list,"000")
 				state.liuxing = response.data.song_list
 				}).catch((error) => {
 					console.log(error);
@@ -397,8 +417,21 @@ var store = new Vuex.Store({
 						pass:state.password,
 					}
 			}).then((response) => {	
-				console.log(response)
-				              response.data
+//				state.liuxing = response.data.song_list
+				}).catch((error) => {
+					console.log(error);
+				});
+           }
+  
+		//获取搜索
+		getsearch(state) {
+			axios.get("http://localhost:6789/search", {
+				params: {
+						type:state.mysearch
+					}
+			}).then((response) => {	
+				console.log(response.data.song,"000")
+				state.backsong = response.data.song
 				}).catch((error) => {
 					console.log(error);
 				});

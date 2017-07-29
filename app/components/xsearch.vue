@@ -5,9 +5,12 @@
 				<div class="search-input">
 					<div class="input-wrap">
 						<div class="search-query-button"><span></span></div>
-						<input type="search" autocomplete="off" name="query" value="" placeholder="歌名、歌词、歌手、专辑">
+						<input type="search" autocomplete="off" name="query" v-model="song" value="" placeholder="歌名、歌词、歌手、专辑" @keyup="showsearch()" >
 						<div class="search-cancel-button" style="display: none"><span></span></div>
-						<div class="search-button"><a href="#/recommend">取消</a></div>
+						<div class="search-button">
+							<a href="#/recommend" v-if="issearch">取消</a>
+							<a href="#/subsearch" v-if="!issearch" @click="search()">搜索</a>
+						</div>
 					</div>
 				</div>
 			</form>
@@ -24,20 +27,36 @@
 
 <script>
 	export default {
-		computed: {
-//			search() {
-//				return this.$store.state.count
-//			},
+		data(){
+			return{
+				song : "",
+				issearch : true
+			}
 		},
-//		methods: {
-//			loadMore() {
-//				this.$store.state.isshow = "none";
-//				this.$store.dispatch("setChange")
-//			},
-//		},
-//		mounted() {
-//			this.setShow();
-//		},
+		computed:{
+			backlist(){
+				return this.$store.state.backsong
+			}
+		},
+		methods:{
+			showsearch() {
+				if(this.song.length>0){
+					this.issearch = false
+				}else{
+					this.issearch = true
+				}
+			},
+			search(){
+				this.$store.state.mysearch = this.song;
+				this.$store.dispatch("getmsg");
+			}
+		},
+		mounted(){
+			console.log(this.$store.state.backsong)
+						if(this.song.length>0){
+				this.issearch = false
+			}
+		}
 	}
 </script>
 

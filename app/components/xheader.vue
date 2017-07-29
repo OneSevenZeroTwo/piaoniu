@@ -16,6 +16,7 @@
 
 			<div class="nav-wrap">
 				<ul class="sub-nav">
+					<li class="log url" :class="{'on':'recommend'==light}" @click="changeLight('recommend')" data-name="home" data-log="{&quot;pos&quot;:&quot;nav_home&quot;}" data-url="#/recommend"><a href="#/recommend/regebang">推荐</a></li>
 
 					<li class="log url on" data-name="home" data-log="{&quot;pos&quot;:&quot;nav_home&quot;}" data-url="#/recommend">
 						<a href="#/recommend/regebang">推荐</a>
@@ -36,17 +37,32 @@
 					<li class="log url" data-name="mvs" data-log="{&quot;pos&quot;:&quot;nav_mv&quot;}" data-url="#/mv">
 						<a href="#/mv">MV</a>
 					</li>
+					<li class="log url" :class="{'on':'cate'==light}" @click="changeLight('cate')" data-name="songlists" data-log="{&quot;pos&quot;:&quot;nav_songlists&quot;}" data-url="#/cate"><a href="#/cate">分类</a></li>
 
+					<li class="log url" :class="{'on':'bill'==light}" @click="changeLight('bill')" data-name="listcate" data-log="{&quot;pos&quot;:&quot;nav_listcate&quot;}" data-url="#/bill"><a href="#/bill">榜单</a></li>
+
+					<li class="log url" :class="{'on':'artists'==light}" @click="changeLight('artists')" data-name="artists" data-log="{&quot;pos&quot;:&quot;nav_artists&quot;}" data-url="#/artists"><a href="#/artists">歌手</a></li>
+
+					<li class="log url" :class="{'on':'mv'==light}" @click="changeLight('mv')" data-name="mvs" data-log="{&quot;pos&quot;:&quot;nav_mv&quot;}" data-url="#/mv"><a href="#/mv">MV</a></li>
 				</ul>
 			</div>
 		</header>
-		<div id="top"><span class="iconfont">&#xe601;</span></div>
+		<div id="top" @click="hui" v-show="xian"><span class="iconfont">&#xe601;</span></div>
 	</div>
 </template>
 <script>
 	export default {
+		data() {
+			return {
+				scroll: "",
+				xian: "false",
+				timer: null,
+			}
+		},
 		computed: {
-
+			light(){
+			return this.$store.state.bottomLight
+		}
 		},
 		methods: {
 			bottomLight() {
@@ -54,16 +70,36 @@
 			},
 			direction() {
 				return this.$store.state.direction = "right"
-			}
-		},
-		data() {
-			return {
-
-			}
+			},
+			menu() {
+				this.scroll = document.body.scrollTop;
+				if(this.scroll > 300) {
+					this.xian = true;
+				} else {
+					this.xian = false;
+				};
+				if(this.scroll == 0) {
+					clearInterval(this.timer);
+				}
+			},
+			hui() {
+				this.timer = setInterval(function() {
+					document.body.scrollTop = document.body.scrollTop / 2;
+					if(document.body.scrollTop <= 100) {
+						document.body.scrollTop = 0;
+					};
+					if(document.body.scrollTop == 0) {
+						clearInterval(this.timer);
+					}
+				}, 100);
+			},
+			changeLight(change){
+			this.$store.state.bottomLight = change
+		}
 		},
 		mounted() {
-//			window.localStorage.getItem("username","username")
-//			console.log(name)
+			window.addEventListener('scroll', this.menu)
+			this.menu()
 		},
 	}
 </script>
@@ -89,10 +125,15 @@
 		background: rgba(0, 0, 0, .8);
 		text-align: center;
 		line-height: 50px;
+		/*display: none;*/
 	}
 	
 	#top>span {
 		font-size: 30px;
 		color: #fff;
+	}
+	
+	.topshow {
+		display: block;
 	}
 </style>

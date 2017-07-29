@@ -8,7 +8,7 @@
 
 							<div v-for="x01 in xg01" class="info url log" data-url="#/album/548836363/">
 								<div class="poster">
-									<img :src="x01.pic_small" alt="不如笑归去">
+									<img :src="x01.pic_big" alt="不如笑归去">
 									<span m-on="playall" class="btn-play ui-icon-play" data-aid="548836363"></span>
 								</div>
 								<div class="text-wrap">
@@ -22,7 +22,7 @@
 
 							<div v-for="x02 in xg02" class="info url log" data-url="#/album/548836363/">
 								<div class="poster">
-									<img :src="x02.pic_small" alt="不如笑归去">
+									<img :src="x02.pic_big" alt="不如笑归去">
 									<span m-on="playall" class="btn-play ui-icon-play" data-aid="548836363"></span>
 								</div>
 								<div class="text-wrap">
