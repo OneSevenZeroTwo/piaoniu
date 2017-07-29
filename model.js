@@ -29,7 +29,7 @@ app.get('/register',function(req,res){
 	connection.connect();
 	//写入数据库
 	connection.query("select username from count",function(error,results,fields){
-		for(var i=0 ; i<results.length ; i++){
+		for(var i=0; i<results.length; i++){
 			if(results[i].username==req.query.user){
 				res.send('0');
 				connection.end();
@@ -49,20 +49,20 @@ app.get('/register',function(req,res){
 
 
 ////登录
-app.post('/denglu',function(req,res){
+app.get('/login',function(req,res){
 	res.append("Access-Control-Allow-Origin", "*")
 	//打开数据库
 	createConnection()
 	connection.connect();
 	//写入数据库
-		console.log(req.body.user,req.body.pass);
-	connection.query("select * from count where username = '"+req.body.user+"'",function(error,results,fields){
+		console.log(req.query.user,req.query.pass);
+	connection.query("select * from count where username = '"+req.query.user+"'",function(error,results,fields){
 		console.log(results);
 		if(results.length==0){
 			res.send('0')
-		}else if(req.body.user==results[0].username&&req.body.pass==results[0].password){
+		}else if(req.query.user==results[0].username&&req.query.pass==results[0].password){
 			res.send('1')
-		}else if(req.body.user!=results[0].username||req.body.pass!=results[0].password){
+		}else if(req.query.user!=results[0].username||req.query.pass!=results[0].password){
 			res.send('0')
 		}
 	});

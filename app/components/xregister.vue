@@ -22,15 +22,15 @@
 			<div class="t_login">
 				<div class="form-wrapper login-wrapper">
 					<div class="input-con ">
-						<input class="input-text username" type="tel" name="phone" placeholder="请输入用户名" v-model="username" >
-						
+						<input class="input-text username" type="tel" name="phone" placeholder="请输入用户名" v-model="username">
+
 					</div>
 					<div class="input-con verify-text">
 						<input class="input-text password" type="tel" name="verifyCode" placeholder="请输入密码" v-model="password">
-						
+
 					</div>
 					<div class="button-con">
-						<button class="submit-btn disabled" n-type="submit" a-type="submit" @click="err()">注册</button>
+						<button class="submit-btn " n-type="submit" a-type="submit" @click="err()">注册</button>
 					</div>
 				</div>
 
@@ -50,28 +50,24 @@
 				username: "",
 				password: "",
 				reg: /^[a-zA-Z][a-zA-Z0-9]{5,19}$/,
-				regg:/^[\S]{6,20}$/i,
+				regg: /^[\S]{6,20}$/i,
+				
 			}
 		},
 		computed: {
-					
-		        },
-		        
+		},
 		methods: {
-			err() {		
-				if(this.reg.test(this.name)&&this.regg.test(this.password)){
+			err() {
+				if(this.reg.test(this.username) && this.regg.test(this.password)) {
 					this.$store.state.username = this.username;
-				    this.$store.state.password = this.password;
-				    this.$store.dispatch("Register");
-				 
-				}else{
-					
-					
+					this.$store.state.password = this.password;
+					this.$store.dispatch("Register");
+				} else {
+
 					return false
 				}
-						
+
 			},
-		
 		},
 		mounted() {
 		},
@@ -79,5 +75,5 @@
 </script>
 
 <style scoped>
-  
+
 </style>

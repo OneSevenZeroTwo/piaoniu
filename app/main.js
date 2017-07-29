@@ -12,7 +12,7 @@ import axios from "axios";
 require("./css/common.css")
 require("./css/login.css")
 //轮播图
-import 'swiper-3.4.2/dist/js/swiper.js' 
+import 'swiper-3.4.2/dist/js/swiper.js'
 import 'swiper-3.4.2/dist/css/swiper.css'
 // 引入muzeUi
 import MuseUI from 'muse-ui'
@@ -56,15 +56,15 @@ var router = new VueRouter({
 	routes: [{
 		path: '/recommend',
 		component: recommend,
-		children:[{
-			path:'/recommend/regebang',
-			component:regebang,
-		},{
-			path:'/recommend/xingebang',
-			component:xingebang,
-		},{
-			path:'/recommend/kingbang',
-			component:kingbang,
+		children: [{
+			path: '/recommend/regebang',
+			component: regebang,
+		}, {
+			path: '/recommend/xingebang',
+			component: xingebang,
+		}, {
+			path: '/recommend/kingbang',
+			component: kingbang,
 		}]
 	}, {
 		path: '/gengduoxg',
@@ -84,41 +84,41 @@ var router = new VueRouter({
 	}, {
 		path: '/search',
 		component: search
-	},  {
+	}, {
 		path: '/entry',
 		component: entry
 	}, {
 		path: '/register',
 		component: register
-	},{
+	}, {
 		path: '/login',
-		component: login 
-	},{
-		path:'/subcate',
-		component:subcate,
-		children:[{
-			path:'liuxing',
-			component:liuxing
-		},{
-			path:'wangluo',
-			component:wangluo
-		},{
-			path:'minyao',
-			component:minyao
-		},{
-			path:'oumei',
-			component:oumei
-		},{
-			path:'qingge',
-			component:qingge
+		component: login
+	}, {
+		path: '/subcate',
+		component: subcate,
+		children: [{
+			path: 'liuxing',
+			component: liuxing
+		}, {
+			path: 'wangluo',
+			component: wangluo
+		}, {
+			path: 'minyao',
+			component: minyao
+		}, {
+			path: 'oumei',
+			component: oumei
+		}, {
+			path: 'qingge',
+			component: qingge
 		}]
-	},{
-			path:'/subsearch',
-			component:subsearch
-	},{
-			path:'/detail',
-			component:detail
-	},{
+	}, {
+		path: '/subsearch',
+		component: subsearch
+	}, {
+		path: '/detail',
+		component: detail
+	}, {
 		path: '/',
 		redirect: '/recommend/regebang'
 	}]
@@ -130,35 +130,37 @@ var store = new Vuex.Store({
 	//所有组件的状态，也就是数据源
 	state: {
 		bottomLight: true,
-		bill:"",
-		bottomLight:'recommend',
-		bill:[],
-		hot:[],
-		news:[],
-		page:0,
-		count: 1,
-		isshow:"true",
-		art:[],
-		mtv:[],
+		bill: "",
+		bottomLight: 'recommend',
+		bill: [],
+		hot: [],
 		news: [],
-		arrs:[],
-		re:[],
-		liuxing:[],
-		kind:null,
-		tui:[],
-		rege:[],
-		xinge:[],
-		king:[],
-		xg01:[],
-		xg02:[],
-		direction:"",
-		username:"",
-		password:"",
-		mysearch:null,
-		backsong:[],
-		detailname:null,
-		detailpic:null,
-		playsong:null
+		page: 0,
+		count: 1,
+		isshow: "true",
+		art: [],
+		mtv: [],
+		news: [],
+		arrs: [],
+		re: [],
+		liuxing: [],
+		kind: null,
+		tui: [],
+		rege: [],
+		xinge: [],
+		king: [],
+		xg01: [],
+		xg02: [],
+		direction: "",
+		username: "",
+		password: "",
+		userName: "",
+		passWord: "",	
+		mysearch: null,
+		backsong: [],
+		detailname: null,
+		detailpic: null,
+		playsong: null,
 	},
 	getters: {},
 	//分发状态
@@ -169,15 +171,15 @@ var store = new Vuex.Store({
 		},
 		setChange(context, data) {
 			context.commit('setNews', data),
-			context.commit('setArrs', data),
-			context.commit('setRe', data),
-			context.commit('setTui', data),
-			context.commit('setRege', data),
-			context.commit('setXinge', data),
-			context.commit('setKing', data),
-			context.commit('setXg', data),
-			context.commit('setXg02', data),
-			context.commit('setFang', data)
+				context.commit('setArrs', data),
+				context.commit('setRe', data),
+				context.commit('setTui', data),
+				context.commit('setRege', data),
+				context.commit('setXinge', data),
+				context.commit('setKing', data),
+				context.commit('setXg', data),
+				context.commit('setXg02', data),
+				context.commit('setFang', data)
 		},
 		sethot(context, data) {
 			context.commit('hot', data)
@@ -191,7 +193,10 @@ var store = new Vuex.Store({
 		Register(context, data) {
 			context.commit('register', data)
 		},
-		
+		Login(context, data) {
+			context.commit('login', data)
+		},
+
 		setliuxing(context, data) {
 			context.commit('liuxing', data)
 		},
@@ -199,7 +204,7 @@ var store = new Vuex.Store({
 			context.commit('getsearch', data)
 		},
 	},
-	
+
 	//分发状态
 	mutations: {
 		setFang(state, data) {
@@ -221,8 +226,7 @@ var store = new Vuex.Store({
 			state.count = data
 		},
 		setNews(state) {
-			axios.get('http://localhost:6789/index', {	
-				})
+			axios.get('http://localhost:6789/index', {})
 				.then((response) => {
 					console.log(response.data.song_list)
 					state.news = response.data.song_list;
@@ -233,112 +237,111 @@ var store = new Vuex.Store({
 				.then((response) => {
 					console.log(response.data.song_list)
 					state.news = response.data.song_list;
-//					state.news = state.news.concat(response.data.song_list);
+					//					state.news = state.news.concat(response.data.song_list);
 				})
 				.catch((error) => {
 					console.log(error);
 				});
 		},
-//		新歌速递
+		//		新歌速递
 		setArrs(state) {
 			axios.get('http://localhost:6789/xin', {
 					params: {
-						
+
 					}
-			}).then((response) => {
-//					console.log(response.data.song_list)
+				}).then((response) => {
+					//					console.log(response.data.song_list)
 					state.arrs = response.data.song_list;
-//					state.news = state.news.concat(response.data.song_list);
+					//					state.news = state.news.concat(response.data.song_list);
 				})
 				.catch((error) => {
 					console.log(error);
 				});
 		},
-//		热门歌单
+		//		热门歌单
 		setRe(state) {
 			axios.get('http://localhost:6789/re', {
-					params: {
-					}
+					params: {}
 				})
 				.then((response) => {
-//					console.log(response.data.song_list)
+					//					console.log(response.data.song_list)
 					state.re = response.data.song_list;
-//					state.news = state.news.concat(response.data.song_list);
+					//					state.news = state.news.concat(response.data.song_list);
 				})
 				.catch((error) => {
 					console.log(error);
 				});
 		},
-//		推荐
+		//		推荐
 		setTui(state) {
 			axios.get('http://localhost:6789/tui', {
 					params: {
-						
+
 					}
-			}).then((response) => {
-//					console.log(response.data.song_list)
+				}).then((response) => {
+					//					console.log(response.data.song_list)
 					state.tui = response.data.song_list;
-//					state.news = state.news.concat(response.data.song_list);
+					//					state.news = state.news.concat(response.data.song_list);
 				})
 				.catch((error) => {
 					console.log(error);
 				});
 		},
-//		热歌榜
+		//		热歌榜
 		setRege(state) {
 			axios.get('http://localhost:6789/rege', {
 					params: {
-						
+
 					}
-			}).then((response) => {
-//					console.log(response.data.song_list)
+				}).then((response) => {
+					//					console.log(response.data.song_list)
 					state.rege = response.data.song_list;
-//					state.news = state.news.concat(response.data.song_list);
+					//					state.news = state.news.concat(response.data.song_list);
 				})
 				.catch((error) => {
 					console.log(error);
 				});
 		},
-//		新歌榜
+		//		新歌榜
 		setXinge(state) {
 			axios.get('http://localhost:6789/xinge', {
 					params: {
-						
+
 					}
-			}).then((response) => {
-//					console.log(response.data.song_list)
+				}).then((response) => {
+					//					console.log(response.data.song_list)
 					state.xinge = response.data.song_list;
-//					state.news = state.news.concat(response.data.song_list);
+					//					state.news = state.news.concat(response.data.song_list);
 				})
 				.catch((error) => {
 					console.log(error);
 				});
 		},
-//		king榜
+		//		king榜
 		setKing(state) {
 			axios.get('http://localhost:6789/king', {
 					params: {
-						
+
 					}
-			}).then((response) => {
-//					console.log(response.data.song_list)
+				}).then((response) => {
+					//					console.log(response.data.song_list)
 					state.king = response.data.song_list;
-//					state.news = state.news.concat(response.data.song_list);
+					//					state.news = state.news.concat(response.data.song_list);
 				})
 				.catch((error) => {
 					console.log(error);
 				});
 		},
-//		新歌更多
+		//		新歌更多
 		setXg(state) {
 			axios.get('http://localhost:6789/xg', {
 					params: {
-						
+
 					}
-			}).then((response) => {
-//					console.log(response.data.song_list)
+				}).then((response) => {
+					//					console.log(response.data.song_list)
 					state.xg01 = response.data.song_list;
-//					state.news = state.news.concat(response.data.song_list);
+					//					state.news = state.news.concat(response.data.song_list);
 				})
 				.catch((error) => {
 					console.log(error);
@@ -347,43 +350,42 @@ var store = new Vuex.Store({
 		setXg02(state) {
 			axios.get('http://localhost:6789/xg02', {
 					params: {
-						
+
 					}
-			}).then((response) => {
-//					console.log(response.data.song_list)
+				}).then((response) => {
+					//					console.log(response.data.song_list)
 					state.xg02 = response.data.song_list;
-//					state.news = state.news.concat(response.data.song_list);
+					//					state.news = state.news.concat(response.data.song_list);
 				})
 				.catch((error) => {
 					console.log(error);
 				});
 		},
 		bill(state) {
-			axios.get("http://localhost:6789/bill", {
-			}).then((response) => {
-               state.bill = response.data.song_list
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+			axios.get("http://localhost:6789/bill", {}).then((response) => {
+					state.bill = response.data.song_list
+				})
+				.catch((error) => {
+					console.log(error);
+				});
 		},
 		hot(state) {
 			axios.get("http://localhost:6789/hot", {
-				params: {
+					params: {
 						page: state.page,
 					}
-			}).then((response) => {
-               state.hot = state.hot.concat(response.data.song_list)
-				
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+				}).then((response) => {
+					state.hot = state.hot.concat(response.data.song_list)
+
+				})
+				.catch((error) => {
+					console.log(error);
+				});
 		},
 		mtv(state) {
 			axios.get("http://localhost:6789/mtv", {
 
-			}).then((response) => {
+				}).then((response) => {
 					state.mtv = state.mtv.concat(response.data.song_list)
 				}).then((response) => {
 					console.log(response.data.song_list)
@@ -398,44 +400,74 @@ var store = new Vuex.Store({
 		liuxing(state) {
 			axios.get("http://localhost:6789/liuxing", {
 				params: {
-						type:state.kind
-					}
-			}).then((response) => {	
+					type: state.kind
+				}
+			}).then((response) => {
 				state.liuxing = response.data.song_list
-				}).catch((error) => {
-					console.log(error);
-				});
+			}).catch((error) => {
+				console.log(error);
+			});
 		},
+		//注册
 		register(state) {
-			           console.log(state.username,state.password)
+			console.log(state.username, state.password)
 			axios.get("http://localhost:1234/register", {
-				
+
 				params: {
-						user:state.username,
-						pass:state.password,
-					}
-			}).then((response) => {	
-//				state.liuxing = response.data.song_list
-				}).catch((error) => {
-					console.log(error);
-				});
-          },
-  
+					user: state.username,
+					pass: state.password,
+				}
+			}).then((response) => {
+//             console.log(response.data)
+				if(response.data== 1) {
+					alert("注册成功")
+					location.href = "#login"
+				} else if(response.data== 0) {
+					alert("注册失败")
+					return false
+				}
+			}).catch((error) => {
+				//					console.log(error);
+			});
+		},
+		//登录
+		login(state) {
+			axios.get("http://localhost:1234/login", {
+
+				params: {
+					user: state.userName,
+					pass: state.passWord,
+				}
+			}).then((response) => {
+               console.log(response.data)
+               console.log("1")
+				if(response.data== 1) {
+					alert("登录成功")
+					location.href = "#recommend"
+				} else if(response.data== 0) {
+					alert("登录失败")
+					return false
+				}
+			}).catch((error) => {
+				//					console.log(error);
+			});
+		},
+
 		//获取搜索
 		getsearch(state) {
 			axios.get("http://localhost:6789/search", {
 				params: {
-						type:state.mysearch
-					}
-			}).then((response) => {	
-				console.log(response.data.song,"000")
+					type: state.mysearch
+				}
+			}).then((response) => {
+				console.log(response.data.song, "000")
 				state.backsong = response.data.song
-				}).catch((error) => {
-					console.log(error);
-				});
+			}).catch((error) => {
+				console.log(error);
+			});
 		},
-		
-},
+
+	},
 
 })
 
