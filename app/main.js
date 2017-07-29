@@ -12,8 +12,14 @@ import axios from "axios";
 require("./css/common.css")
 require("./css/login.css")
 //轮播图
-import 'swiper-3.4.2/dist/js/swiper.js'
-import 'swiper-3.4.2/dist/css/swiper.css'
+
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/dist/js/swiper.js'
+import 'swiper/dist/css/swiper.css'
+
+// import 'swiper-3.4.2/dist/js/swiper.js'
+// import 'swiper-3.4.2/dist/css/swiper.css'
+
 // 引入muzeUi
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
@@ -141,26 +147,29 @@ var store = new Vuex.Store({
 		art: [],
 		mtv: [],
 		news: [],
-		arrs: [],
-		re: [],
-		liuxing: [],
-		kind: null,
-		tui: [],
-		rege: [],
-		xinge: [],
-		king: [],
-		xg01: [],
-		xg02: [],
-		direction: "",
+		arrs:[],
+		re:[],
+		liuxing:[],
+		kind:null,
+		tui:[],
+		rege:[],
+		xinge:[],
+		king:[],
+		xg01:[],
+		xg02:[],
+		direction:"",
+		mysearch:null,
+		backsong:[],
+		detailname:null,
+		detailpic:null,
+		playsong:null,
+		directionC:"",
+		hash:null,
+		hashsong:null,
 		username: "",
 		password: "",
 		userName: "",
 		passWord: "",	
-		mysearch: null,
-		backsong: [],
-		detailname: null,
-		detailpic: null,
-		playsong: null,
 	},
 	getters: {},
 	//分发状态
@@ -171,15 +180,16 @@ var store = new Vuex.Store({
 		},
 		setChange(context, data) {
 			context.commit('setNews', data),
-				context.commit('setArrs', data),
-				context.commit('setRe', data),
-				context.commit('setTui', data),
-				context.commit('setRege', data),
-				context.commit('setXinge', data),
-				context.commit('setKing', data),
-				context.commit('setXg', data),
-				context.commit('setXg02', data),
-				context.commit('setFang', data)
+			context.commit('setArrs', data),
+			context.commit('setRe', data),
+			context.commit('setTui', data),
+			context.commit('setRege', data),
+			context.commit('setXinge', data),
+			context.commit('setKing', data),
+			context.commit('setXg', data),
+			context.commit('setXg02', data),
+			context.commit('setFang', data),
+			context.commit('setCang', data)
 		},
 		sethot(context, data) {
 			context.commit('hot', data)
@@ -203,6 +213,9 @@ var store = new Vuex.Store({
 		getmsg(context, data) {
 			context.commit('getsearch', data)
 		},
+		playthesong(context, data) {
+			context.commit('gethashsong', data)
+		},
 	},
 
 	//分发状态
@@ -210,12 +223,16 @@ var store = new Vuex.Store({
 		setFang(state, data) {
 			state.direction = data
 		},
+		setCang(state, data) {
+			state.directionC = data
+		},
 		xart(state) {
 			axios.get("http://localhost:6789/xart", {
-
+					
 				}).then((response) => {
-					console.log(response.data.song_list)
-					state.art = state.art.concat(response.data.song_list)
+					console.log(response.data.singers.list.info)
+					state.art = response.data.singers.list.info
+//					state.art = state.art.concat(response.data.singers.list.info)
 				})
 				.catch((error) => {
 					console.log(error);
@@ -374,13 +391,15 @@ var store = new Vuex.Store({
 					params: {
 						page: state.page,
 					}
-				}).then((response) => {
-					state.hot = state.hot.concat(response.data.song_list)
 
-				})
-				.catch((error) => {
-					console.log(error);
-				});
+			}).then((response) => {
+				console.log(response.data.data,"02222")
+               state.hot = response.data.data
+				
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 		},
 		mtv(state) {
 			axios.get("http://localhost:6789/mtv", {
@@ -467,7 +486,24 @@ var store = new Vuex.Store({
 			});
 		},
 
-	},
+
+		//获取搜索
+		gethashsong(state) {
+			axios.get("http://localhost:6789/gethashsong", {
+				params: {
+						song:state.hash
+					}
+			}).then((response) => {	
+				console.log(response,"gggg")
+				state.hashsong = response.data.url
+				}).catch((error) => {
+					console.log(error);
+				});
+		},
+		
+},
+
+
 
 })
 

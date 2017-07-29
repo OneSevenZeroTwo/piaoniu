@@ -17,7 +17,7 @@
 		</div>
 		<div v-for="(n,$index) in backlist"  class="song">
 			<div @click="playsong($index)">
-				<span class="t">{{n.songname}}<i class="sq"></i></span>
+				<span class="t">{{n.songname}}<i class="sq" background-size="10px"></i></span>
 				<p class="b"><img src="../../images/1.gif" alt="" v-if="$index==page">{{n.artistname}}<i class="load"></i></p>
 			</div>
 		</div>
@@ -80,6 +80,7 @@
 	margin-right: 16px;
 }
 .sq{
+	background-size: 12px;
 	display: block;
 	width: 50px;
 	height: 50px;
@@ -89,9 +90,10 @@
 	background: url(../../images/4.png)-370px -135px
 }
 .load{
+	/*background-size: 12px;*/
 	display: block;
-	width: 50px;
-	height: 50px;
+	width: 20px;
+	height: 20px;
 	background-color: red;
 	position: absolute;
 	right:0px;
