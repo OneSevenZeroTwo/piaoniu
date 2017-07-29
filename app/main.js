@@ -143,7 +143,9 @@ var store = new Vuex.Store({
 		backsong:[],
 		detailname:null,
 		detailpic:null,
-		playsong:null
+		playsong:null,
+		directionC:"",
+		shu:[]
 	},
 	getters: {},
 	//分发状态
@@ -162,7 +164,8 @@ var store = new Vuex.Store({
 			context.commit('setKing', data),
 			context.commit('setXg', data),
 			context.commit('setXg02', data),
-			context.commit('setFang', data)
+			context.commit('setFang', data),
+			context.commit('setCang', data)
 		},
 		sethot(context, data) {
 			context.commit('hot', data)
@@ -186,12 +189,16 @@ var store = new Vuex.Store({
 		setFang(state, data) {
 			state.direction = data
 		},
+		setCang(state, data) {
+			state.directionC = data
+		},
 		xart(state) {
 			axios.get("http://localhost:6789/xart", {
-
+					
 				}).then((response) => {
-					console.log(response.data.song_list)
-					state.art = state.art.concat(response.data.song_list)
+					console.log(response.data.singers.list.info)
+					
+					state.art = state.art.concat(response.data.singers.list.info)
 				})
 				.catch((error) => {
 					console.log(error);
