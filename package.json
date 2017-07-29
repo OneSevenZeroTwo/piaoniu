@@ -12,6 +12,7 @@
     "axios": "^0.16.2",
     "babel-loader": "^7.1.1",
     "cheerio": "^1.0.0-rc.2",
+    "cookie": "^0.3.1",
     "css-loader": "^0.28.4",
     "express": "^4.15.3",
     "html-loader": "^0.4.5",

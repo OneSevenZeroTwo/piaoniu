@@ -15,7 +15,9 @@
 				</div>
 			</form>
 			<div class="ui-suggestion" style="height: 640px;">
-				<div class="hot-sug clearfix" style="margin-bottom: 10px;"><span class="item" v-for="n in name" @click="dian(n)">{{n}}</span><!--<span class="item">孙盛希《Between》</span><span class="item">林忆莲《我不能忘记你》</span><span class="item">五月天</span><span class="item">梁静茹</span><span class="item">莫文蔚</span><span class="item">李宗盛</span><span class="item">陈梓童</span><span class="item">刚好遇见你</span><span class="item">张杰</span>--></div>
+				<div class="hot-sug clearfix" style="margin-bottom: 10px;">
+					<span class="item" v-for="n in name" @click="dian(n)">{{n}}</span>
+				</div>
 				<div class="ui-suggestion-content"> </div>
 				<div class="ui-suggestion-button">
 					<div class="ui-suggestion-clear">清除历史记录</div>

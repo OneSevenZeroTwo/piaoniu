@@ -177,13 +177,27 @@
 		</div>
 		<div class="hot">
 			<h4>热门歌单</h4>
-			<div v-for="n in hot" >
-				<a href="#/detail" @click="detail(n.artist_name,n.pic_big,n.title)"><img :src="n.pic_big" alt=""></a>
-				<p>{{n.author}}</p>
-				<i></i>
-				<span>{{n.title}}</span>
+			<div v-for="(n,$index) in hot">
+				<div>
+					<p @click="sethash(n.hash,n.remark,$index)">
+						<span>{{n.filename}}</span>
+						<img src="../images/1.gif" alt="" v-if="$index==page&&player">
+					</p>
+					<i class="love"></i>		
+				</div>
 			</div>
-			<p class="loadMore" @click="sethot()">加载更多</p>
+			<audio autoplay="autoplay" :src="playhash" alt="" v-if="player"></audio>
+		</div>
+		<div class="player" v-if="player">
+    		<ul class="action">
+    			<li class="thenamep">
+    				<img src="../images/10.jpg" alt="">
+    				<span class="thename">{{songnameh}}</span>
+    			</li>
+	        	<li class="iconfont play icon-stop" @click="stop()"></li>
+	        	<li class="iconfont icon-next" @click="nextsong()"></li>
+	        	<li class="iconfont icon-list"></li>
+    		</ul>
 		</div>
 	</div>
 </template>
@@ -192,7 +206,11 @@
 		data(){
 			return{
 				isSpend:false,
-				spendWord:"展开全部分类"
+				spendWord:"展开全部分类",
+				player:false,
+				psong:null,
+				songnameh:null,
+				page:null
 			}
 		},
 		methods:{
@@ -209,12 +227,29 @@
 				this.$store.state.detailname = name;
 				this.$store.state.detailpic = img;
 				this.$store.state.playsong = song;
-			}
+			},
+			sethash:function(seth,name,page){
+				this.$store.state.hash = seth;
+				this.$store.dispatch("playthesong");
+				this.player = true;
+				this.songnameh = name;
+				this.page = page;
+			},
+			stop:function(){
+				this.player = false
+			},
+			nextsong:function(){
+				this.page = this.page++
+				console.log(this.page++)
+			},
 		},
 		computed:{
 			hot(){
 				console.log(this.$store.state.hot)
 				return this.$store.state.hot
+			},
+			playhash(){
+				return this.$store.state.hashsong
 			}
 		},
 		mounted:function(){
@@ -304,22 +339,24 @@ h4{
 	margin-left: 3%
 }
 .hot div{
-	width: 40%;
+	width: 90%;
+	height: 50px;
 	margin: 5%;
 	float: left;
 	font-size: 12px;
 	position: relative;
 }
-.hot div i{
+.love{
 	display: block;
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
 	background-color: red;
 	position:absolute;
-	right: 8px;
-	top: 5rem;
-	background: url(//static0.qianqian.com/web/st/img/sprite/ui-list-0e4.png)-137px -114px;
+	right: -30px;
+	top: -17px;
+	background: url(//static0.qianqian.com/web/st/img/sprite/ui-list-0e4.png)-112px -205px;
+	background-size: 220px;
 }
 .hot h4{
 	margin-left: 5%;
@@ -330,5 +367,29 @@ h4{
 	width: 90%;
 	margin-left: 0;
 	text-align: center;
+}
+.player{
+	position: relative;
+}
+.player ul{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 50px;
+}
+.player ul li{
+	height: 30px;
+	float: left;
+	font-size: 30px;
+	line-height: 50px;
+	width: 25%;
+	text-align: center;
+}
+.player ul li span{
+	font-size: 12px;
+	height: 50px;
+	line-height: 50px;
+	overflow: hidden
 }
 </style>
