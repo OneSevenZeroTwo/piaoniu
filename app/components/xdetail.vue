@@ -5,17 +5,30 @@
 				<img :src="pic" alt="">
 			</div>
 		</div>
-		<div v-for="(n,$index) in backsong"  class="song" @click="plays($index)">
+		<div v-for="(n,$index) in backsong"  class="song" @click="plays($index,n.songname)">
 			<span class="t">{{n.songname}}<i class="sq"></i></span>
-			<p class="p"><img src="../images/1.gif" alt="" v-if="$index==page">{{n.artistname}}<i class="load"></i></p>
-		</div>	
+			<p class="p"><img src="../images/1.gif" alt="" v-if="$index==page&&player">{{n.artistname}}<i class="load"></i></p>
+		</div>
+		<div class="player" v-if="player">
+    		<ul class="action">
+    			<li class="thenamep">
+    				<img :src="pic" alt="">
+    				<span class="thename">{{psong}}</span>
+    			</li>
+	        	<li  @click="plays()" class="iconfont play icon-stop"></li>
+	        	<li class="iconfont icon-next"></li>
+	        	<li class="iconfont icon-list"></li>
+    		</ul>
+		</div>
 	</div>
 </template>
 <script>
 	export default{
 		data(){
 			return{
-				page:null
+				page:null,
+				player:false,
+				psong:null
 			}
 		},
 		methods:{
@@ -24,8 +37,10 @@
 				this.$store.state.mysearch = this.$store.state.detailname;
 				this.$store.dispatch("getmsg");
 			},
-			plays:function(index){
-				this.page = index
+			plays:function(index,psong){
+				this.page = index;
+				this.player = !this.player
+				this.psong = psong 
 			}
 		},
 		computed:{
@@ -47,7 +62,8 @@
 </script>
 <style scoped>
 	.detail{
-		margin-top: 100px
+		margin-top: 100px;
+		position: relative;
 	}	
 	.pic{
 		height: 200px;
@@ -88,5 +104,31 @@
 		top: -25px;
 		background: url(../images/4.png)-250px 0px;
 		background-size: 200px
+	}
+	.player ul{
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		z-index: 100
+	}
+	.action li{
+		float: left;
+		width: 25%;
+		height: 60px;
+		text-align: center;
+		line-height: 60px;
+		font-size: 40px;
+	}
+	.thenamep{
+		position: relative;
+		overflow: hidden;
+	}
+	.thename{
+		position: absolute;
+		left: 0;
+		width: 100%;
+		display: block;
+		bottom: -10px;
+		font-size: 14px;
 	}
 </style>

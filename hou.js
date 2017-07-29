@@ -124,7 +124,7 @@ app.get("/xg02",function(request,response){
 app.get("/hot",function(request,response){
 	console.log(request.query.page)
 	response.setHeader("Access-Control-Allow-Origin","*");
-	http.get("http://tingapi.ting.baidu.com/v1/restserver/ting?format=json&calback=&from=webapp_music&method=baidu.ting.billboard.billList&type=2&size=20&offset="+request.query.page*20, function(res) {
+	http.get("http://m.kugou.com/?json=true", function(res) {
 		var data = "";
 		res.on('data', function(chunk) {
 			data += chunk
@@ -210,7 +210,37 @@ app.get("/search",function(request,response){
 	})
 })
 
+//请求歌手信息
+//app.get("/singer",function(request,response){
+////	var name = encodeURI(request.query.type);
+//	response.setHeader("Access-Control-Allow-Origin","*");
+//	http.get("http://tingapi.ting.baidu.com/v1/restserver/ting?format=json&calback=&from=webapp_music&method=baidu.ting.artist.getInfo&tinguid=ting id, function(res) {
+//		var data = "";
+//		res.on('data', function(chunk) {
+//			data += chunk
+//			console.log(data)
+//		})
+//		res.on('end', function() {
+//			response.end(data)
+//		})
+//	})
+//})
 
+//搜索
+app.get("/gethashsong",function(request,response){
+	console.log(request.query.song)
+	response.setHeader("Access-Control-Allow-Origin","*");
+	http.get("http://m.kugou.com/app/i/getSongInfo.php?cmd=playInfo&hash="+request.query.song, function(res) {
+		var data = "";
+		res.on('data', function(chunk) {
+			data += chunk
+			console.log(data)
+		})
+		res.on('end', function() {
+			response.end(data)
+		})
+	})
+})
 var server = app.listen("6789",function(host,post){
 
 })

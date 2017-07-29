@@ -12,6 +12,8 @@ import axios from "axios";
 require("./css/common.css")
 //轮播图
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/dist/js/swiper.js'
+import 'swiper/dist/css/swiper.css'
 // 引入muzeUi
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
@@ -141,7 +143,9 @@ var store = new Vuex.Store({
 		backsong:[],
 		detailname:null,
 		detailpic:null,
-		playsong:null
+		playsong:null,
+		hash:null,
+		hashsong:null
 	},
 	getters: {},
 	//分发状态
@@ -159,7 +163,8 @@ var store = new Vuex.Store({
 			context.commit('setXinge', data),
 			context.commit('setKing', data),
 			context.commit('setXg', data),
-			context.commit('setXg02', data)
+			context.commit('setXg02', data),
+			context.commit('setFang', data)
 		},
 		sethot(context, data) {
 			context.commit('hot', data)
@@ -176,13 +181,16 @@ var store = new Vuex.Store({
 		getmsg(context, data) {
 			context.commit('getsearch', data)
 		},
+		playthesong(context, data) {
+			context.commit('gethashsong', data)
+		},
 	},
 	
 	//分发状态
 	mutations: {
-//		setCount(state, data) {
-//			state.direction = data
-//		},
+		setFang(state, data) {
+			state.direction = data
+		},
 		xart(state) {
 			axios.get("http://localhost:6789/xart", {
 
@@ -351,7 +359,8 @@ var store = new Vuex.Store({
 						page: state.page,
 					}
 			}).then((response) => {
-               state.hot = state.hot.concat(response.data.song_list)
+				console.log(response.data.data,"02222")
+               state.hot = response.data.data
 				
 			})
 			.catch((error) => {
@@ -396,6 +405,20 @@ var store = new Vuex.Store({
 			}).then((response) => {	
 				console.log(response.data.song,"000")
 				state.backsong = response.data.song
+				}).catch((error) => {
+					console.log(error);
+				});
+		},
+
+		//获取搜索
+		gethashsong(state) {
+			axios.get("http://localhost:6789/gethashsong", {
+				params: {
+						song:state.hash
+					}
+			}).then((response) => {	
+				console.log(response,"gggg")
+				state.hashsong = response.data.url
 				}).catch((error) => {
 					console.log(error);
 				});
