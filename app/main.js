@@ -10,6 +10,7 @@ import axios from "axios";
 //引入公共样式 全局
 //添加样式
 require("./css/common.css")
+require("./css/login.css")
 //轮播图
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 // 引入muzeUi
@@ -46,6 +47,9 @@ import regebang from "./components/routers/regebang_2.vue";
 import xingebang from "./components/routers/xingebang_2.vue";
 import kingbang from "./components/routers/kingbang_2.vue";
 import gengduoxg from "./components/routers/gengduoxg.vue";
+import entry from "./components/routers/entry.vue";
+import register from "./components/routers/register.vue";
+import login from "./components/routers/login.vue";
 var router = new VueRouter({
 	routes: [{
 		path: '/recommend',
@@ -78,7 +82,16 @@ var router = new VueRouter({
 	}, {
 		path: '/search',
 		component: search
+	},  {
+		path: '/entry',
+		component: entry
 	}, {
+		path: '/register',
+		component: register
+	},{
+		path: '/login',
+		component: login 
+	},{
 		path:'/subcate',
 		component:subcate,
 		children:[{
@@ -109,7 +122,7 @@ var store = new Vuex.Store({
 	//所有组件的状态，也就是数据源
 	state: {
 		bottomLight: true,
-		bill:[],
+		bill:"",
 		hot:[],
 		news:[],
 		page:0,
@@ -129,6 +142,8 @@ var store = new Vuex.Store({
 		xg01:[],
 		xg02:[],
 		direction:"",
+		username:"",
+		password:"",
 	},
 	getters: {},
 	//分发状态
@@ -157,6 +172,10 @@ var store = new Vuex.Store({
 		Mtv(context, data) {
 			context.commit('mtv', data)
 		},
+		Register(context, data) {
+			context.commit('register', data)
+		},
+		
 		setliuxing(context, data) {
 			context.commit('liuxing', data)
 		},
@@ -323,7 +342,7 @@ var store = new Vuex.Store({
 		bill(state) {
 			axios.get("http://localhost:6789/bill", {
 			}).then((response) => {
-               state.bill = state.bill.concat(response.data.song_list)
+               state.bill = response.data.song_list
 			})
 			.catch((error) => {
 				console.log(error);
@@ -365,6 +384,21 @@ var store = new Vuex.Store({
 			}).then((response) => {	
 				console.log(response.data.song_list,"000")
 				state.liuxing = response.data.song_list
+				}).catch((error) => {
+					console.log(error);
+				});
+		},
+		register(state) {
+			           console.log(state.username,state.password)
+			axios.get("http://localhost:1234/register", {
+				
+				params: {
+						user:state.username,
+						pass:state.password,
+					}
+			}).then((response) => {	
+				console.log(response)
+				              response.data
 				}).catch((error) => {
 					console.log(error);
 				});
