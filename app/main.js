@@ -12,9 +12,8 @@ import axios from "axios";
 require("./css/common.css")
 require("./css/login.css")
 //轮播图
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-import 'swiper/dist/js/swiper.js'
-import 'swiper/dist/css/swiper.css'
+import 'swiper-3.4.2/dist/js/swiper.js' 
+import 'swiper-3.4.2/dist/css/swiper.css'
 // 引入muzeUi
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
@@ -27,7 +26,6 @@ Vue.use(Vuex);
 //通过 Vue.use()明确地安装路由功能
 Vue.use(VueRouter);
 Vue.use(VueResource);
-Vue.use(VueAwesomeSwiper)
 //挂载axios在Vue构造器下
 Vue.prototype.$ajax = axios;
 //拥入weui样式库
@@ -421,7 +419,7 @@ var store = new Vuex.Store({
 				}).catch((error) => {
 					console.log(error);
 				});
-           }
+          },
   
 		//获取搜索
 		getsearch(state) {
