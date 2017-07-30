@@ -7,15 +7,15 @@
 			</div>
 			<div class="list">
 				<ul>
-					<li class="yi" @click=""><span class="iconfont ziti">&#xe675;</span><span>Mail firend</span><span>></span></li>
-					<li class="er" @click=""><span class="iconfont ziti">&#xe646;</span><span>Mail link</span><span>></span></li>
-					<li class="san" @click=""><span class="iconfont ziti">&#xe648;</span><span>Mail timing</span><span>></span></li>
-					<li class="si" @click=""><span class="iconfont ziti">&#xe60a;</span><span>Mail inbox</span><span>></span></li>
-					<li class="wu" @click=""><span class="iconfont ziti">&#xe611;</span><span>Mail inbox</span><span>></span></li>
+					<li class="yi" @click="directionTo"><span class="iconfont ziti">&#xe675;</span><span>Mail firend</span><span>></span></li>
+					<li class="er" @click="directionTo"><span class="iconfont ziti">&#xe646;</span><span>Mail link</span><span>></span></li>
+					<li class="san" @click="directionTo"><span class="iconfont ziti">&#xe648;</span><span>Mail timing</span><span>></span></li>
+					<li class="si" @click="directionTo"><span class="iconfont ziti">&#xe60a;</span><span>Mail inbox</span><span>></span></li>
+					<li class="wu" @click="directionTo"><span class="iconfont ziti">&#xe611;</span><span>Mail inbox</span><span>></span></li>
 				</ul>
 			</div>
 			<div class="dibu">
-				<div class="dibu_01"><span class="iconfont" @click="directionTo">&#xe639;</span></div>
+				<div class="dibu_01"><span class="iconfont" @click="directionToC">&#xe639;</span></div>
 			</div>
 			<!--<div class="huan" style="display:{{isShowShang?'block':'none'}};">
 			<div class="huan01">
@@ -56,6 +56,11 @@
 				this.page = index;
 			},
 			directionTo() {
+				this.$store.state.direction="left",
+				this.$store.dispatch("setChange",this.$store.state.direction),
+				this.$store.state.directionC = "lefter"
+			},
+			directionToC() {
 				this.$store.state.direction="left",
 				this.$store.dispatch("setChange",this.$store.state.direction)
 			},
