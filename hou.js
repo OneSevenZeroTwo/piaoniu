@@ -243,6 +243,40 @@ app.get("/gethashsong",function(request,response){
 		})
 	})
 })
+
+
+
+//搜索
+app.get("/bbbbb",function(request,response){
+	console.log(request.query.song)
+	response.setHeader("Access-Control-Allow-Origin","*");
+	http.get("http://m.kugou.com/rank/list&json=true", function(res) {
+		var data = "";
+		res.on('data', function(chunk) {
+			data += chunk
+			console.log(data)
+		})
+		res.on('end', function() {
+			response.end(data)
+		})
+	})
+})
+
+
+app.get("/ccccc",function(request,response){
+	console.log(request.query.song)
+	response.setHeader("Access-Control-Allow-Origin","*");
+	http.get("http://m.kugou.com/rank/info/?rankid=6666&page=1&json=true", function(res) {
+		var data = "";
+		res.on('data', function(chunk) {
+			data += chunk
+			console.log(data)
+		})
+		res.on('end', function() {
+			response.end(data)
+		})
+	})
+})
 var server = app.listen("6789",function(host,post){
 
 })
