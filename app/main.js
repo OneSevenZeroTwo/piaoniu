@@ -380,7 +380,8 @@ var store = new Vuex.Store({
 		},
 		bill(state) {
 			axios.get("http://localhost:6789/bill", {}).then((response) => {
-					state.bill = response.data.song_list
+					console.log(response.data.plist.list.info,"bill")
+					state.bill = response.data.plist.list.info
 				})
 				.catch((error) => {
 					console.log(error);
