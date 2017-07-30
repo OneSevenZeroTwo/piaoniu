@@ -138,7 +138,7 @@ app.get("/hot",function(request,response){
 
 app.get("/bill",function(request,response){
 	response.setHeader("Access-Control-Allow-Origin","*");
-	http.get("http://tingapi.ting.baidu.com/v1/restserver/ting?format=json&calback=&from=webapp_music&method=baidu.ting.billboard.billList&type=1&size=10&offset=0  ", function(res) {
+	http.get("http://m.kugou.com/plist/index&json=true", function(res) {
 		var data = "";
 		res.on('data', function(chunk) {
 			data += chunk
@@ -251,7 +251,7 @@ app.get("/bbbbb",function(request,response){
 app.get("/ccccc",function(request,response){
 	console.log(request.query.song)
 	response.setHeader("Access-Control-Allow-Origin","*");
-	http.get("http://m.kugou.com/rank/info/?rankid=6666&page=1&json=true", function(res) {
+	http.get("http://mobilecdn.kugou.com/api/v3/search/hot?format=json&plat=0&count=30", function(res) {
 		var data = "";
 		res.on('data', function(chunk) {
 			data += chunk
