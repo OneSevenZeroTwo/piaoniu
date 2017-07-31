@@ -183,7 +183,7 @@
 						<span>{{n.filename}}</span>
 						<img src="../images/1.gif" alt="" v-if="$index==page&&player">
 					</p>
-					<i class="love"></i>		
+					<i class="love" @click="cllocet(n.filename,n.hash)"></i>		
 				</div>
 			</div>
 			<audio autoplay="autoplay" :src="playhash" alt="" v-if="player"></audio>
@@ -242,6 +242,12 @@
 				this.page = this.page++
 				console.log(this.page++)
 			},
+			cllocet:function(songname,url){
+				console.log(songname,url);
+				this.$store.state.cllocetname = songname;
+				this.$store.state.clloceturl = url;
+				this.$store.dispatch("cllocet");
+			}
 		},
 		computed:{
 			hot(){

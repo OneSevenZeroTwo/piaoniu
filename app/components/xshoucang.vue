@@ -7,8 +7,7 @@
 			</div>
 			<div class="shou_footer">
 				<ul>
-					<li><img src="../images/lun03.jpg" alt="" /><span class="geshou">薛之谦</span><span class="geming">歌曲名称</span></li>
-					<li><img src="../images/lun03.jpg" alt="" /><span class="geshou">薛之谦</span><span class="geming">歌曲名称</span></li>
+					<li v-for="n in cllocetlist"><span class="geshou">{{n.songname}}</span></li>
 				</ul>
 			</div>
 		</div>
@@ -29,6 +28,9 @@
 			directionC() {
 				return this.$store.state.directionC
 			},
+			cllocetlist(){
+				return this.$store.state.showcllocet
+			}
 		},
 		methods: {
 			directionToC() {
@@ -49,6 +51,7 @@
 		},
 		mounted() {
 			this.loadMore();
+			this.$store.dispatch("showcllocet")
 		},
 	}
 </script>
@@ -115,9 +118,9 @@
 	}
 	#shou .shou_footer ul li .geshou{
 		display: inline-block;
-		width: 100px;
+		width: 100%;
 		height: 40px;
-		text-align: center;
+		line-height: 40px;
 		layout-grid-char: 40px;
 		font-size: 12px;
 		color: #8C8C8C;

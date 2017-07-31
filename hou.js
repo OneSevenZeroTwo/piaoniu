@@ -231,6 +231,8 @@ app.get("/gethashsong",function(request,response){
 
 
 
+
+
 //搜索
 app.get("/bbbbb",function(request,response){
 	console.log(request.query.song)

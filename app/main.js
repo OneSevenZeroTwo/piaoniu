@@ -169,7 +169,10 @@ var store = new Vuex.Store({
 		username: "",
 		password: "",
 		userName: "",
-		passWord: "",	
+		passWord: "",
+		cllocetname:null,
+		clloceturl:null	,
+		showcllocet:[]
 	},
 	getters: {},
 	//分发状态
@@ -216,6 +219,12 @@ var store = new Vuex.Store({
 		playthesong(context, data) {
 			context.commit('gethashsong', data)
 		},
+		cllocet(context,data){
+			context.commit('cllocetion',data)
+		},
+		showcllocet(context,data){
+			context.commit('showthecllocet',data)
+		}
 	},
 
 	//分发状态
@@ -250,11 +259,6 @@ var store = new Vuex.Store({
 					params: {
 						//page: state.page++,
 					}
-				})
-				.then((response) => {
-					console.log(response.data.song_list)
-					state.news = response.data.song_list;
-					//					state.news = state.news.concat(response.data.song_list);
 				})
 				.catch((error) => {
 					console.log(error);
@@ -497,6 +501,35 @@ var store = new Vuex.Store({
 			}).then((response) => {	
 				console.log(response,"gggg")
 				state.hashsong = response.data.url
+				}).catch((error) => {
+					console.log(error);
+				});
+		},
+
+
+
+		//收藏
+		cllocetion(state) {
+			axios.get("http://localhost:1234/cllocet", {
+				params: {
+						cllocetname:state.cllocetname,
+						clloceturl:state.clloceturl,
+					}
+			}).then((response) => {	
+
+				}).catch((error) => {
+					console.log(error);
+				});
+		},
+
+
+		//收藏
+		showthecllocet(state) {
+			axios.get("http://localhost:1234/showthecllocet", {
+
+			}).then((response) => {	
+					console.log(response.data,"收藏")
+					state.showcllocet = response.data;
 				}).catch((error) => {
 					console.log(error);
 				});

@@ -68,6 +68,37 @@ app.get('/login',function(req,res){
 	});
 	connection.end();
 });
+
+//收藏
+app.get('/cllocet',function(req,res){
+	res.append("Access-Control-Allow-Origin", "*")
+	//打开数据库
+	createConnection()
+	connection.connect();
+	//写入数据库
+		console.log(req.query.cllocetname,req.query.clloceturl);
+	connection.query("insert into `cllocet` (songname,mp3url) values ('"+req.query.cllocetname+"','"+req.query.clloceturl+"')",function(error,results,fields){
+					console.log("insert into `cllocet` (songname,mp3url) values ('"+req.query.cllocetname+"','"+req.query.clloceturl+"')");
+					res.send('1');
+					connection.end();
+				});
+});
+
+
+
+//显示收藏
+app.get('/showthecllocet',function(req,res){
+	res.append("Access-Control-Allow-Origin", "*")
+	//打开数据库
+	createConnection()
+	connection.connect();
+	//写入数据库
+	connection.query("select * from cllocet",function(error,results,fields){
+					console.log(results)
+					res.send(results);
+					connection.end();
+				});
+});
 //
 //
 //
