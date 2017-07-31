@@ -183,8 +183,6 @@ app.get('/xiu', function(req, res) {
 	})
 
 //
-//
-//
 ////列表页返回cake数据
 //app.post('/list',function(req,res){
 //	res.append("Access-Control-Allow-Origin", "*")

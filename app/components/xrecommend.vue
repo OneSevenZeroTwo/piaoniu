@@ -10,10 +10,9 @@
 							<div class="hd">今日推荐</div>
 							<div class="container">
 								<div class="songlist">
-
 									<div v-for="n in news" class="card url song-541853982 normal log" data-sid="541853982" data-url="/song/541853982" data-log="{&quot;page&quot;:&quot;home&quot;,&quot;pos&quot;:&quot;recommendsong_wap&quot;}">
 										<div class="poster">
-											<img :src="n.pic_small" alt="">
+											<img :src="n?n.pic_small:imgu" alt="">
 											<span class="btn-play ui-icon-play url song- normal" data-sid="541853982" data-url="/song/541853982"></span>
 										</div>
 										<div class="info">
@@ -35,9 +34,6 @@
 							<div class="container">
 								<div class="gallery">
 									<div class="scroller">
-										<!--<div class="swiper-container">
-										<div class="swiper-wrapper">-->
-										<!--<div class="swiper-slide">-->
 										<div v-for="a in arrs" class="card url" data-url="#/album/544527746/" data-id="544527746">
 											<div class="album">
 												<img :src="a.pic_small">
@@ -46,9 +42,6 @@
 												<div class="author">{{a.artist_name}}</div>
 											</div>
 										</div>
-										<!--</div>-->
-										<!--</div>
-									</div>-->
 									</div>
 								</div>
 							</div>
@@ -166,6 +159,7 @@
 				],
 				page: 0,
 				scroll: "",
+				imgu:require('../images/10.jpg')
 			}
 		},
 		computed: {

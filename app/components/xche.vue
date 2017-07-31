@@ -37,7 +37,7 @@
 	export default {
 		data() {
 			return {
-//				direction:this.$store.state.direction
+				//				direction:this.$store.state.direction
 			}
 		},
 		computed: {
@@ -56,17 +56,22 @@
 				this.page = index;
 			},
 			directionTo() {
-				this.$store.state.direction="left",
-				this.$store.dispatch("setChange",this.$store.state.direction),
+				this.$store.state.direction = "left",
+				this.$store.dispatch("setChange", this.$store.state.direction),
 				this.$store.state.directionC = "lefter"
 			},
 			directionToC() {
-				this.$store.state.direction="left",
-				this.$store.dispatch("setChange",this.$store.state.direction)
+				this.$store.state.direction = "left",
+				this.$store.dispatch("setChange", this.$store.state.direction)
 			},
+//			fetch:function() {
+//				return JSON.parse(window.localStorage.getItem("itemss") || []);
+//				console.log(fetch)
+//			},
 		},
 		mounted() {
 			this.loadMore();
+//			this.fetch();
 		},
 	}
 </script>
