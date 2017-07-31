@@ -457,7 +457,7 @@ var store = new Vuex.Store({
 			}).then((response) => {
 				if(response.data== 1) {
 					window.localStorage.setItem("username",state.userName)
-					window.localStorage.setItem("username",state.passWord)
+					window.localStorage.setItem("password",state.passWord)
 					alert("登录成功")
 					location.href = "#recommend"
 				} else if(response.data== 0) {
