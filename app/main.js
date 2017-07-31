@@ -12,8 +12,8 @@ import axios from "axios";
 require("./css/common.css")
 require("./css/login.css")
 //轮播图
-import 'swiper-3.4.2/dist/js/swiper.js'
-import 'swiper-3.4.2/dist/css/swiper.css'
+// import 'swiper-3.4.2/dist/js/swiper.js'
+// import 'swiper-3.4.2/dist/css/swiper.css'
 
 // import 'swiper-3.4.2/dist/js/swiper.js'
 // import 'swiper-3.4.2/dist/css/swiper.css'
@@ -62,16 +62,17 @@ var router = new VueRouter({
 		path: '/recommend',
 		component: recommend,
 		children: [{
-			path: '/recommend/regebang',
+			path: 'regebang',
 			component: regebang,
 		}, {
-			path: '/recommend/xingebang',
+			path: 'ingebang',
 			component: xingebang,
 		}, {
-			path: '/recommend/kingbang',
+			path: 'recommend/kingbang',
 			component: kingbang,
 		}]
-	}, {
+	}, 
+	{
 		path: '/gengduoxg',
 		component: gengduoxg,
 	}, {
@@ -172,7 +173,12 @@ var store = new Vuex.Store({
 		username: "",
 		password: "",
 		userName: "",
-		passWord: "",	
+		passWord: "",
+		cllocetname:null,
+		clloceturl:null	,
+		showcllocet:[],
+		playsongpic:"http://img.knowledge.csdn.net/upload/base/1453701371636_636.jpg",
+		showplay:false
 	},
 	getters: {},
 	//分发状态
@@ -219,6 +225,12 @@ var store = new Vuex.Store({
 		playthesong(context, data) {
 			context.commit('gethashsong', data)
 		},
+		cllocet(context,data){
+			context.commit('cllocetion',data)
+		},
+		showcllocet(context,data){
+			context.commit('showthecllocet',data)
+		}
 	},
 
 	//分发状态
@@ -233,7 +245,6 @@ var store = new Vuex.Store({
 			axios.get("http://localhost:6789/xart", {
 					
 				}).then((response) => {
-					console.log(response.data.singers.list.info)
 					state.art = response.data.singers.list.info
 //					state.art = state.art.concat(response.data.singers.list.info)
 				})
@@ -262,16 +273,10 @@ var store = new Vuex.Store({
 		setNews(state) {
 			axios.get('http://localhost:6789/index', {})
 				.then((response) => {
-					console.log(response.data.song_list)
 					state.news = response.data.song_list;
 					params: {
 						//page: state.page++,
 					}
-				})
-				.then((response) => {
-					console.log(response.data.song_list)
-					state.news = response.data.song_list;
-					//					state.news = state.news.concat(response.data.song_list);
 				})
 				.catch((error) => {
 					console.log(error);
@@ -397,7 +402,6 @@ var store = new Vuex.Store({
 		},
 		bill(state) {
 			axios.get("http://localhost:6789/bill", {}).then((response) => {
-					console.log(response.data.plist.list.info,"bill")
 					state.bill = response.data.plist.list.info
 				})
 				.catch((error) => {
@@ -411,7 +415,6 @@ var store = new Vuex.Store({
 					}
 
 			}).then((response) => {
-				console.log(response.data.data,"02222")
                state.hot = response.data.data
 				
 			})
@@ -426,9 +429,10 @@ var store = new Vuex.Store({
                  }
 				}).then((response) => {
 					state.mtv = state.mtv.concat(response.data.song_list)
+
 				}).catch((error) => {
-					console.log(error);
-				});
+					
+				})
 		},
 
 		//分类流行音乐
@@ -438,14 +442,14 @@ var store = new Vuex.Store({
 					type: state.kind
 				}
 			}).then((response) => {
-				state.liuxing = response.data.song_list
+				console.log(response,"回来的数据")
+				state.liuxing = response.data.songs.list
 			}).catch((error) => {
 				console.log(error);
 			});
 		},
 		//注册
 		register(state) {
-			console.log(state.username, state.password)
 			axios.get("http://localhost:1234/register", {
 
 				params: {
@@ -474,8 +478,6 @@ var store = new Vuex.Store({
 					pass: state.passWord,
 				}
 			}).then((response) => {
-               console.log(response.data)
-               console.log("1")
 				if(response.data== 1) {
 					window.localStorage.setItem("username",state.userName)
 					window.localStorage.setItem("password",state.passWord)
@@ -497,7 +499,6 @@ var store = new Vuex.Store({
 					type: state.mysearch
 				}
 			}).then((response) => {
-				console.log(response.data.song, "000")
 				state.backsong = response.data.song
 			}).catch((error) => {
 				console.log(error);
@@ -512,8 +513,37 @@ var store = new Vuex.Store({
 						song:state.hash
 					}
 			}).then((response) => {	
-				console.log(response,"gggg")
 				state.hashsong = response.data.url
+				state.playsongpic = response.data.imgUrl
+				sessionStorage.setItem("playsongurl",response.data.url)
+				}).catch((error) => {
+					console.log(error);
+				});
+		},
+
+
+
+		//收藏
+		cllocetion(state) {
+			axios.get("http://localhost:1234/cllocet", {
+				params: {
+						cllocetname:state.cllocetname,
+						clloceturl:state.clloceturl,
+					}
+			}).then((response) => {	
+
+				}).catch((error) => {
+					console.log(error);
+				});
+		},
+
+
+		//收藏
+		showthecllocet(state) {
+			axios.get("http://localhost:1234/showthecllocet", {
+
+			}).then((response) => {	
+					state.showcllocet = response.data;
 				}).catch((error) => {
 					console.log(error);
 				});
