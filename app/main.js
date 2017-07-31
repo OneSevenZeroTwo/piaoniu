@@ -12,10 +12,8 @@ import axios from "axios";
 require("./css/common.css")
 require("./css/login.css")
 //轮播图
-
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-import 'swiper/dist/js/swiper.js'
-import 'swiper/dist/css/swiper.css'
+import 'swiper-3.4.2/dist/js/swiper.js'
+import 'swiper-3.4.2/dist/css/swiper.css'
 
 // import 'swiper-3.4.2/dist/js/swiper.js'
 // import 'swiper-3.4.2/dist/css/swiper.css'
@@ -27,7 +25,6 @@ Vue.use(MuseUI)
 Vue.use(Vuex);
 //vue-mui
 //import Mui from "vue-awesome-mui";
-//import "vue-awesome-mui/mui/dist/css/mui.css"
 //Vue.use(Mui);
 //通过 Vue.use()明确地安装路由功能
 Vue.use(VueRouter);
@@ -459,6 +456,8 @@ var store = new Vuex.Store({
 				}
 			}).then((response) => {
 				if(response.data== 1) {
+					window.localStorage.setItem("username",state.userName)
+					window.localStorage.setItem("username",state.passWord)
 					alert("登录成功")
 					location.href = "#recommend"
 				} else if(response.data== 0) {
