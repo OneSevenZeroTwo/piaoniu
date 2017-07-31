@@ -168,45 +168,40 @@
 				scroll: "",
 			}
 		},
-//			canActivate(transition) {
-//				console.log(transition, "======上一个页面的url信息=======");
-//				transition.next();
-//			}
-
-			computed: {
-				search() {
-					return this.$store.state.count
-				},
-				//推荐
-				news() {
-					return this.$store.state.news
-				},
-				//新歌
-				arrs() {
-					return this.$store.state.arrs
-				},
-				//热歌
-				re() {
-					return this.$store.state.re
-				},
-				//推荐mv
-				tui() {
-					return this.$store.state.tui
-				}
+		computed: {
+			search() {
+				return this.$store.state.count
 			},
-			methods: {
-				loadMore() {
-					this.$store.dispatch("setChange")
-				},
-				changeTab: function(index) {
-					this.page = index;
-				},
+			//推荐
+			news() {
+				return this.$store.state.news
 			},
-			mounted() {
-				this.loadMore();
-				//			this.swiper();
+			//新歌
+			arrs() {
+				return this.$store.state.arrs
 			},
-		}
+			//热歌
+			re() {
+				return this.$store.state.re
+			},
+			//推荐mv
+			tui() {
+				return this.$store.state.tui
+			}
+		},
+		methods: {
+			loadMore() {
+				this.$store.dispatch("setChange")
+			},
+			changeTab: function(index) {
+				this.page = index;
+			},
+		},
+		mounted() {
+			this.loadMore();
+			//			this.swiper();
+		},
+	}
 </script>
 
 <style scoped>

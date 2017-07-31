@@ -83,7 +83,7 @@ app.post('/zeng', function(req, res) {
 	res.append("Access-Control-Allow-Origin", "*")
 })
 
-//写入页面功能
+//cms写入页面功能
 app.get('/xie', function(req, res) {
 	createConnection()
 	connection.connect();
@@ -103,6 +103,27 @@ app.get('/xie', function(req, res) {
 	//		console.log(req.query)
 	res.append("Access-Control-Allow-Origin", "*")
 })
+
+
+//最近上架
+app.get('/mtv', function(req, res) {
+	createConnection()
+	connection.connect();
+	connection.query('SELECT * FROM cms ', function(error, results, fields) {
+		if(error) throw error;
+		//results =>array类型
+		//					console.log('The solution is: ', results);
+		var obj = {
+			jobs: results
+		}
+		res.send(JSON.stringify(obj));
+		connection.end();
+	});
+	//		console.log(req.query)
+	res.append("Access-Control-Allow-Origin", "*")
+})
+
+
 
 //搜索功能
 app.get('/sou', function(req, res) {

@@ -169,7 +169,8 @@ var store = new Vuex.Store({
 		username: "",
 		password: "",
 		userName: "",
-		passWord: "",	
+		passWord: "",
+//		zheShow:"false"
 	},
 	getters: {},
 	//分发状态
@@ -379,9 +380,13 @@ var store = new Vuex.Store({
 				});
 		},
 		bill(state) {
-			axios.get("http://localhost:6789/bill", {}).then((response) => {
+//			state.zheShow = "true"
+			axios.get("http://localhost:6789/bill", {
+				
+			}).then((response) => {
 					console.log(response.data.plist.list.info,"bill")
-					state.bill = response.data.plist.list.info
+					state.bill = response.data.plist.list.info;
+//					state.zheShow = "false"
 				})
 				.catch((error) => {
 					console.log(error);
@@ -403,13 +408,14 @@ var store = new Vuex.Store({
 			});
 		},
 		mtv(state) {
-			axios.get("http://localhost:6789/mtv", {
+			axios.get("http://localhost:1234/mtv", {
 
 				}).then((response) => {
-					state.mtv = state.mtv.concat(response.data.song_list)
-				}).then((response) => {
-					console.log(response.data.song_list)
-					state.bill = state.bill.concat(response.data.song_list)
+					console.log(response)
+					state.mtv = response.data.jobs
+//				}).then((response) => {
+//					console.log(response.data.song_list)
+//					state.bill = state.bill.concat(response.data.song_list)
 				})
 				.catch((error) => {
 					console.log(error);

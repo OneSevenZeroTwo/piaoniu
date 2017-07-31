@@ -24,7 +24,7 @@
 
 					<li class="log url" :class="{'on':'artists'==light}" @click="changeLight('artists')" data-name="artists" data-log="{&quot;pos&quot;:&quot;nav_artists&quot;}" data-url="#/artists"><a href="#/artists">歌手</a></li>
 
-					<li class="log url" :class="{'on':'mv'==light}" @click="changeLight('mv')" data-name="mvs" data-log="{&quot;pos&quot;:&quot;nav_mv&quot;}" data-url="#/mv"><a href="#/mv">MV</a></li>
+					<li class="log url" :class="{'on':'mv'==light}" @click="changeLight('mv')" data-name="mvs" data-log="{&quot;pos&quot;:&quot;nav_mv&quot;}" data-url="#/mv"><a href="#/mv">新歌上架</a></li>
 
 				</ul>
 			</div>

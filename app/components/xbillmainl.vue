@@ -21,7 +21,13 @@
 			</li>
 		</ul>
 		<audio autoplay="autoplay" :src="playsong" alt="" v-if="stop"></audio>
+		<div id="zhe" v-show="zheShow">
+			<div class="iconfont fuhao">
+				&#xe509;
+			</div>
+		</div>
 	</div>
+	
 </template>
 
 <script>
@@ -44,7 +50,10 @@
 			},
 			playsong(){
 				return this.$store.state.hashsong
-			}
+			},
+			zheShow() {
+				return this.$store.state.zheShow
+			},
 		},
 		methods: {
 			bill() {
@@ -67,5 +76,20 @@
 		padding: 0 10px 20px;
 		margin-top: 50px;
 		border-top:1px solid #eee;
+     }
+     #zhe{
+     	width: 100%;
+     	height: 488px;
+     	background-color: #fff;
+     	position: fixed;
+     	top: 80px;
+     	left: 0;
+     	z-index: 1;
+     }
+     #zhe .fuhao{
+     	position: absolute;
+     	top: 200px;
+     	left: 145px;
+     	font-size: 40px;
      }
 </style>
