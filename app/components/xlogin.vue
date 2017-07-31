@@ -23,11 +23,11 @@
 				<div class="t_login">
 					<div class="form-wrapper login-wrapper">
 						<div class="input-con ">
-							<input class="input-text username" type="tel" name="phone" placeholder="请输入用户名" v-model="username">
+							<input class="input-text username" type="tel" name="phone" placeholder="请输入用户名" v-model="username" :value="userName">
 
 						</div>
 						<div class="input-con verify-text">
-							<input class="input-text password" type="tel" name="verifyCode" placeholder="请输入密码" v-model="password">
+							<input class="input-text password" type="tel" name="verifyCode" placeholder="请输入密码" v-model="password" :value="passWord">
 
 						</div>
 						<div class="button-con">
@@ -53,6 +53,8 @@
 				password: "",
 				reg: /^[a-zA-Z][a-zA-Z0-9]{5,19}$/,
 				regg: /^[\S]{6,20}$/i,
+				userName:"",
+				passWord:""
 			}
 		},
 		computed: {},
@@ -67,8 +69,18 @@
 					return false
 				}
 			},
+			
+			
+			
+			
+			
 		},
-		mounted() {},
+		mounted() {
+		this.userName = window.localStorage.getItem("username")	
+		this.passWord = window.localStorage.getItem("password")
+		
+		
+		},
 	}
 </script>
 

@@ -38,8 +38,8 @@
 
 					</div>
 
-					<a class="btn-login" href="#/register">点击登录</a>
-					<a class="btn-logout">注销</a>
+					<a class="btn-login"  @click="btn">点击注册</a>
+					<!--<a class="btn-login" href="#/login">点击登录</a>-->
 				</div>
 				<div class="ucenter-content">
 					<h3></h3>
@@ -69,7 +69,29 @@
 
 <script>
 	export default {
-
+           data() {
+			return {
+				username:"",
+				
+			}
+		},
+		computed: {
+		},
+		methods: {
+			btn() {
+				console.log(this.username)
+				if(this.username){
+					location.href = "#login"
+				}else{
+					location.href = "#register"
+				}
+			}
+			
+		},
+		mounted() {
+			console.log(this.username)
+		 this.username = window.localStorage.getItem("username")
+		},
 	}
 </script>
 
