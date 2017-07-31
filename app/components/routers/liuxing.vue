@@ -57,6 +57,7 @@
 	float: right;
 }
 .list{
+	height: 190px;
 	width: 50%;
 	float: left;
 	padding: 3%;
@@ -73,5 +74,8 @@
 	right: 18px;
 	top: 5rem;
 	background: url(//static0.qianqian.com/web/st/img/sprite/ui-list-0e4.png)-137px -114px;
+}
+.list p{
+	font-size: 10px;
 }
 </style>
