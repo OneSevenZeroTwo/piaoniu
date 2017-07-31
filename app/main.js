@@ -12,8 +12,8 @@ import axios from "axios";
 require("./css/common.css")
 require("./css/login.css")
 //轮播图
-import 'swiper-3.4.2/dist/js/swiper.js'
-import 'swiper-3.4.2/dist/css/swiper.css'
+// import 'swiper-3.4.2/dist/js/swiper.js'
+// import 'swiper-3.4.2/dist/css/swiper.css'
 
 // import 'swiper-3.4.2/dist/js/swiper.js'
 // import 'swiper-3.4.2/dist/css/swiper.css'
