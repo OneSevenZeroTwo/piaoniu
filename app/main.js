@@ -172,7 +172,8 @@ var store = new Vuex.Store({
 		passWord: "",
 		cllocetname:null,
 		clloceturl:null	,
-		showcllocet:[]
+		showcllocet:[],
+		playsongpic:null
 	},
 	getters: {},
 	//分发状态
@@ -239,7 +240,6 @@ var store = new Vuex.Store({
 			axios.get("http://localhost:6789/xart", {
 					
 				}).then((response) => {
-					console.log(response.data.singers.list.info)
 					state.art = response.data.singers.list.info
 //					state.art = state.art.concat(response.data.singers.list.info)
 				})
@@ -254,7 +254,6 @@ var store = new Vuex.Store({
 		setNews(state) {
 			axios.get('http://localhost:6789/index', {})
 				.then((response) => {
-					console.log(response.data.song_list)
 					state.news = response.data.song_list;
 					params: {
 						//page: state.page++,
@@ -384,7 +383,6 @@ var store = new Vuex.Store({
 		},
 		bill(state) {
 			axios.get("http://localhost:6789/bill", {}).then((response) => {
-					console.log(response.data.plist.list.info,"bill")
 					state.bill = response.data.plist.list.info
 				})
 				.catch((error) => {
@@ -398,7 +396,6 @@ var store = new Vuex.Store({
 					}
 
 			}).then((response) => {
-				console.log(response.data.data,"02222")
                state.hot = response.data.data
 				
 			})
@@ -412,7 +409,6 @@ var store = new Vuex.Store({
 				}).then((response) => {
 					state.mtv = state.mtv.concat(response.data.song_list)
 				}).then((response) => {
-					console.log(response.data.song_list)
 					state.bill = state.bill.concat(response.data.song_list)
 				})
 				.catch((error) => {
@@ -427,14 +423,13 @@ var store = new Vuex.Store({
 					type: state.kind
 				}
 			}).then((response) => {
-				state.liuxing = response.data.song_list
+				state.liuxing = response.data.songs.list
 			}).catch((error) => {
 				console.log(error);
 			});
 		},
 		//注册
 		register(state) {
-			console.log(state.username, state.password)
 			axios.get("http://localhost:1234/register", {
 
 				params: {
@@ -463,8 +458,6 @@ var store = new Vuex.Store({
 					pass: state.passWord,
 				}
 			}).then((response) => {
-               console.log(response.data)
-               console.log("1")
 				if(response.data== 1) {
 					alert("登录成功")
 					location.href = "#recommend"
@@ -484,7 +477,6 @@ var store = new Vuex.Store({
 					type: state.mysearch
 				}
 			}).then((response) => {
-				console.log(response.data.song, "000")
 				state.backsong = response.data.song
 			}).catch((error) => {
 				console.log(error);
@@ -499,8 +491,8 @@ var store = new Vuex.Store({
 						song:state.hash
 					}
 			}).then((response) => {	
-				console.log(response,"gggg")
 				state.hashsong = response.data.url
+				state.playsongpic = response.data.imgUrl
 				}).catch((error) => {
 					console.log(error);
 				});
@@ -528,7 +520,6 @@ var store = new Vuex.Store({
 			axios.get("http://localhost:1234/showthecllocet", {
 
 			}).then((response) => {	
-					console.log(response.data,"收藏")
 					state.showcllocet = response.data;
 				}).catch((error) => {
 					console.log(error);

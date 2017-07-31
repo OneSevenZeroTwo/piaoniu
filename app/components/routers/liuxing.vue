@@ -5,25 +5,55 @@
 			<span>最热</span>
 			<span>最新</span>
 		</div>
-		<div class="list" v-for="n in liuxing">
-			<img :src="n.pic_big" alt="">
-			<i></i>
-			<p>{{n.author}}</p>
-			<p>{{n.album_title}}</p>
+		<div class="list" v-for="n in liuxing" @click="sethash(n.hash)">
+			<p>{{n.remark}}</p>
+		</div>
+		<audio autoplay="autoplay" :src="playhash" alt="" v-if="showplay"></audio>
+		<div class="player" v-if="showplay">
+    		<ul class="action">
+    			<li class="thenamep">
+    				<img :src="playsongpic|getsize" alt="">
+    			</li>
+	        	<li class="iconfont play icon-stop"></li>
+	        	<li class="iconfont icon-next"></li>
+	        	<li class="iconfont icon-list"></li>
+    		</ul>
 		</div>
 	</div>
 </template>
 <script>
 	export default{
+		data(){
+			return{
+				showplay:false
+			}
+		},
 		computed:{
 			liuxing(){
 				return this.$store.state.liuxing
+			},
+			playhash(){
+				return this.$store.state.hashsong
+			},
+			playsongpic(){
+				return this.$store.state.playsongpic
 			}
 		},
 		methods:{
 			setliuxing(){
-				this.$store.state.kind = 16,
+				this.$store.state.kind = 27,
 				this.$store.dispatch("setliuxing")
+			},
+			sethash(seth){
+				this.$store.state.hash = seth;
+				this.$store.dispatch("playthesong");
+				this.showplay = true
+			},
+		},
+		filters:{
+			getsize(input){
+				var arr = input.split("{size}");
+				return arr.join("")
 			}
 		},
 		mounted:function(){
@@ -49,29 +79,38 @@
 }
 .title span{
 	display: block;
-	border:1px solid pink;
 	width: 50px;
 	height: 24px;
 	text-align: center;
 	line-height: 24px;
 	float: right;
 }
-.list{
-	width: 50%;
-	float: left;
-	padding: 3%;
-	border:1px solid #fff;
+.list p{
+	height: 40px;
+	line-height: 40px;
+}
+.player{
 	position: relative;
 }
-.list i{
-	display: block;
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	background-color: red;
-	position:absolute;
-	right: 18px;
-	top: 5rem;
-	background: url(//static0.qianqian.com/web/st/img/sprite/ui-list-0e4.png)-137px -114px;
+.player ul{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 50px;
+}
+.player ul li{
+	height: 30px;
+	float: left;
+	font-size: 30px;
+	line-height: 50px;
+	width: 25%;
+	text-align: center;
+}
+.player ul li span{
+	font-size: 12px;
+	height: 50px;
+	line-height: 50px;
+	overflow: hidden
 }
 </style>

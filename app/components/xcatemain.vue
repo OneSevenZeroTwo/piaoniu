@@ -10,7 +10,7 @@
 				</div>
 				<div class="nav subnav">
 					<div class="treenav"><a href="#/subcate/wangluo">网络歌曲</a></div>
-					<div class="treenav"><a href="#/subcate/qingge">情歌对唱</a></div>
+					<div class="treenav"><a href="#/subcate/qingge">韩语</a></div>
 				</div>
 			</div>
 			<div class="spend" v-show="isSpend">
@@ -191,8 +191,7 @@
 		<div class="player" v-if="player">
     		<ul class="action">
     			<li class="thenamep">
-    				<img src="../images/10.jpg" alt="">
-    				<span class="thename">{{songnameh}}</span>
+    				<img :src="playsongpic|getsize" alt="">
     			</li>
 	        	<li class="iconfont play icon-stop" @click="stop()"></li>
 	        	<li class="iconfont icon-next" @click="nextsong()"></li>
@@ -256,6 +255,15 @@
 			},
 			playhash(){
 				return this.$store.state.hashsong
+			},
+			playsongpic(){
+				return this.$store.state.playsongpic
+			}
+		},
+		filters:{
+			getsize(input){
+				var arr = input.split("{size}");
+				return arr.join("")
 			}
 		},
 		mounted:function(){

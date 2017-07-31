@@ -80,7 +80,7 @@
 	margin-right: 16px;
 }
 .sq{
-	background-size: 12px;
+	/*background-size: 12px 12px;*/
 	display: block;
 	width: 50px;
 	height: 50px;
@@ -90,10 +90,10 @@
 	background: url(../../images/4.png)-370px -135px
 }
 .load{
-	/*background-size: 12px;*/
+	/*background-position: 12px 12px;*/
 	display: block;
-	width: 20px;
-	height: 20px;
+	width: 50px;
+	height: 50px;
 	background-color: red;
 	position: absolute;
 	right:0px;
