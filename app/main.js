@@ -137,6 +137,7 @@ var store = new Vuex.Store({
 	//定义一个状态
 	//所有组件的状态，也就是数据源
 	state: {
+		id:"",
 		bottomLight: true,
 		bill: "",
 		bottomLight: 'recommend',
@@ -242,7 +243,9 @@ var store = new Vuex.Store({
 		},
 		Album(state) {
 			axios.get("http://localhost:6789/album", {
-					
+				 params:{
+				 	id:state.id
+				 }		
 				}).then((response) => {
 					console.log(response.data.singers.list.info)
 					state.art = response.data.singers.list.info

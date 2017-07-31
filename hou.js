@@ -266,7 +266,7 @@ app.get("/ccccc",function(request,response){
 app.get("/album",function(request,response){
 	console.log(request.query.song)
 	response.setHeader("Access-Control-Allow-Origin","*");
-	http.get(" http://m.kugou.com/singer/info/3060&json=true", function(res) {
+	http.get(" http://m.kugou.com/singer/info/json=true", function(res) {
 		var data = "";
 		res.on('data', function(chunk) {
 			data += chunk

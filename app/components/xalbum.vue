@@ -443,7 +443,7 @@
 	export default {
           data() {
 			return {
-               id:"",
+               
 			}
 		},
 		computed: {
@@ -457,8 +457,8 @@
 			}
 		},
 		mounted() {
-		this.id = this.$store.params
-		console.log(this.id)
+		this.$store.state.id = this.$router.currentRoute.fullPath.split("album/")[1];
+		console.log(this.$store.state.id)
 			this.loadMore()
 			
 		},
