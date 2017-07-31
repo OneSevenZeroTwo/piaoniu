@@ -2,7 +2,7 @@
 	<div>
 		<div id="che" :class="{'sidebar-move-left':direction=='left','sidebar-move-right':direction=='right'}">
 			<div class="tou">
-				<div class="tou_01"><img src="img/0.jpg" alt="" class="touxiang am-img-circle am-img-thumbnail am-img-thumbnail" ng-click="xian()" /></div>
+				<div class="tou_01"><img src="" alt="" class="touxiang am-img-circle am-img-thumbnail am-img-thumbnail" ng-click="xian()" /></div>
 				<div class="tou_02"><span class="ceBianDeng">未登录</span></div>
 			</div>
 			<div class="list">

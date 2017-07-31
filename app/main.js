@@ -60,43 +60,43 @@ var router = new VueRouter({
 		path: '/recommend',
 		component: recommend,
 		children: [{
-			path: '/recommend/regebang',
+			path: 'regebang',
 			component: regebang,
 		}, {
-			path: '/recommend/xingebang',
+			path: 'ingebang',
 			component: xingebang,
 		}, {
-			path: '/recommend/kingbang',
+			path: 'recommend/kingbang',
 			component: kingbang,
 		}]
-	}, {
-		path: '/gengduoxg',
-		component: gengduoxg,
-	}, {
-		path: '/cate',
-		component: cate
-	}, {
-		path: '/bill',
-		component: bill
-	}, {
-		path: '/artists',
-		component: artists
-	}, {
-		path: '/mv',
-		component: mv
-	}, {
-		path: '/search',
-		component: search
-	}, {
-		path: '/entry',
-		component: entry
-	}, {
-		path: '/register',
-		component: register
-	}, {
-		path: '/login',
-		component: login
-	}, {
+		}, {
+			path: '/gengduoxg',
+			component: gengduoxg,
+		}, {
+			path: '/cate',
+			component: cate
+		}, {
+			path: '/bill',
+			component: bill
+		}, {
+			path: '/artists',
+			component: artists
+		}, {
+			path: '/mv',
+			component: mv
+		}, {
+			path: '/search',
+			component: search
+		}, {
+			path: '/entry',
+			component: entry
+		}, {
+			path: '/register',
+			component: register
+		}, {
+			path: '/login',
+			component: login
+		}, {
 		path: '/subcate',
 		component: subcate,
 		children: [{
@@ -170,7 +170,8 @@ var store = new Vuex.Store({
 		cllocetname:null,
 		clloceturl:null	,
 		showcllocet:[],
-		playsongpic:null
+		playsongpic:"http://img.knowledge.csdn.net/upload/base/1453701371636_636.jpg",
+		showplay:false
 	},
 	getters: {},
 	//分发状态
@@ -420,6 +421,7 @@ var store = new Vuex.Store({
 					type: state.kind
 				}
 			}).then((response) => {
+				console.log(response,"回来的数据")
 				state.liuxing = response.data.songs.list
 			}).catch((error) => {
 				console.log(error);
@@ -492,6 +494,7 @@ var store = new Vuex.Store({
 			}).then((response) => {	
 				state.hashsong = response.data.url
 				state.playsongpic = response.data.imgUrl
+				sessionStorage.setItem("playsongurl",response.data.url)
 				}).catch((error) => {
 					console.log(error);
 				});

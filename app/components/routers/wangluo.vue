@@ -5,16 +5,15 @@
 			<span>最热</span>
 			<span>最新</span>
 		</div>
-		<div class="list" v-for="n in liuxing" @click="sethash(n.hash)">
-			<p>{{n.remark}}</p>
+		<div class="list keep" v-for="n in liuxing" @click="sethash(n.hash)">
+			<p class="keepplay">{{n.filename}}</p>
 		</div>
-		<audio autoplay="autoplay" :src="playhash" alt="" v-if="showplay"></audio>
-		<div class="player" v-if="showplay">
+		<div class="player" v-if="showplay1">
     		<ul class="action">
     			<li class="thenamep">
     				<img :src="playsongpic|getsize" alt="">
     			</li>
-	        	<li class="iconfont play icon-stop"></li>
+	        	<li id="stop" class="iconfont play icon-stop" @click="stop()"></li>
 	        	<li class="iconfont icon-next"></li>
 	        	<li class="iconfont icon-list"></li>
     		</ul>
@@ -23,11 +22,6 @@
 </template>
 <script>
 	export default{
-		data(){
-			return{
-				showplay:false
-			}
-		},
 		computed:{
 			liuxing(){
 				return this.$store.state.liuxing
@@ -37,6 +31,9 @@
 			},
 			playsongpic(){
 				return this.$store.state.playsongpic
+			},
+			showplay1(){
+				return this.$store.state.showplay
 			}
 		},
 		methods:{
@@ -46,14 +43,25 @@
 			},
 			sethash(seth){
 				this.$store.state.hash = seth;
+				this.$store.state.showplay = true;
 				this.$store.dispatch("playthesong");
 				this.showplay = true
 			},
+			stop(){
+				sessionStorage.removeItem("playsongurl")
+			}
 		},
 		filters:{
 			getsize(input){
 				var arr = input.split("{size}");
 				return arr.join("")
+			},
+			nomore(input){
+				if(input.length>=25){
+					return input.substring(0,25)+"..."
+				}else{
+					return input
+				}
 			}
 		},
 		mounted:function(){

@@ -8,18 +8,33 @@
 		<link rel="stylesheet" href="./icontfont/font_amel523lzblhxgvi/iconfont.css" />
 		<script src="./Swiper-3.4.2/dist/js/swiper.min.js"></script>
 		<link rel="stylesheet" href="./Swiper-3.4.2/dist/css/swiper.min.css">
-		<style>
-			body {
-				font-size: 16px
-			}
-		</style>
 	</head>
 
 	<body>
 		<div id="demo">
 
 		</div>
+		<audio id= song autoplay="autoplay" src="" alt="" v-if="showplay"></audio>
 	</body>
 	<script src="bundle.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded",function(){
+			window.onclick=function(e){
+				e = e||window.event;
+				var target = e.target || e.srcElement;
+				if(target.className.toLowerCase()=="keepplay"){
+					setTimeout(function(){
+						var play = sessionStorage.getItem("playsongurl");
+						var audio = document.getElementById("song");
+						audio.setAttribute("src",play)
+					},1000) 				
+				}else if(target.id.toLowerCase()=="stop"){
+					var audio = document.getElementById("song");
+					audio.setAttribute("src",null)
+				}
+			}
+
+		});
+	</script>
 
 </html>
