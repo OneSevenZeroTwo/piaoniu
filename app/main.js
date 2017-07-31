@@ -55,6 +55,8 @@ import register from "./components/routers/register.vue";
 import login from "./components/routers/login.vue";
 import subsearch from "./components/routers/subsearch.vue";
 import detail from "./components/routers/detail.vue";
+import xqpage from "./components/routers/xqpage.vue";
+import album from "./components/routers/album.vue";
 var router = new VueRouter({
 	routes: [{
 		path: '/recommend',
@@ -82,9 +84,12 @@ var router = new VueRouter({
 		path: '/artists',
 		component: artists
 	}, {
+		path: '/album/:singerid',
+		component: album
+	}, {
 		path: '/mv',
 		component: mv
-	}, {
+	},{
 		path: '/search',
 		component: search
 	}, {
@@ -119,8 +124,8 @@ var router = new VueRouter({
 		path: '/subsearch',
 		component: subsearch
 	}, {
-		path: '/detail',
-		component: detail
+		path: '/xqpage',
+		component: xqpage
 	}, {
 		path: '/',
 		redirect: '/recommend/regebang'
@@ -225,6 +230,18 @@ var store = new Vuex.Store({
 		},
 		xart(state) {
 			axios.get("http://localhost:6789/xart", {
+					
+				}).then((response) => {
+					console.log(response.data.singers.list.info)
+					state.art = response.data.singers.list.info
+//					state.art = state.art.concat(response.data.singers.list.info)
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+		Album(state) {
+			axios.get("http://localhost:6789/album", {
 					
 				}).then((response) => {
 					console.log(response.data.singers.list.info)
@@ -401,14 +418,12 @@ var store = new Vuex.Store({
 		},
 		mtv(state) {
 			axios.get("http://localhost:6789/mtv", {
-
+                 params:{
+                 	page:state.page
+                 }
 				}).then((response) => {
 					state.mtv = state.mtv.concat(response.data.song_list)
-				}).then((response) => {
-					console.log(response.data.song_list)
-					state.bill = state.bill.concat(response.data.song_list)
-				})
-				.catch((error) => {
+				}).catch((error) => {
 					console.log(error);
 				});
 		},

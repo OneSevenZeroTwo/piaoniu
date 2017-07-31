@@ -262,6 +262,21 @@ app.get("/ccccc",function(request,response){
 		})
 	})
 })
+
+app.get("/album",function(request,response){
+	console.log(request.query.song)
+	response.setHeader("Access-Control-Allow-Origin","*");
+	http.get(" http://m.kugou.com/singer/info/3060&json=true", function(res) {
+		var data = "";
+		res.on('data', function(chunk) {
+			data += chunk
+			console.log(data)
+		})
+		res.on('end', function() {
+			response.end(data)
+		})
+	})
+})
 var server = app.listen("6789",function(host,post){
 
 })
