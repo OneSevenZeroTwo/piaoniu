@@ -181,7 +181,7 @@ app.get("/xart",function(request,response){
 //流行歌曲请求
 app.get("/liuxing",function(request,response){
 	response.setHeader("Access-Control-Allow-Origin","*");
-	http.get("http://tingapi.ting.baidu.com/v1/restserver/ting?format=json&calback=&from=webapp_music&method=baidu.ting.billboard.billList&type="+request.query.type+"&size=20&offset=0  ", function(res) {
+	http.get("http://m.kugou.com/rank/info/?rankid="+request.query.type+"&page=1&json=true", function(res) {
 		var data = "";
 		res.on('data', function(chunk) {
 			data += chunk
@@ -231,6 +231,8 @@ app.get("/gethashsong",function(request,response){
 
 
 
+
+
 //搜索
 app.get("/bbbbb",function(request,response){
 	console.log(request.query.song)
@@ -251,7 +253,7 @@ app.get("/bbbbb",function(request,response){
 app.get("/ccccc",function(request,response){
 	console.log(request.query.song)
 	response.setHeader("Access-Control-Allow-Origin","*");
-	http.get("http://mobilecdn.kugou.com/api/v3/search/hot?format=json&plat=0&count=30", function(res) {
+	http.get("http://m.kugou.com/rank/info/?rankid=28&page=1&json=true", function(res) {
 		var data = "";
 		res.on('data', function(chunk) {
 			data += chunk

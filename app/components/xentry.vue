@@ -1,35 +1,5 @@
 <template>
 	<div>
-		<header id="header" class="animated headroom--top">
-			<div class="bar  bar-form ">
-				<div class="left"></div>
-				<div class="title">我的音乐</div>
-				<div class="right">
-					<span class="btn btn-ucenter url on" data-name="ucenter" data-url="/ucenter" data-transition="none" style="display: none;"></span>
-					<span class="btn log btn-search" data-log="{&quot;pos&quot;:&quot;searchup&quot;,&quot;page&quot;:&quot;home&quot;}"></span>
-					<div class="form-search">
-						<div class="btn-search-icon"></div>
-						<input type="search" autocomplete="off" name="query" value="" placeholder="搜歌曲">
-					</div>
-				</div>
-			</div>
-
-			<div class="nav-wrap">
-				<ul class="sub-nav">
-
-					<li class="log url" data-name="home" data-log="{&quot;pos&quot;:&quot;nav_home&quot;}" data-url="/home">推荐</li>
-
-					<li class="log url" data-name="songlists" data-log="{&quot;pos&quot;:&quot;nav_songlists&quot;}" data-url="/songlists">分类</li>
-
-					<li class="log url" data-name="listcate" data-log="{&quot;pos&quot;:&quot;nav_listcate&quot;}" data-url="/listcate">榜单</li>
-
-					<li class="log url" data-name="artists" data-log="{&quot;pos&quot;:&quot;nav_artists&quot;}" data-url="/artists">歌手</li>
-
-					<li class="log url" data-name="mvs" data-log="{&quot;pos&quot;:&quot;nav_mv&quot;}" data-url="/mv">MV</li>
-
-				</ul>
-			</div>
-		</header>
         <div id="main">
 		<div class="layout ucenter layout-current" data-title="我的音乐">
 			<section class="content">
@@ -38,8 +8,8 @@
 
 					</div>
 
-					<a class="btn-login" href="#/register">点击登录</a>
-					<a class="btn-logout">注销</a>
+					<a class="btn-login"  @click="btn">点击注册</a>
+					<!--<a class="btn-login" href="#/login">点击登录</a>-->
 				</div>
 				<div class="ucenter-content">
 					<h3></h3>
@@ -69,7 +39,29 @@
 
 <script>
 	export default {
-
+           data() {
+			return {
+				username:"",
+				
+			}
+		},
+		computed: {
+		},
+		methods: {
+			btn() {
+				console.log(this.username)
+				if(this.username){
+					location.href = "#login"
+				}else{
+					location.href = "#register"
+				}
+			}
+			
+		},
+		mounted() {
+			console.log(this.username)
+		 this.username = window.localStorage.getItem("username")
+		},
 	}
 </script>
 

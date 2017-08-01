@@ -5,7 +5,7 @@
 				<div class="left iconfont"><span @click="direction">&#xe63d;</span></div>
 				<div class="title">百度音乐</div>
 				<div class="right">
-					<a href="#/entry"><span class="btn btn-ucenter url" data-name="ucenter" data-url="/ucenter" data-transition="none"></span></a>
+					<a href="#/login"><span class="btn btn-ucenter url" data-name="ucenter" data-url="/ucenter" data-transition="none"></span></a>
 					<span class="btn log btn-search" data-log="{&quot;pos&quot;:&quot;searchup&quot;,&quot;page&quot;:&quot;home&quot;}"></span>
 					<div class="form-search">
 						<div class="btn-search-icon"></div>

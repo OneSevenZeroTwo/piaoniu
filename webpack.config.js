@@ -1,7 +1,7 @@
 //webpack 全局安装
 //npm install webpack -g
 module.exports = {
-	//devtool:"source-map",
+	devtool:"source-map",
 	//入口文件 相当于gulp.src 导入main.js
 	entry: __dirname + "/app/main.js",
 	//出口文件

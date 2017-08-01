@@ -2,8 +2,9 @@
 	<div>
 		<div id="che" :class="{'sidebar-move-left':direction=='left','sidebar-move-right':direction=='right'}">
 			<div class="tou">
-				<div class="tou_01"><img src="img/0.jpg" alt="" class="touxiang am-img-circle am-img-thumbnail am-img-thumbnail" ng-click="xian()" /></div>
-				<div class="tou_02"><span class="ceBianDeng">未登录</span></div>
+				<div class="tou_01"><img src="img/0.jpg" alt="" class="touxiang am-img-circle am-img-thumbnail am-img-thumbnail" @click="sShang()" /></div>
+				<div class="tou_02" v-show="!xian"><span class="ceBianDeng dengLu">未登录</span></div>
+				<div class="tou_02 yF" v-show="xian"><span class="ceBianDeng yM">{{ming}}</span><button class="tui" @click="tuichu()">退出</button></div>
 			</div>
 			<div class="list">
 				<ul>
@@ -17,18 +18,18 @@
 			<div class="dibu">
 				<div class="dibu_01"><span class="iconfont" @click="directionToC">&#xe639;</span></div>
 			</div>
-			<!--<div class="huan" style="display:{{isShowShang?'block':'none'}};">
-			<div class="huan01">
-				<span class="iconfont huantu" @click = "cang()">&#xe639;</span>
-				<form class="am-form tupian" id="tupian">
-					<div class="am-form-group">
-						<input type="file" id="user-pic" name="logo">
-						<p class="am-form-help">请选择要上传的文件...</p>
-					</div>
-				</form>
-				<button type="button" class="am-btn am-btn-primary " id="am-btn-xs" ng-click = "shangchuan();cang()" >保存</button>
+			<div class="huan" v-show="shang">
+				<div class="huan01">
+					<span class="iconfont huantu" @click="cCang()">&#xe639;</span>
+					<form class="am-form tupian" id="tupian">
+						<div class="am-form-group">
+							<input type="file" id="user-pic" name="logo">
+							<p class="am-form-help">请选择要上传的文件...</p>
+						</div>
+					</form>
+					<button type="button" class="am-btn am-btn-primary " id="am-btn-xs" @click="chuan()">保存</button>
+				</div>
 			</div>
-		</div>-->
 		</div>
 	</div>
 </template>
@@ -37,7 +38,9 @@
 	export default {
 		data() {
 			return {
-				//				direction:this.$store.state.direction
+				xian: false,
+				ming: "",
+				shang: false
 			}
 		},
 		computed: {
@@ -57,21 +60,49 @@
 			},
 			directionTo() {
 				this.$store.state.direction = "left",
-				this.$store.dispatch("setChange", this.$store.state.direction),
-				this.$store.state.directionC = "lefter"
+					this.$store.dispatch("setChange", this.$store.state.direction),
+					this.$store.state.directionC = "lefter"
 			},
 			directionToC() {
 				this.$store.state.direction = "left",
 				this.$store.dispatch("setChange", this.$store.state.direction)
 			},
-//			fetch:function() {
-//				return JSON.parse(window.localStorage.getItem("itemss") || []);
-//				console.log(fetch)
-//			},
+			sShang() {
+				this.shang = true
+			},
+			cCang() {
+				this.shang = false
+			},
+			cXian() {
+				var cookies = document.cookie;
+				if(cookies) {
+					var arr = cookies.split('; ');
+					var left = this;
+					arr.forEach(function(item) {
+						var temp = item.split('=');
+						if(temp[0] === 'username') {
+							left.xian = true;
+							left.ming = temp[1]
+						}
+					});
+				} else {
+					this.xian = false
+				}
+			},
+			tuichu() {
+				var now = new Date('2017-5-9');
+				document.cookie = 'username=null;expires=' + now.toUTCString();
+				//window.location.reload();
+				this.xian = false
+			},
+			chuan(){
+				this.$store.state.shangChuanTu,
+				$(".am-img-thumbnail").attr("src", "uploads/" + this.$store.state.shangChuanTu,);
+			}
 		},
 		mounted() {
 			this.loadMore();
-//			this.fetch();
+			this.cXian();
 		},
 	}
 </script>
@@ -114,7 +145,7 @@
 		text-align: center;
 		position: absolute;
 		top: 150px;
-		left: 135px;
+		left: 105px;
 		color: #F1F2F3;
 	}
 	
@@ -225,10 +256,77 @@
 		box-sizing: border-box;
 	}
 	
+	.dengLu {
+		width: 50px;
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 30px;
+	}
+	
 	.huan .huan01 .huantu {
 		position: absolute;
 		top: 0px;
 		right: 5px;
 		color: #ccc;
+	}
+	
+	.yM {
+		display: block;
+	}
+	
+	.yF {
+		width: 100px;
+		height: 50px;
+		position: relative;
+	}
+	
+	.tui {
+		background-color: #ccc;
+		display: block;
+		width: 40px;
+		height: 20px;
+		font-size: 10px;
+		color: #fff;
+		position: absolute;
+		top: 20px;
+		left: 30px;
+	}
+	
+	.huan {
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0);
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1002;
+	}
+	
+	.huan .huan01 {
+		width: 200px;
+		height: 200px;
+		background-color: #fff;
+		border-radius: 10px;
+		position: absolute;
+		top: 155px;
+		left: 60px;
+		z-index: 1003;
+		padding-left: 30px;
+		padding-top: 50px;
+		box-sizing: border-box;
+	}
+	
+	.huan .huan01 .huantu {
+		position: absolute;
+		top: 0px;
+		right: 5px;
+		color: #ccc;
+	}
+	
+	#am-btn-xs {
+		background-color: #ccc;
+		color: #000000;
+		font-size: 10px;
 	}
 </style>

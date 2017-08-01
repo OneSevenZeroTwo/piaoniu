@@ -12,10 +12,8 @@ import axios from "axios";
 require("./css/common.css")
 require("./css/login.css")
 //轮播图
-
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-import 'swiper/dist/js/swiper.js'
-import 'swiper/dist/css/swiper.css'
+// import 'swiper-3.4.2/dist/js/swiper.js'
+// import 'swiper-3.4.2/dist/css/swiper.css'
 
 // import 'swiper-3.4.2/dist/js/swiper.js'
 // import 'swiper-3.4.2/dist/css/swiper.css'
@@ -27,7 +25,6 @@ Vue.use(MuseUI)
 Vue.use(Vuex);
 //vue-mui
 //import Mui from "vue-awesome-mui";
-//import "vue-awesome-mui/mui/dist/css/mui.css"
 //Vue.use(Mui);
 //通过 Vue.use()明确地安装路由功能
 Vue.use(VueRouter);
@@ -147,30 +144,35 @@ var store = new Vuex.Store({
 		art: [],
 		mtv: [],
 		news: [],
-		arrs:[],
-		re:[],
-		liuxing:[],
-		kind:null,
-		tui:[],
-		rege:[],
-		xinge:[],
-		king:[],
-		xg01:[],
-		xg02:[],
-		direction:"",
-		mysearch:null,
-		backsong:[],
-		detailname:null,
-		detailpic:null,
-		playsong:null,
-		directionC:"",
-		hash:null,
-		hashsong:null,
+		arrs: [],
+		re: [],
+		liuxing: [],
+		kind: null,
+		tui: [],
+		rege: [],
+		xinge: [],
+		king: [],
+		xg01: [],
+		xg02: [],
+		direction: "",
+		mysearch: null,
+		backsong: [],
+		detailname: null,
+		detailpic: null,
+		playsong: null,
+		directionC: "",
+		hash: null,
+		hashsong: null,
 		username: "",
 		password: "",
 		userName: "",
 		passWord: "",
-//		zheShow:"false"
+		cllocetname: null,
+		clloceturl: null,
+//		obj:[],
+		showcllocet: [],
+		playsongpic: null,
+		shangChuanTu: ""
 	},
 	getters: {},
 	//分发状态
@@ -181,16 +183,17 @@ var store = new Vuex.Store({
 		},
 		setChange(context, data) {
 			context.commit('setNews', data),
-			context.commit('setArrs', data),
-			context.commit('setRe', data),
-			context.commit('setTui', data),
-			context.commit('setRege', data),
-			context.commit('setXinge', data),
-			context.commit('setKing', data),
-			context.commit('setXg', data),
-			context.commit('setXg02', data),
-			context.commit('setFang', data),
-			context.commit('setCang', data)
+				context.commit('setArrs', data),
+				context.commit('setRe', data),
+				context.commit('setTui', data),
+				context.commit('setRege', data),
+				context.commit('setXinge', data),
+				context.commit('setKing', data),
+				context.commit('setXg', data),
+				context.commit('setXg02', data),
+				context.commit('setFang', data),
+				context.commit('setCang', data)
+			context.commit('shangChuan', data)
 		},
 		sethot(context, data) {
 			context.commit('hot', data)
@@ -217,6 +220,12 @@ var store = new Vuex.Store({
 		playthesong(context, data) {
 			context.commit('gethashsong', data)
 		},
+		cllocet(context, data) {
+			context.commit('cllocetion', data)
+		},
+		showcllocet(context, data) {
+			context.commit('showthecllocet', data)
+		}
 	},
 
 	//分发状态
@@ -229,11 +238,10 @@ var store = new Vuex.Store({
 		},
 		xart(state) {
 			axios.get("http://localhost:6789/xart", {
-					
+
 				}).then((response) => {
-					console.log(response.data.singers.list.info)
 					state.art = response.data.singers.list.info
-//					state.art = state.art.concat(response.data.singers.list.info)
+					//					state.art = state.art.concat(response.data.singers.list.info)
 				})
 				.catch((error) => {
 					console.log(error);
@@ -246,16 +254,10 @@ var store = new Vuex.Store({
 		setNews(state) {
 			axios.get('http://localhost:6789/index', {})
 				.then((response) => {
-					console.log(response.data.song_list)
 					state.news = response.data.song_list;
 					params: {
 						//page: state.page++,
 					}
-				})
-				.then((response) => {
-					console.log(response.data.song_list)
-					state.news = response.data.song_list;
-					//					state.news = state.news.concat(response.data.song_list);
 				})
 				.catch((error) => {
 					console.log(error);
@@ -380,13 +382,13 @@ var store = new Vuex.Store({
 				});
 		},
 		bill(state) {
-//			state.zheShow = "true"
+			//			state.zheShow = "true"
 			axios.get("http://localhost:6789/bill", {
-				
-			}).then((response) => {
-					console.log(response.data.plist.list.info,"bill")
+
+				}).then((response) => {
+					console.log(response.data.plist.list.info, "bill")
 					state.bill = response.data.plist.list.info;
-//					state.zheShow = "false"
+					//					state.zheShow = "false"
 				})
 				.catch((error) => {
 					console.log(error);
@@ -398,14 +400,13 @@ var store = new Vuex.Store({
 						page: state.page,
 					}
 
-			}).then((response) => {
-				console.log(response.data.data,"02222")
-               state.hot = response.data.data
-				
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+				}).then((response) => {
+					state.hot = response.data.data
+
+				})
+				.catch((error) => {
+					console.log(error);
+				});
 		},
 		mtv(state) {
 			axios.get("http://localhost:1234/mtv", {
@@ -413,9 +414,9 @@ var store = new Vuex.Store({
 				}).then((response) => {
 					console.log(response)
 					state.mtv = response.data.jobs
-//				}).then((response) => {
-//					console.log(response.data.song_list)
-//					state.bill = state.bill.concat(response.data.song_list)
+					//				}).then((response) => {
+					//					console.log(response.data.song_list)
+					//					state.bill = state.bill.concat(response.data.song_list)
 				})
 				.catch((error) => {
 					console.log(error);
@@ -429,14 +430,13 @@ var store = new Vuex.Store({
 					type: state.kind
 				}
 			}).then((response) => {
-				state.liuxing = response.data.song_list
+				state.liuxing = response.data.songs.list
 			}).catch((error) => {
 				console.log(error);
 			});
 		},
 		//注册
 		register(state) {
-			console.log(state.username, state.password)
 			axios.get("http://localhost:1234/register", {
 
 				params: {
@@ -444,11 +444,11 @@ var store = new Vuex.Store({
 					pass: state.password,
 				}
 			}).then((response) => {
-//             console.log(response.data)
-				if(response.data== 1) {
+				//             console.log(response.data)
+				if(response.data == 1) {
 					alert("注册成功")
 					location.href = "#login"
-				} else if(response.data== 0) {
+				} else if(response.data == 0) {
 					alert("注册失败")
 					return false
 				}
@@ -465,12 +465,21 @@ var store = new Vuex.Store({
 					pass: state.passWord,
 				}
 			}).then((response) => {
-               console.log(response.data)
-               console.log("1")
-				if(response.data== 1) {
-					alert("登录成功")
-					location.href = "#recommend"
-				} else if(response.data== 0) {
+				if(response.data == 1) {
+					window.localStorage.setItem("username", state.userName)
+					window.localStorage.setItem("password", state.passWord)
+					console.log(state.userName)
+					var str1 = 'username=' + state.userName;
+					var now = new Date();
+					now.setDate(now.getDate() + 7);
+					str1 += ';expires=' + now.toUTCString();
+					// 把用户名存入cookie
+					document.cookie = str1;
+					// setCookie('user',str1,now.toUTCString());
+
+					//					alert("登录成功")
+					location.href = "#/recommend/regebang"
+				} else if(response.data == 0) {
 					alert("登录失败")
 					return false
 				}
@@ -486,31 +495,81 @@ var store = new Vuex.Store({
 					type: state.mysearch
 				}
 			}).then((response) => {
-				console.log(response.data.song, "000")
 				state.backsong = response.data.song
 			}).catch((error) => {
 				console.log(error);
 			});
 		},
 
-
 		//获取搜索
 		gethashsong(state) {
 			axios.get("http://localhost:6789/gethashsong", {
 				params: {
-						song:state.hash
-					}
-			}).then((response) => {	
-				console.log(response,"gggg")
+					song: state.hash
+				}
+			}).then((response) => {
 				state.hashsong = response.data.url
-				}).catch((error) => {
-					console.log(error);
-				});
+				state.playsongpic = response.data.imgUrl
+			}).catch((error) => {
+				console.log(error);
+			});
+		},
+
+		//收藏
+		cllocetion(state) {
+			if(getCookie('username').length>0){
+				var obj = {
+						renname:state.cllocetname,
+//						gename:state.clloceturl
+					};
+					var obj = JSON.stringify(obj);
+			axios.get("http://localhost:1234/cllocet", {
+				params: {
+					zhangming: getCookie('username'),
+					gexin: obj,
+				}
+			}).then((response) => {
+
+			}).catch((error) => {
+				console.log(error);
+			});
+			}
+		},
+
+		//渲染收藏
+		showthecllocet(state) {
+			axios.get("http://localhost:1234/showthecllocet", {
+				params: {
+					zhangming: getCookie('username'),
+				}
+			}).then((response) => {
+				state.showcllocet = response.data;
+				console.log(response,"888888888888888")
+			}).catch((error) => {
+				console.log(error);
+			});
 		},
 		
-},
+		
+		
+		//上传图片
+		shangChuan(state) {
+			$.ajax({
+				method: "post",
+				url: "http://localhost:1234/upload-single",
+				cache: false,
+				data: new FormData($('#tupian')[0]),
+				processData: false,
+				contentType: false,
+			}).then(function(data) {
+				console.log(data)
+				console.log(data.imgInfo[0].filename)
+				state.shangChuanTu = data.imgInfo[0].filename
 
+			})
+		}
 
+	},
 
 })
 

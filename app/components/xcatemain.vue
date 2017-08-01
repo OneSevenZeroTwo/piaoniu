@@ -10,7 +10,7 @@
 				</div>
 				<div class="nav subnav">
 					<div class="treenav"><a href="#/subcate/wangluo">网络歌曲</a></div>
-					<div class="treenav"><a href="#/subcate/qingge">情歌对唱</a></div>
+					<div class="treenav"><a href="#/subcate/qingge">韩语</a></div>
 				</div>
 			</div>
 			<div class="spend" v-show="isSpend">
@@ -183,7 +183,7 @@
 						<span>{{n.filename}}</span>
 						<img src="../images/1.gif" alt="" v-if="$index==page&&player">
 					</p>
-					<i class="love"></i>		
+					<i class="love" @click="cllocet(n.filename,n.hash)"></i>		
 				</div>
 			</div>
 			<audio autoplay="autoplay" :src="playhash" alt="" v-if="player"></audio>
@@ -191,8 +191,7 @@
 		<div class="player" v-if="player">
     		<ul class="action">
     			<li class="thenamep">
-    				<img src="../images/10.jpg" alt="">
-    				<span class="thename">{{songnameh}}</span>
+    				<img :src="playsongpic|getsize" alt="">
     			</li>
 	        	<li class="iconfont play icon-stop" @click="stop()"></li>
 	        	<li class="iconfont icon-next" @click="nextsong()"></li>
@@ -242,6 +241,13 @@
 				this.page = this.page++
 				console.log(this.page++)
 			},
+			cllocet:function(songname,url){
+				console.log(songname,url);
+				this.$store.state.cllocetname = songname;
+				this.$store.state.clloceturl = url;
+				this.$store.dispatch("cllocet");
+				
+			}
 		},
 		computed:{
 			hot(){
@@ -250,6 +256,16 @@
 			},
 			playhash(){
 				return this.$store.state.hashsong
+			},
+			playsongpic(){
+				return this.$store.state.playsongpic
+			},
+			
+		},
+		filters:{
+			getsize(input){
+				var arr = input.split("{size}");
+				return arr.join("")
 			}
 		},
 		mounted:function(){
