@@ -180,8 +180,7 @@
 			<div v-for="(n,$index) in hot">
 				<div>
 					<p>
-						<span class="keepplay"  @click="sethash(n.hash,n.remark,$index)">{{n.filename|nomore}}</span>
-						<img src="../images/1.gif" alt="" v-if="$index==page&&player">
+						<span class="keepplay"  @click="sethash(n.hash,n.remark,$index,n.filename)">{{n.filename|nomore}}</span>
 					</p>
 					<i class="love" @click="cllocet(n.filename,n.hash)"></i>		
 				</div>
@@ -226,12 +225,13 @@
 				this.$store.state.detailpic = img;
 				this.$store.state.playsong = song;
 			},
-			sethash:function(seth,name,page){
+			sethash:function(seth,name,page,detailname){
 				this.$store.state.hash = seth;
 				this.$store.state.showplay = true;
 				this.$store.dispatch("playthesong");
 				this.player = true;
 				this.songnameh = name;
+				this.$store.state.detailname = detailname;
 				this.page = page;
 			},
 			stop:function(){
