@@ -9,7 +9,7 @@
 			<div class="list">
 				<ul>
 					<li class="yi" @click="directionTo"><span class="iconfont ziti">&#xe675;</span><span>Mail firend</span><span>></span></li>
-					<li class="er" @click="directionTo"><span class="iconfont ziti">&#xe646;</span><span>Mail link</span><span>></span></li>
+					<li class="er" @click="directionTo"><span class="iconfont ziti">&#xe646;</span><span>clloection</span><span>></span></li>
 					<li class="san" @click="directionTo"><span class="iconfont ziti">&#xe648;</span><span>Mail timing</span><span>></span></li>
 					<li class="si" @click="directionTo"><span class="iconfont ziti">&#xe60a;</span><span>Mail inbox</span><span>></span></li>
 					<li class="wu" @click="directionTo"><span class="iconfont ziti">&#xe611;</span><span>Mail inbox</span><span>></span></li>

@@ -197,7 +197,7 @@
     		</ul>
 		</div>
 		<div class="gong" v-show="chenggong">
-			<div class="haol">收藏成功<div class="cha" @click="xiaoshid">X</div></div>
+			<div class="haol">收藏成功</div>
 		</div>
 	</div>
 </template>
