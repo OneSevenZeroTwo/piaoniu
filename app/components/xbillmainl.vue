@@ -20,7 +20,6 @@
 				</div>
 			</li>
 		</ul>
-		<audio autoplay="autoplay" :src="playsong" alt="" v-if="stop"></audio>
 		<div id="zhe" v-show="zheShow">
 			<div class="iconfont fuhao">
 				&#xe509;
@@ -43,8 +42,8 @@
 				return arr.join('')
 			},
 			nomore(input){
-				if(input.length>=18){
-					return input.substring(0,18)+"..."
+				if(input.length>=12){
+					return input.substring(0,12)+"..."
 				}else{
 					return input
 				}

@@ -190,7 +190,7 @@
 		<div class="player" v-if="showplay1">
     		<ul class="action">
     			<li class="thenamep">
-    				<img :src="playsongpic|getsize" alt="">
+    				<a href="#/xqpage"><img :src="playsongpic|getsize" alt=""></a>
     			</li>
 	        	<li id="stop" class="iconfont play icon-stop" @click="stop()"></li>
 	        	<li class="iconfont icon-next" @click="nextsong()"></li>
