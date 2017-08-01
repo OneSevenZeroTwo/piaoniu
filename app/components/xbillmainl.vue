@@ -11,9 +11,9 @@
 					</div>
 					<ul class="cate-hot">
 
-						<li v-for="(songs,$index) in n.songs" @click="play(songs.hash)">
+						<li v-for="(songs,$index) in n.songs" @click="play(songs.hash)" style="line-height: 34px; height: 34px;">
 							<span class="col-rank rank-1" title="1">{{$index+1}}</span>
-							<span class="col-title">{{songs.filename}}</span>
+							<span class="keepplay">{{songs.filename|nomore}}</span>
 						</li>
 
 					</ul>
@@ -39,9 +39,15 @@
 		},
 		filters:{
 			getpic(input){
-				var arr = input.split("{size}");
-					
+				var arr = input.split("{size}");	
 				return arr.join('')
+			},
+			nomore(input){
+				if(input.length>=18){
+					return input.substring(0,18)+"..."
+				}else{
+					return input
+				}
 			}
 		},
 		computed: {

@@ -1,5 +1,35 @@
 <template>
 	<div>
+		<header id="header" class="animated headroom--top">
+			<div class="bar  bar-form ">
+				<div class="left"></div>
+				<div class="title">我的音乐</div>
+				<div class="right">
+					<span class="btn btn-ucenter url on" data-name="ucenter" data-url="/ucenter" data-transition="none" style="display: none;"></span>
+					<span class="btn log btn-search" data-log="{&quot;pos&quot;:&quot;searchup&quot;,&quot;page&quot;:&quot;home&quot;}"></span>
+					<div class="form-search">
+						<div class="btn-search-icon"></div>
+						<input type="search" autocomplete="off" name="query" value="" placeholder="搜歌曲">
+					</div>
+				</div>
+			</div>
+
+			<div class="nav-wrap">
+				<ul class="sub-nav">
+
+					<li class="log url" data-name="home" data-log="{&quot;pos&quot;:&quot;nav_home&quot;}" data-url="/home"><a href="#/recommend/regebang">推荐</a></li>
+
+					<li class="log url" data-name="songlists" data-log="{&quot;pos&quot;:&quot;nav_songlists&quot;}" data-url="/songlists"><a href="#/cate">分类</a></li>
+
+					<li class="log url" data-name="listcate" data-log="{&quot;pos&quot;:&quot;nav_listcate&quot;}" data-url="/listcate"><a href="#/bill">榜单</a></li>
+
+					<li class="log url" data-name="artists" data-log="{&quot;pos&quot;:&quot;nav_artists&quot;}" data-url="/artists"><a href="#/artists">歌手</a></li>
+
+					<li class="log url" data-name="mvs" data-log="{&quot;pos&quot;:&quot;nav_mv&quot;}" data-url="/mv"><a href="#/mv">MV</a></li>
+
+				</ul>
+			</div>
+		</header>
         <div id="main">
 		<div class="layout ucenter layout-current" data-title="我的音乐">
 			<section class="content">

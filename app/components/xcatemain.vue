@@ -179,21 +179,20 @@
 			<h4>热门歌单</h4>
 			<div v-for="(n,$index) in hot">
 				<div>
-					<p @click="sethash(n.hash,n.remark,$index)">
-						<span>{{n.filename}}</span>
+					<p>
+						<span class="keepplay"  @click="sethash(n.hash,n.remark,$index)">{{n.filename|nomore}}</span>
 						<img src="../images/1.gif" alt="" v-if="$index==page&&player">
 					</p>
 					<i class="love" @click="cllocet(n.filename,n.hash)"></i>		
 				</div>
 			</div>
-			<audio autoplay="autoplay" :src="playhash" alt="" v-if="player"></audio>
 		</div>
-		<div class="player" v-if="player">
+		<div class="player" v-if="showplay1">
     		<ul class="action">
     			<li class="thenamep">
     				<img :src="playsongpic|getsize" alt="">
     			</li>
-	        	<li class="iconfont play icon-stop" @click="stop()"></li>
+	        	<li id="stop" class="iconfont play icon-stop" @click="stop()"></li>
 	        	<li class="iconfont icon-next" @click="nextsong()"></li>
 	        	<li class="iconfont icon-list"></li>
     		</ul>
@@ -229,13 +228,15 @@
 			},
 			sethash:function(seth,name,page){
 				this.$store.state.hash = seth;
+				this.$store.state.showplay = true;
 				this.$store.dispatch("playthesong");
 				this.player = true;
 				this.songnameh = name;
 				this.page = page;
 			},
 			stop:function(){
-				this.player = false
+				this.player = false;
+				sessionStorage.removeItem("playsongurl")
 			},
 			nextsong:function(){
 				this.page = this.page++
@@ -260,12 +261,21 @@
 			playsongpic(){
 				return this.$store.state.playsongpic
 			},
-			
+			showplay1(){
+				return this.$store.state.showplay
+			}
 		},
 		filters:{
 			getsize(input){
 				var arr = input.split("{size}");
 				return arr.join("")
+			},
+			nomore(input){
+				if(input.length>=18){
+					return input.substring(0,18)+"..."
+				}else{
+					return input
+				}
 			}
 		},
 		mounted:function(){

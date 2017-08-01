@@ -55,21 +55,24 @@ import register from "./components/routers/register.vue";
 import login from "./components/routers/login.vue";
 import subsearch from "./components/routers/subsearch.vue";
 import detail from "./components/routers/detail.vue";
+import xqpage from "./components/routers/xqpage.vue";
+import album from "./components/routers/album.vue";
 var router = new VueRouter({
 	routes: [{
 		path: '/recommend',
 		component: recommend,
 		children: [{
-			path: '/recommend/regebang',
+			path: 'regebang',
 			component: regebang,
 		}, {
-			path: '/recommend/xingebang',
+			path: 'ingebang',
 			component: xingebang,
 		}, {
-			path: '/recommend/kingbang',
+			path: 'recommend/kingbang',
 			component: kingbang,
 		}]
-	}, {
+	}, 
+	{
 		path: '/gengduoxg',
 		component: gengduoxg,
 	}, {
@@ -82,9 +85,12 @@ var router = new VueRouter({
 		path: '/artists',
 		component: artists
 	}, {
+		path: '/album/:singerid',
+		component: album
+	}, {
 		path: '/mv',
 		component: mv
-	}, {
+	},{
 		path: '/search',
 		component: search
 	}, {
@@ -119,8 +125,8 @@ var router = new VueRouter({
 		path: '/subsearch',
 		component: subsearch
 	}, {
-		path: '/detail',
-		component: detail
+		path: '/xqpage',
+		component: xqpage
 	}, {
 		path: '/',
 		redirect: '/recommend/regebang'
@@ -132,6 +138,7 @@ var store = new Vuex.Store({
 	//定义一个状态
 	//所有组件的状态，也就是数据源
 	state: {
+		id:"",
 		bottomLight: true,
 		bill: "",
 		bottomLight: 'recommend',
@@ -167,12 +174,12 @@ var store = new Vuex.Store({
 		password: "",
 		userName: "",
 		passWord: "",
-		cllocetname: null,
-		clloceturl: null,
-//		obj:[],
-		showcllocet: [],
-		playsongpic: null,
-		shangChuanTu: ""
+		shangChuanTu: "",
+		cllocetname:null,
+		clloceturl:null	,
+		showcllocet:[],
+		playsongpic:"http://img.knowledge.csdn.net/upload/base/1453701371636_636.jpg",
+		showplay:false
 	},
 	getters: {},
 	//分发状态
@@ -242,6 +249,20 @@ var store = new Vuex.Store({
 				}).then((response) => {
 					state.art = response.data.singers.list.info
 					//					state.art = state.art.concat(response.data.singers.list.info)
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+		Album(state) {
+			axios.get("http://localhost:6789/album", {
+				 params:{
+				 	id:state.id
+				 }		
+				}).then((response) => {
+					console.log(response.data.singers.list.info)
+					state.art = response.data.singers.list.info
+//					state.art = state.art.concat(response.data.singers.list.info)
 				})
 				.catch((error) => {
 					console.log(error);
@@ -412,15 +433,22 @@ var store = new Vuex.Store({
 			axios.get("http://localhost:1234/mtv", {
 
 				}).then((response) => {
-					console.log(response)
+					console.log(response.data.jobs)
 					state.mtv = response.data.jobs
-					//				}).then((response) => {
+//									}).then((response) => {
 					//					console.log(response.data.song_list)
-					//					state.bill = state.bill.concat(response.data.song_list)
+//										state.bill = state.bill.concat(response.data.song_list)
+//			axios.get("http://localhost:6789/mtv", {
+//               params:{
+//               	page:state.page
+//               }
+//				}).then((response) => {
+//					state.mtv = state.mtv.concat(response.data.song_list)
+//					console.log(state.mtv)
+
+				}).catch((error) => {
+					
 				})
-				.catch((error) => {
-					console.log(error);
-				});
 		},
 
 		//分类流行音乐
@@ -430,6 +458,7 @@ var store = new Vuex.Store({
 					type: state.kind
 				}
 			}).then((response) => {
+				console.log(response,"回来的数据")
 				state.liuxing = response.data.songs.list
 			}).catch((error) => {
 				console.log(error);
@@ -510,9 +539,10 @@ var store = new Vuex.Store({
 			}).then((response) => {
 				state.hashsong = response.data.url
 				state.playsongpic = response.data.imgUrl
-			}).catch((error) => {
-				console.log(error);
-			});
+				sessionStorage.setItem("playsongurl",response.data.url)
+				}).catch((error) => {
+					console.log(error);
+				});
 		},
 
 		//收藏

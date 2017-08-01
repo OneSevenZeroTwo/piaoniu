@@ -23,11 +23,10 @@
 				<div class="t_login">
 					<div class="form-wrapper login-wrapper">
 						<div class="input-con ">
-							<input class="input-text username" type="tel" name="phone" placeholder="请输入用户名" v-model="username">
-
+							<input class="input-text username" type="text" name="phone" placeholder="请输入用户名" v-model="username" >
 						</div>
 						<div class="input-con verify-text">
-							<input class="input-text password" type="tel" name="verifyCode" placeholder="请输入密码" v-model="password">
+							<input class="input-text password" type="password" name="verifyCode" placeholder="请输入密码" v-model="password">
 
 						</div>
 						<div class="button-con">
@@ -62,20 +61,15 @@
 				this.$store.state.userName = this.username;
 				this.$store.state.passWord = this.password;
 				this.$store.dispatch("Login");
-				
-//				this.$store.state.userName="";
-//				this.$store.state.passWord="";
-				
-			},
 		},
-		mounted() {
-			this.userName = window.localStorage.getItem("username")
-			this.passWord = window.localStorage.getItem("password")
-			
-			this.username = this.userName
-			this.password = this.passWord
 		},
-	}
+		mounted() {	
+			this.userName = window.localStorage.getItem("username");
+			this.passWord = window.localStorage.getItem("password");
+			this.username = this.userName;
+			this.password = this.passWord;
+		},
+		}
 </script>
 
 <style>
