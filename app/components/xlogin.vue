@@ -64,10 +64,10 @@
 		},
 		},
 		mounted() {	
-			this.userName = window.localStorage.getItem("username");
-			this.passWord = window.localStorage.getItem("password");
-			this.username = this.userName;
-			this.password = this.passWord;
+//			this.userName = window.localStorage.getItem("username");
+//			this.passWord = window.localStorage.getItem("password");
+//			this.username = "this.userName";
+//			this.password = "this.passWord";
 		},
 		}
 </script>

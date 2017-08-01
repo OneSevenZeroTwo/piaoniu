@@ -276,10 +276,11 @@ app.get('/showthecllocet', function(req, res) {
 	connection.connect();
 	//写入数据库
 	connection.query("select shou from count where username = '"+req.query.zhangming+"'", function(error, results, fields) {
-		console.log(results,"0000000")
-	
-		console.log(JSON.stringify(results))
-		res.send(results[0].shou);
+		if(results[0]){
+			res.send(results[0].shou);
+		}else{
+			res.send([]);
+		}
 		connection.end();
 	});
 });
