@@ -1,10 +1,10 @@
 
 @font-face {font-family: "iconfont";
-  src: url('iconfont.eot?t=1501160741971'); /* IE9*/
-  src: url('iconfont.eot?t=1501160741971#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1501160741971') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1501160741971') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1501160741971#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1501463466851'); /* IE9*/
+  src: url('iconfont.eot?t=1501463466851#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1501463466851') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1501463466851') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1501463466851#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
@@ -32,4 +32,6 @@
 .icon-icon:before { content: "\e505"; }
 
 .icon-dushu:before { content: "\e60a"; }
+
+.icon-loading-copy-copy:before { content: "\e509"; }
 

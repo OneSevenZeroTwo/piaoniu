@@ -5,7 +5,7 @@
 				<div class="left iconfont"><span @click="direction">&#xe63d;</span></div>
 				<div class="title">百度音乐</div>
 				<div class="right">
-					<a href="#/entry"><span class="btn btn-ucenter url" data-name="ucenter" data-url="/ucenter" data-transition="none"></span></a>
+					<a href="#/login"><span class="btn btn-ucenter url" data-name="ucenter" data-url="/ucenter" data-transition="none"></span></a>
 					<span class="btn log btn-search" data-log="{&quot;pos&quot;:&quot;searchup&quot;,&quot;page&quot;:&quot;home&quot;}"></span>
 					<div class="form-search">
 						<div class="btn-search-icon"></div>
@@ -24,7 +24,7 @@
 
 					<li class="log url" :class="{'on':'artists'==light}" @click="changeLight('artists')" data-name="artists" data-log="{&quot;pos&quot;:&quot;nav_artists&quot;}" data-url="#/artists"><a href="#/artists">歌手</a></li>
 
-					<li class="log url" :class="{'on':'mv'==light}" @click="changeLight('mv')" data-name="mvs" data-log="{&quot;pos&quot;:&quot;nav_mv&quot;}" data-url="#/mv"><a href="#/mv">MV</a></li>
+					<li class="log url" :class="{'on':'mv'==light}" @click="changeLight('mv')" data-name="mvs" data-log="{&quot;pos&quot;:&quot;nav_mv&quot;}" data-url="#/mv"><a href="#/mv">新歌上架</a></li>
 
 				</ul>
 			</div>

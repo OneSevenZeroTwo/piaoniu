@@ -32,7 +32,7 @@
 								<!--<img alt="薛之谦" :src="a.imgurl">-->
 							<!--</div>-->
 							<div class="info">
-								<div>{{a.singername}}</div>
+								<a :href="'#/album/'+a.singerid"><div>{{a.singername}}</div></a>
 							</div>
 						</li>
 

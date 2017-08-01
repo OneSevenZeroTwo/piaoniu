@@ -7,7 +7,7 @@
 			</div>
 			<div class="shou_footer">
 				<ul>
-					<li v-for="n in cllocetlist"><span class="geshou">{{n.songname}}</span></li>
+					<li v-for="n in cllocetlist"><span class="geshou">{{n.renname}}</span></li>
 				</ul>
 			</div>
 		</div>

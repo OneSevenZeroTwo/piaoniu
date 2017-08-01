@@ -17,6 +17,7 @@
     "css-loader": "^0.28.4",
     "express": "^4.15.3",
     "html-loader": "^0.4.5",
+    "jQuery": "^1.7.4",
     "jialong": "^1.0.2",
     "jquery": "^3.2.1",
     "less": "^2.7.2",

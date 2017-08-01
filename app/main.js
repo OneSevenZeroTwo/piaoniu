@@ -56,6 +56,8 @@ import register from "./components/routers/register.vue";
 import login from "./components/routers/login.vue";
 import subsearch from "./components/routers/subsearch.vue";
 import detail from "./components/routers/detail.vue";
+import xqpage from "./components/routers/xqpage.vue";
+import album from "./components/routers/album.vue";
 var router = new VueRouter({
 	routes: [{
 		path: '/recommend',
@@ -70,34 +72,38 @@ var router = new VueRouter({
 			path: 'recommend/kingbang',
 			component: kingbang,
 		}]
-		}, {
-			path: '/gengduoxg',
-			component: gengduoxg,
-		}, {
-			path: '/cate',
-			component: cate
-		}, {
-			path: '/bill',
-			component: bill
-		}, {
-			path: '/artists',
-			component: artists
-		}, {
-			path: '/mv',
-			component: mv
-		}, {
-			path: '/search',
-			component: search
-		}, {
-			path: '/entry',
-			component: entry
-		}, {
-			path: '/register',
-			component: register
-		}, {
-			path: '/login',
-			component: login
-		}, {
+	}, 
+	{
+		path: '/gengduoxg',
+		component: gengduoxg,
+	}, {
+		path: '/cate',
+		component: cate
+	}, {
+		path: '/bill',
+		component: bill
+	}, {
+		path: '/artists',
+		component: artists
+	}, {
+		path: '/album/:singerid',
+		component: album
+	}, {
+		path: '/mv',
+		component: mv
+	},{
+		path: '/search',
+		component: search
+	}, {
+		path: '/entry',
+		component: entry
+	}, {
+		path: '/register',
+		component: register
+	}, {
+		path: '/login',
+		component: login
+	}, {
 		path: '/subcate',
 		component: subcate,
 		children: [{
@@ -120,8 +126,8 @@ var router = new VueRouter({
 		path: '/subsearch',
 		component: subsearch
 	}, {
-		path: '/detail',
-		component: detail
+		path: '/xqpage',
+		component: xqpage
 	}, {
 		path: '/',
 		redirect: '/recommend/regebang'
@@ -133,6 +139,7 @@ var store = new Vuex.Store({
 	//定义一个状态
 	//所有组件的状态，也就是数据源
 	state: {
+		id:"",
 		bottomLight: true,
 		bill: "",
 		bottomLight: 'recommend',
@@ -145,29 +152,30 @@ var store = new Vuex.Store({
 		art: [],
 		mtv: [],
 		news: [],
-		arrs:[],
-		re:[],
-		liuxing:[],
-		kind:null,
-		tui:[],
-		rege:[],
-		xinge:[],
-		king:[],
-		xg01:[],
-		xg02:[],
-		direction:"",
-		mysearch:null,
-		backsong:[],
-		detailname:null,
-		detailpic:null,
-		playsong:null,
-		directionC:"",
-		hash:null,
-		hashsong:null,
+		arrs: [],
+		re: [],
+		liuxing: [],
+		kind: null,
+		tui: [],
+		rege: [],
+		xinge: [],
+		king: [],
+		xg01: [],
+		xg02: [],
+		direction: "",
+		mysearch: null,
+		backsong: [],
+		detailname: null,
+		detailpic: null,
+		playsong: null,
+		directionC: "",
+		hash: null,
+		hashsong: null,
 		username: "",
 		password: "",
 		userName: "",
 		passWord: "",
+		shangChuanTu: "",
 		cllocetname:null,
 		clloceturl:null	,
 		showcllocet:[],
@@ -183,16 +191,17 @@ var store = new Vuex.Store({
 		},
 		setChange(context, data) {
 			context.commit('setNews', data),
-			context.commit('setArrs', data),
-			context.commit('setRe', data),
-			context.commit('setTui', data),
-			context.commit('setRege', data),
-			context.commit('setXinge', data),
-			context.commit('setKing', data),
-			context.commit('setXg', data),
-			context.commit('setXg02', data),
-			context.commit('setFang', data),
-			context.commit('setCang', data)
+				context.commit('setArrs', data),
+				context.commit('setRe', data),
+				context.commit('setTui', data),
+				context.commit('setRege', data),
+				context.commit('setXinge', data),
+				context.commit('setKing', data),
+				context.commit('setXg', data),
+				context.commit('setXg02', data),
+				context.commit('setFang', data),
+				context.commit('setCang', data)
+			context.commit('shangChuan', data)
 		},
 		sethot(context, data) {
 			context.commit('hot', data)
@@ -219,11 +228,11 @@ var store = new Vuex.Store({
 		playthesong(context, data) {
 			context.commit('gethashsong', data)
 		},
-		cllocet(context,data){
-			context.commit('cllocetion',data)
+		cllocet(context, data) {
+			context.commit('cllocetion', data)
 		},
-		showcllocet(context,data){
-			context.commit('showthecllocet',data)
+		showcllocet(context, data) {
+			context.commit('showthecllocet', data)
 		}
 	},
 
@@ -237,8 +246,22 @@ var store = new Vuex.Store({
 		},
 		xart(state) {
 			axios.get("http://localhost:6789/xart", {
-					
+
 				}).then((response) => {
+					state.art = response.data.singers.list.info
+					//					state.art = state.art.concat(response.data.singers.list.info)
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+		Album(state) {
+			axios.get("http://localhost:6789/album", {
+				 params:{
+				 	id:state.id
+				 }		
+				}).then((response) => {
+					console.log(response.data.singers.list.info)
 					state.art = response.data.singers.list.info
 //					state.art = state.art.concat(response.data.singers.list.info)
 				})
@@ -381,8 +404,13 @@ var store = new Vuex.Store({
 				});
 		},
 		bill(state) {
-			axios.get("http://localhost:6789/bill", {}).then((response) => {
-					state.bill = response.data.plist.list.info
+			//			state.zheShow = "true"
+			axios.get("http://localhost:6789/bill", {
+
+				}).then((response) => {
+					console.log(response.data.plist.list.info, "bill")
+					state.bill = response.data.plist.list.info;
+					//					state.zheShow = "false"
 				})
 				.catch((error) => {
 					console.log(error);
@@ -394,25 +422,34 @@ var store = new Vuex.Store({
 						page: state.page,
 					}
 
-			}).then((response) => {
-               state.hot = response.data.data
-				
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-		},
-		mtv(state) {
-			axios.get("http://localhost:6789/mtv", {
+				}).then((response) => {
+					state.hot = response.data.data
 
-				}).then((response) => {
-					state.mtv = state.mtv.concat(response.data.song_list)
-				}).then((response) => {
-					state.bill = state.bill.concat(response.data.song_list)
 				})
 				.catch((error) => {
 					console.log(error);
 				});
+		},
+		mtv(state) {
+			axios.get("http://localhost:1234/mtv", {
+
+				}).then((response) => {
+					console.log(response.data.jobs)
+					state.mtv = response.data.jobs
+//									}).then((response) => {
+					//					console.log(response.data.song_list)
+//										state.bill = state.bill.concat(response.data.song_list)
+//			axios.get("http://localhost:6789/mtv", {
+//               params:{
+//               	page:state.page
+//               }
+//				}).then((response) => {
+//					state.mtv = state.mtv.concat(response.data.song_list)
+//					console.log(state.mtv)
+
+				}).catch((error) => {
+					
+				})
 		},
 
 		//分类流行音乐
@@ -437,11 +474,11 @@ var store = new Vuex.Store({
 					pass: state.password,
 				}
 			}).then((response) => {
-//             console.log(response.data)
-				if(response.data== 1) {
+				//             console.log(response.data)
+				if(response.data == 1) {
 					alert("注册成功")
 					location.href = "#login"
-				} else if(response.data== 0) {
+				} else if(response.data == 0) {
 					alert("注册失败")
 					return false
 				}
@@ -458,12 +495,21 @@ var store = new Vuex.Store({
 					pass: state.passWord,
 				}
 			}).then((response) => {
-				if(response.data== 1) {
-					window.localStorage.setItem("username",state.userName)
-					window.localStorage.setItem("password",state.passWord)
-					alert("登录成功")
-					location.href = "#recommend"
-				} else if(response.data== 0) {
+				if(response.data == 1) {
+					window.localStorage.setItem("username", state.userName)
+					window.localStorage.setItem("password", state.passWord)
+					console.log(state.userName)
+					var str1 = 'username=' + state.userName;
+					var now = new Date();
+					now.setDate(now.getDate() + 7);
+					str1 += ';expires=' + now.toUTCString();
+					// 把用户名存入cookie
+					document.cookie = str1;
+					// setCookie('user',str1,now.toUTCString());
+
+					//					alert("登录成功")
+					location.href = "#/recommend/regebang"
+				} else if(response.data == 0) {
 					alert("登录失败")
 					return false
 				}
@@ -485,14 +531,13 @@ var store = new Vuex.Store({
 			});
 		},
 
-
 		//获取搜索
 		gethashsong(state) {
 			axios.get("http://localhost:6789/gethashsong", {
 				params: {
-						song:state.hash
-					}
-			}).then((response) => {	
+					song: state.hash
+				}
+			}).then((response) => {
 				state.hashsong = response.data.url
 				state.playsongpic = response.data.imgUrl
 				sessionStorage.setItem("playsongurl",response.data.url)
@@ -501,37 +546,61 @@ var store = new Vuex.Store({
 				});
 		},
 
-
-
 		//收藏
 		cllocetion(state) {
+			if(getCookie('username').length>0){
+				var obj = {
+						renname:state.cllocetname,
+//						gename:state.clloceturl
+					};
+					var obj = JSON.stringify(obj);
 			axios.get("http://localhost:1234/cllocet", {
 				params: {
-						cllocetname:state.cllocetname,
-						clloceturl:state.clloceturl,
-					}
-			}).then((response) => {	
+					zhangming: getCookie('username'),
+					gexin: obj,
+				}
+			}).then((response) => {
 
-				}).catch((error) => {
-					console.log(error);
-				});
+			}).catch((error) => {
+				console.log(error);
+			});
+			}
 		},
 
-
-		//收藏
+		//渲染收藏
 		showthecllocet(state) {
 			axios.get("http://localhost:1234/showthecllocet", {
-
-			}).then((response) => {	
-					state.showcllocet = response.data;
-				}).catch((error) => {
-					console.log(error);
-				});
+				params: {
+					zhangming: getCookie('username'),
+				}
+			}).then((response) => {
+				state.showcllocet = response.data;
+				console.log(response,"888888888888888")
+			}).catch((error) => {
+				console.log(error);
+			});
 		},
 		
-},
+		
+		
+		//上传图片
+		shangChuan(state) {
+			$.ajax({
+				method: "post",
+				url: "http://localhost:1234/upload-single",
+				cache: false,
+				data: new FormData($('#tupian')[0]),
+				processData: false,
+				contentType: false,
+			}).then(function(data) {
+				console.log(data)
+				console.log(data.imgInfo[0].filename)
+				state.shangChuanTu = data.imgInfo[0].filename
 
+			})
+		}
 
+	},
 
 })
 
