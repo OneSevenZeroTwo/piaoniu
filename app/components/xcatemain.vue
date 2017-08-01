@@ -198,7 +198,7 @@
     		</ul>
 		</div>
 		<div class="gong" v-show="chenggong">
-			<div class="haol">收藏成功<div class="cha" @click="xiaoshid">X</div></div>
+			<div class="haol">收藏成功</div>
 		</div>
 	</div>
 </template>
@@ -253,9 +253,6 @@
 				this.$store.dispatch("cllocet");
 				this.chenggong = true
 					this.xiaoshi()
-			},
-			xiaoshid(){
-				this.chenggong = false
 			},
 			xiaoshi(){
 				setTimeout(()=>{console.log(this.chenggong)

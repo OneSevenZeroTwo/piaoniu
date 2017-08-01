@@ -72,8 +72,7 @@ var router = new VueRouter({
 			path: 'kingbang',
 			component: kingbang,
 		}]
-	}, 
-	{
+	}, {
 		path: '/gengduoxg',
 		component: gengduoxg,
 	}, {
