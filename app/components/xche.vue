@@ -2,7 +2,7 @@
 	<div>
 		<div id="che" :class="{'sidebar-move-left':direction=='left','sidebar-move-right':direction=='right'}">
 			<div class="tou">
-				<div class="tou_01"><img src="img/0.jpg" alt="" class="touxiang am-img-circle am-img-thumbnail am-img-thumbnail" @click="sShang()" /></div>
+				<div class="tou_01"><img src="../images/0.jpg" alt="" class="touxiang am-img-circle am-img-thumbnail am-img-thumbnail" @click="sShang()" /></div>
 				<div class="tou_02" v-show="!xian"><span class="ceBianDeng dengLu">未登录</span></div>
 				<div class="tou_02 yF" v-show="xian"><span class="ceBianDeng yM">{{ming}}</span><button class="tui" @click="tuichu()">退出</button></div>
 			</div>

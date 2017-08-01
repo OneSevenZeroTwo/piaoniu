@@ -196,6 +196,9 @@
 	        	<li class="iconfont icon-list"></li>
     		</ul>
 		</div>
+		<div class="gong" v-show="chenggong">
+			<div class="haol">收藏成功<div class="cha" @click="xiaoshid">X</div></div>
+		</div>
 	</div>
 </template>
 <script>
@@ -207,7 +210,8 @@
 				player:false,
 				psong:null,
 				songnameh:null,
-				page:null
+				page:null,
+				chenggong:false
 			}
 		},
 		methods:{
@@ -247,7 +251,16 @@
 				this.$store.state.cllocetname = songname;
 				this.$store.state.clloceturl = url;
 				this.$store.dispatch("cllocet");
-				
+				this.chenggong = true
+					this.xiaoshi()
+			},
+			xiaoshid(){
+				this.chenggong = false
+			},
+			xiaoshi(){
+				setTimeout(()=>{console.log(this.chenggong)
+					this.chenggong = false
+				},1000)
 			}
 		},
 		computed:{
@@ -279,7 +292,7 @@
 			}
 		},
 		mounted:function(){
-			this.sethot()
+			this.sethot();
 		}
 	}
 </script>
@@ -417,5 +430,36 @@ h4{
 	height: 50px;
 	line-height: 50px;
 	overflow: hidden
+}
+.gong{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0);
+	z-index: 9000;
+}
+.gong .haol{
+	width: 200px;
+	height: 100px;
+	background-color: #ccc;
+	position: absolute;
+	top: 200px;
+	left: 60px;
+	border-radius: 10px;
+	text-align: center;
+	line-height: 100px;
+}
+.gong .haol .cha{
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	line-height: 20px;
+	border-radius: 50%;
+	background-color: #fff;
 }
 </style>
