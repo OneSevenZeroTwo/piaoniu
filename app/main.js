@@ -65,10 +65,10 @@ var router = new VueRouter({
 			path: 'regebang',
 			component: regebang,
 		}, {
-			path: 'ingebang',
+			path: 'xingebang',
 			component: xingebang,
 		}, {
-			path: 'recommend/kingbang',
+			path: 'kingbang',
 			component: kingbang,
 		}]
 	}, 
@@ -200,7 +200,7 @@ var store = new Vuex.Store({
 				context.commit('setXg02', data),
 				context.commit('setFang', data),
 				context.commit('setCang', data)
-			context.commit('shangChuan', data)
+//				context.commit('shangChuan', data)
 		},
 		sethot(context, data) {
 			context.commit('hot', data)
@@ -583,21 +583,21 @@ var store = new Vuex.Store({
 		
 		
 		//上传图片
-		shangChuan(state) {
-			$.ajax({
-				method: "post",
-				url: "http://localhost:1234/upload-single",
-				cache: false,
-				data: new FormData($('#tupian')[0]),
-				processData: false,
-				contentType: false,
-			}).then(function(data) {
-				console.log(data)
-				console.log(data.imgInfo[0].filename)
-				state.shangChuanTu = data.imgInfo[0].filename
-
-			})
-		}
+//		shangChuan(state) {
+//			$.ajax({
+//				method: "post",
+//				url: "http://localhost:1234/upload-single",
+//				cache: false,
+//				data: new FormData($('#tupian')[0]),
+//				processData: false,
+//				contentType: false,
+//			}).then(function(data) {
+//				console.log(data)
+//				console.log(data.imgInfo[0].filename)
+//				state.shangChuanTu = data.imgInfo[0].filename
+//
+//			})
+//		}
 
 	},
 
