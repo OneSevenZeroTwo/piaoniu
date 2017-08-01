@@ -179,7 +179,8 @@ var store = new Vuex.Store({
 		clloceturl:null	,
 		showcllocet:[],
 		playsongpic:"http://img.knowledge.csdn.net/upload/base/1453701371636_636.jpg",
-		showplay:false
+		showplay:false,
+		detailname:null
 	},
 	getters: {},
 	//分发状态

@@ -82,12 +82,13 @@
 .sq{
 	/*background-size: 12px 12px;*/
 	display: block;
-	width: 50px;
-	height: 50px;
+	width: 40px;
+	height: 40px;
 	position: absolute;
-	right: -50px;
-	top: -15px;
-	background: url(../../images/4.png)-370px -135px
+	right: -30px;
+	top: -5px;
+	background: url(../../images/4.png)-200px -75px;
+	background-size: 250px
 }
 .load{
 	/*background-position: 12px 12px;*/

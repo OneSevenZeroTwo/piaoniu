@@ -6,8 +6,7 @@
 					<div class="row">
 						<i class="col-1 iconfont icon-home" @click="back()"></i>
 						<div class="col-10 header-content">
-							<p class="title">下雨了</p>
-							<p class="author">薛之谦</p>
+							<p class="title">{{detailname}}</p>
 						</div>
 						<span class="iconfont col-1 icon-search log"></span>
 					</div>
@@ -81,6 +80,9 @@
 			playsongpic(){
 				return this.$store.state.playsongpic
 			},
+			detailname(){
+				return this.$store.state.detailname
+			}
 		},
 		filters:{
 			getsize(input){

@@ -5,7 +5,7 @@
 			<span>最热</span>
 			<span>最新</span>
 		</div>
-		<div class="list" v-for="n in liuxing" @click="sethash(n.hash)">
+		<div class="list" v-for="n in liuxing" @click="sethash(n.hash,n.filename)">
 			<p class="keepplay">{{n.filename|nomore}}</p>
 		</div>
 		<div class="player" v-if="showplay1">
@@ -41,10 +41,11 @@
 				this.$store.state.kind = 28061,
 				this.$store.dispatch("setliuxing")
 			},
-			sethash(seth){
+			sethash(seth,detailname){
 				this.$store.state.hash = seth;
 				this.$store.state.showplay = true;
 				this.$store.dispatch("playthesong");
+				this.$store.state.detailname = detailname;
 				this.showplay = true
 			},
 			stop(){
